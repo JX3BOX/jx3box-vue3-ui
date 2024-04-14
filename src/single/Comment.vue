@@ -2,16 +2,36 @@
     <el-container class="c-comment" v-loading="loading">
         <el-main>
             <CommentInputForm @submit="userSubmitInputForm" />
-            <div class="c-comment-order">
-                <span class="u-label">排序模式：</span>
-                <el-radio-group
-                    v-model="isDesc"
-                    @change="changeOrder"
-                    size="small"
-                >
-                    <el-radio-button label="DESC">最后靠前</el-radio-button>
-                    <el-radio-button label="ASC">最早靠前</el-radio-button>
-                </el-radio-group>
+            <div class="c-comment-panel">
+                <div class="u-order">
+                    <span class="u-label">排序模式：</span>
+                    <el-radio-group
+                        v-model="isDesc"
+                        @change="changeOrder"
+                        size="small"
+                    >
+                        <el-radio-button label="DESC">最后靠前</el-radio-button>
+                        <el-radio-button label="ASC">最早靠前</el-radio-button>
+                    </el-radio-group>
+                </div>
+                <div class="u-op">
+                    <el-switch
+                        class="c-comment-panel-likes"
+                        v-model="orderByLikes"
+                        @change="changeOrderByLikes"
+                        active-text="获赞靠前"
+                    >
+                    </el-switch>
+                    <el-switch
+                        class="c-comment-panel-likes"
+                        v-model="openWhiteList"
+                        @change="changeWhiteList"
+                        v-if="commentPower.is_author || commentPower.is_editor"
+                        active-text="开启过滤"
+                        title="开启过滤后，仅设为显示的评论可被其他人所见"
+                    >
+                    </el-switch>
+                </div>
             </div>
             <template v-if="isNormal">
                 <div
@@ -37,6 +57,9 @@
                         @setStarComment="setStarComment"
                         :user-href="profileLink(item.userId)"
                         :username="item.displayName"
+                        @setWhiteComment="setWhiteComment"
+                        @setLikeComment="setLikeComment"
+                        @hide="hideComment"
                     />
                 </div>
 
@@ -106,11 +129,37 @@ export default {
             this.reloadCommentList(this.pager.index);
             setOrderMode(this.isDesc ? "DESC" : "ASC");
         },
+        changeOrderByLikes() {
+            this.reloadCommentList(this.pager.index);
+            // setOrderMode(this.orderByLikes ? false : true);
+        },
         setTopComment(id, setTop) {
             const action = setTop ? "set" : "cancel";
             PUT(`${this.baseAPI}/comment/${id}/top/${action}`)
                 .then(() => {
                     this.reloadCommentList(this.pager.index);
+                })
+                .catch(() => {});
+        },
+        changeWhiteList() {
+            PUT(
+                `${this.baseAPI}/meta/white-list/${
+                    this.openWhiteList ? "open" : "close"
+                }`
+            ).then(()=>{
+                return this.reloadPower()
+            })
+                .then(() => {
+                    this.commentPower.is_white = this.openWhiteList;
+                    this.reloadCommentList(this.pager.index);
+                })
+                .catch(() => {});
+        },
+        setLikeComment(id, isLike) {
+            var action = isLike ? "like" : "unlike";
+            PUT(`${this.baseAPI}/comment/${id}/${action}`)
+                .then(() => {
+                    //  this.reloadCommentList(this.pager.index);
                 })
                 .catch(() => {});
         },
@@ -122,12 +171,35 @@ export default {
                 })
                 .catch(() => {});
         },
+        setWhiteComment(id, setWhite) {
+            // 设置某个评论为精选
+            var action = setWhite ? "add" : "remove";
+            PUT(`${this.baseAPI}/comment/${id}/white-list/${action}`)
+                .then(() => {
+                    this.reloadCommentList(this.pager.index);
+                })
+                .catch(() => {});
+        },
         deleteComment(id) {
             DELETE(`${this.baseAPI}/comment/${id}`)
                 .then(() => {
                     this.$notify({
                         title: "",
                         message: "删除成功!",
+                        type: "success",
+                        duration: 3000,
+                        position: "bottom-right",
+                    });
+                    this.reloadCommentList(this.pager.index);
+                })
+                .catch(() => {});
+        },
+        hideComment(id) {
+            PUT(`${this.baseAPI}/comment/${id}/hide`)
+                .then(() => {
+                    this.$notify({
+                        title: "",
+                        message: "操作成功!",
                         type: "success",
                         duration: 3000,
                         position: "bottom-right",
@@ -188,6 +260,14 @@ export default {
         showAvatar: function (val) {
             return showAvatar(val, 144);
         },
+        reloadPower(){
+            GET(`${this.baseAPI}/i-am-author`)
+                    .then((power) => {
+                        this.commentPower = power;
+                        this.openWhiteList = power.is_white;
+                    })
+                    .catch(() => {});
+        }
     },
     created() {
         this.baseAPI = `/api/next2/comment/${this.category}/article/${this.id}`;
@@ -323,14 +403,15 @@ export default {
         } */
     }
 }
-.c-comment-order {
+.c-comment-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: #fafbfc;
     padding: 8px 10px;
     border-radius: 3px;
     border: 1px solid #eee;
     margin: 10px 0;
-    .flex;
-    align-items: center;
     .u-label {
         color: #666;
         margin-right: 10px;
@@ -342,5 +423,20 @@ export default {
 .c-comment-emotion {
     max-height: 168px;
     overflow: auto;
+}
+.c-comment-panel-likes {
+    margin-left: 10px;
+}
+.c-comment-alert {
+    color: #e6a23c;
+    margin-left: 10px;
+    font-size: 12px;
+}
+@media screen and (max-width: 720px) {
+    .c-comment-panel {
+        .u-op{
+            display: none;
+        }
+    }
 }
 </style>
