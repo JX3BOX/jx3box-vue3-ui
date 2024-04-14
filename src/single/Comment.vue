@@ -116,6 +116,8 @@ export default {
                 total: 0,
             },
             isDesc: "DESC",
+            orderByLikes: false,
+            openWhiteList: false,
             loading: false,
         };
     },
