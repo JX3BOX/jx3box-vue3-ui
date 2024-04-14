@@ -10,17 +10,22 @@
         />
         <!--评论主体内容-->
         <CommentContentSimple
-            :comment-id="reply.id"
+        :comment-id="reply.id"
             :date="reply.commentDate"
             :content="reply.content"
             :attachments="stringToArray(reply.attachments)"
-            :can-delete="power.allow || power.uid == reply.userId"
+            :can-delete="power.can_del || power.uid == reply.userId"
+            :can-hide="(power.is_author == 1 || power.is_editor == 1)"
             :can-reply="power.uid != reply.userId"
             :user-href="profileLink(reply.replyForUID)"
             :reply-for-username="reply.replyForUsername"
             :reply-for-user-id="reply.replyForUID"
+            :is-like="reply.is_likes == 1"
+            :likes="~~reply.likes"
             @delete="deleteReply"
             @showReplyInput="showReplyForReplyFrom = !showReplyForReplyFrom"
+            @setLikeComment="setLikeComment"
+            @hide="hideReply"
         />
         <!--隐藏起来的回复评论的评论表单-->
         <ReplyForReply
@@ -67,6 +72,12 @@ export default {
         },
         deleteReply(id) {
             this.$emit("deleteReply", id);
+        },
+        hideReply(id) {
+            this.$emit("hide", id);
+        },
+        setLikeComment(setLike) {
+            this.$emit("setLikeComment", this.reply.id, setLike);
         },
         doReply(replyData) {
             (replyData.replyForUID = this.reply.userId),

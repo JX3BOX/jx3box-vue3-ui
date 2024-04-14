@@ -8,7 +8,7 @@
                 >
                 :
             </span>
-            <div class="u-reply-text" v-html="formatContent(content)"></div>
+            <div class="u-reply-text" v-html="renderContent"></div>
              <!--<div class="u-reply-text" v-html="content"></div>-->
             <!-- <p v-for="(p, index) in getPList(content)" :key="index" v-html="formatContent(p)"></p> -->
         </div>
@@ -24,11 +24,39 @@
         <div class="u-toolbar">
             <el-button
                 class="u-admin"
+                v-if="!currentUserHadLike"
+                type="text"
+                size="mini"
+                @click="doLike(true)"
+                ><img
+                    class="u-up"
+                    src="../../assets/img/heart_1.svg"
+                    alt=""
+                />点赞<span class="u-like-count">{{
+                    likesFormat(hasLikeCount)
+                }}</span></el-button
+            >
+            <el-button
+                class="u-admin"
+                type="text"
+                size="mini"
+                v-if="currentUserHadLike"
+                @click="doLike(false)"
+                ><img
+                    class="u-up"
+                    src="../../assets/img/heart_2.svg"
+                    alt=""
+                />已赞<span class="u-like-count">{{
+                    likesFormat(hasLikeCount)
+                }}</span></el-button
+            >
+            <el-button
+                class="u-admin"
                 v-if="canReply"
                 link
                 icon="ChatLineRound"
                 size="small"
-                @click="showReplyForReplyInput()"
+                @click="showReplyForReplyInput"
                 type="primary"
                 >回复</el-button
             >
@@ -39,8 +67,19 @@
                 icon="Delete"
                 size="small"
                 type="danger"
-                @click="deleteComment()"
+                @click="deleteComment"
                 >删除</el-button
+            >
+            <el-button
+                class="u-admin"
+                type="text"
+                size="mini"
+                icon="Delete"
+                v-if="canHide"
+                @click="hideComment"
+                title="拉入黑洞后，仅评论者自己独自可见"
+            >
+                黑洞</el-button
             >
             <time class="u-date">
                 <i class="Clock"></i>
@@ -58,13 +97,16 @@ function fillZero(num) {
 }
 export default {
     props: [
-        "commentId",
+    "commentId",
         "content",
         "attachments",
         "date",
         "hasReply",
         "canDelete",
+        "canHide",
         "canReply",
+        "isLike", // 是否已点赞
+        "likes", // 点赞数
         "userHref",
         "replyForUsername",
         "replyForUserId",
@@ -72,6 +114,10 @@ export default {
     data: function () {
         return {
             showInput: false,
+            currentUserHadLike: this.isLike,
+            hasLikeCount: this.likes,
+
+            renderContent: "",
         };
     },
     computed: {
@@ -81,6 +127,14 @@ export default {
             });
         },
     },
+    watch: {
+        content: {
+            handler: function (val) {
+                this.formatContent(val);
+            },
+            immediate: true,
+        },
+    },
     methods: {
         profileLink: function (uid) {
             return authorLink(uid);
@@ -88,9 +142,21 @@ export default {
         showAttachment: function (val) {
             return resolveImagePath(val) + "?x-oss-process=style/comment_thumb";
         },
-        formatContent,
+        async formatContent(str) {
+            this.renderContent = await formatContent(str);
+        },
         getPList(content) {
             return content.split("\n");
+        },
+        doLike(setLike) {
+            if (setLike === this.currentUserHadLike) {
+                return;
+            }
+            this.currentUserHadLike = setLike;
+            this.hasLikeCount = setLike
+                ? this.hasLikeCount + 1
+                : this.hasLikeCount - 1;
+            this.$emit("setLikeComment", setLike);
         },
         deleteComment() {
             this.$confirm("确定删除该评论吗？", "提示", {
@@ -102,6 +168,20 @@ export default {
                     this.$emit("delete", this.commentId);
                 })
                 .catch(() => {});
+        },
+        hideComment() {
+            this.$confirm("确定隐藏该评论吗？", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning",
+            })
+                .then(() => {
+                    this.$emit("hide", this.commentId);
+                })
+                .catch(() => {});
+        },
+        likesFormat(count) {
+            return count > 0 ? count : "";
         },
         dataFormat(str) {
             let d = new Date(str);

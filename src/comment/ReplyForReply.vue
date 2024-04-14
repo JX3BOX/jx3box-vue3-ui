@@ -18,12 +18,12 @@
         <el-form-item>
             <div class="c-comment-tools">
                 <el-icon class="u-upload-icon" @click="showUploader = !showUploader"><Picture /></el-icon>
-                <!--<Emotion-->
-                <!--    class="c-comment-emotion"-->
-                <!--    @selected="handleEmotionSelected"-->
-                <!--    type="pop"-->
-                <!--    :max="6"-->
-                <!--&gt;</Emotion>-->
+                <Emotion
+                   class="c-comment-emotion"
+                   @selected="handleEmotionSelected"
+                   type="pop"
+                   :max="6">
+                </Emotion>
             </div>
             <Uploader
                 v-if="showUploader"
@@ -49,7 +49,7 @@
 
 <script>
 import Uploader from "./Upload.vue";
-// import Emotion from "@jx3box/jx3box-emotion/src/Emotion2.vue";
+import Emotion from "@jx3box/jx3box-emotion/src/Emotion2.vue";
 export default {
     props: ["username", "userHref", "currentId"],
     data: function () {
@@ -62,7 +62,7 @@ export default {
     },
     components: {
         Uploader,
-        // Emotion,
+        Emotion,
     },
     mounted() {
         if (this.currentId) this.inputId = this.currentId;

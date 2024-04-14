@@ -67,7 +67,7 @@
                 :postId="57260"
                 :allowGift="true"
             />
-            <Comment category="post" id="19382"></Comment>
+            <Comment category="post" id="54842"></Comment>
             <RightSidebar :show-toggle="true">
                 <PostTopic type="bps" :id="48857"></PostTopic>
                 <div id="directory"></div>
@@ -109,7 +109,7 @@ export default {
     },
     data() {
         return {
-            post_id: "69014",
+            post_id: "54842",
             post: "",
             client: location.href.includes("origin") ? "origin" : "std",
             tag: "",

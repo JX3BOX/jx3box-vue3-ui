@@ -3,7 +3,7 @@
         <div
             class="u-text"
             v-if="content != ''"
-            v-html="formatContent(content)"
+            v-html="renderContent"
         ></div>
         <div class="u-attachements" v-if="attachments.length">
             <el-image
@@ -14,70 +14,136 @@
                 lazy
             ></el-image>
         </div>
-        <div class="u-toolbar">
-            <el-button
-                class="u-admin"
-                link
-                size="small"
-                icon="ChatRound"
-                @click="showForm = !showForm"
-                type="primary"
-                >回复</el-button
-            >
-            <el-button
-                class="u-admin"
-                v-if="canDelete"
-                link
-                icon="Delete"
-                size="small"
-                @click="deleteComment()"
-                type="danger"
-                >删除</el-button
-            >
-            <el-button
-                class="u-admin"
-                v-if="canSetTop"
-                link
-                icon="Top"
-                size="small"
-                @click="topComment(true)"
-                type="primary"
-                >置顶</el-button
-            >
-            <el-button
-                class="u-admin"
-                v-if="canCancelTop"
-                link
-                icon="Top"
-                size="small"
-                @click="topComment(false)"
-                type="primary"
-                >取消置顶</el-button
-            >
-            <el-button
-                class="u-admin"
-                v-if="canSetStar"
-                link
-                icon="Star"
-                size="small"
-                @click="starComment(true)"
-                type="primary"
-                >加精</el-button
-            >
-            <el-button
-                class="u-admin"
-                v-if="canCancelStar"
-                link
-                icon="StarFilled"
-                size="small"
-                @click="starComment(false)"
-                type="primary"
-                >取消加精</el-button
-            >
-            <time class="u-date">
-                <i class="Clock"></i>
-                {{ dataFormat(date) }}
-            </time>
+        <div class="u-toolbar u-toolbar--primary">
+            <div class="u-toolbar-left">
+                <el-button
+                    class="u-admin"
+                    v-if="!currentUserHadLike"
+                    type="text"
+                    size="small"
+                    @click="doLike(true)"
+                    ><img
+                        class="u-up"
+                        src="../../assets/img/heart_1.svg"
+                        alt=""
+                    />点赞<span class="u-like-count">{{ likesFormat(hasLikeCount) }}</span></el-button
+                >
+                <el-button
+                    class="u-admin"
+                    type="text"
+                    size="small"
+                    v-if="currentUserHadLike"
+                    @click="doLike(false)"
+                    ><img
+                        class="u-up"
+                        src="../../assets/img/heart_2.svg"
+                        alt=""
+                    />已赞<span class="u-like-count">{{
+                        likesFormat(hasLikeCount)
+                    }}</span></el-button
+                >
+                <el-button
+                    class="u-admin"
+                    link
+                    size="small"
+                    icon="ChatRound"
+                    @click="showForm = !showForm"
+                    type="primary"
+                    >回复</el-button
+                >
+                <el-button
+                    class="u-admin"
+                    v-if="canDelete"
+                    link
+                    icon="Delete"
+                    size="small"
+                    @click="deleteComment()"
+                    type="danger"
+                    >删除</el-button
+                >
+                <el-button
+                    class="u-admin"
+                    type="text"
+                    size="small"
+                    icon="Delete"
+                    v-if="canHide"
+                    @click="hideComment()"
+                    title="拉入黑洞后，仅评论者自己独自可见"
+                    >黑洞</el-button
+                >
+                <el-button
+                    class="u-admin"
+                    v-if="canSetTop"
+                    link
+                    icon="Top"
+                    size="small"
+                    @click="topComment(true)"
+                    type="primary"
+                    >置顶</el-button
+                >
+                <el-button
+                    class="u-admin"
+                    v-if="canCancelTop"
+                    link
+                    icon="Top"
+                    size="small"
+                    @click="topComment(false)"
+                    type="primary"
+                    >取消置顶</el-button
+                >
+                <el-button
+                    class="u-admin"
+                    v-if="canSetStar"
+                    link
+                    icon="Star"
+                    size="small"
+                    @click="starComment(true)"
+                    type="primary"
+                    >加精</el-button
+                >
+                <el-button
+                    class="u-admin"
+                    v-if="canCancelStar"
+                    link
+                    icon="StarFilled"
+                    size="small"
+                    @click="starComment(false)"
+                    type="primary"
+                    >取消加精</el-button
+                >
+                <time class="u-date">
+                    <i class="Clock"></i>
+                    {{ dataFormat(date) }}
+                </time>
+            </div>
+            <div class="u-toolbar-right">
+                <el-button
+                    class="u-admin u-filter"
+                    v-if="canAddWhite"
+                    type="text"
+                    size="small"
+                    @click="setWhiteComment(true)"
+                >
+                    <img
+                        class="u-icon-filter"
+                        src="../../assets/img/view.svg"
+                        alt="显示"
+                    />
+                    显示</el-button
+                >
+                <el-button
+                    class="u-admin u-filter"
+                    v-if="canRemoveWhite"
+                    type="text"
+                    size="small"
+                    @click="setWhiteComment(false)"
+                    ><img
+                        class="u-icon-filter"
+                        src="../../assets/img/hide.svg"
+                        alt="隐藏"
+                    />隐藏</el-button
+                >
+            </div>
         </div>
         <el-form
             v-if="showForm"
@@ -137,16 +203,21 @@ function fillZero(num) {
 }
 export default {
     props: [
-        "content",
+    "content",
         "date",
         "hasReply",
         "canDelete",
         "canSetTop",
         "canCancelTop",
+        "canHide",
+        "isLike", // 是否已点赞
+        "likes", // 点赞数
         "canSetStar",
         "canCancelStar",
         "attachments",
         "commentId",
+        "canAddWhite", // 是否可以添加到过滤白名单， 因为对于一般用户，它看不到非白名单的评论，所以“可以添加到白名单”的权限不要在加一次用户层面的权限判定
+        "canRemoveWhite", // 是否可以从过滤白名单移除
     ],
     components: {
         Uploader,
@@ -162,6 +233,10 @@ export default {
             showUploader: false,
             inputId: "",
             previewList: [],
+            currentUserHadLike: this.isLike,
+            hasLikeCount: this.likes,
+
+            renderContent: "",
         };
     },
     mounted() {
@@ -174,12 +249,33 @@ export default {
             });
         },
     },
+    watch: {
+        content: {
+            handler: function (val) {
+                this.formatContent(val);
+            },
+            immediate: true,
+        },
+    },
     methods: {
+        doLike(setLike) {
+            if (setLike === this.currentUserHadLike) {
+                return;
+            }
+            this.currentUserHadLike = setLike;
+            this.hasLikeCount = setLike
+                ? this.hasLikeCount + 1
+                : this.hasLikeCount - 1;
+            this.$emit("setLikeComment", setLike);
+        },
         topComment(setTop) {
             this.$emit("setTopComment", setTop);
         },
         starComment(setStar) {
             this.$emit("setStarComment", setStar);
+        },
+        setWhiteComment(white) {
+            this.$emit("setWhiteComment", white);
         },
         deleteComment() {
             this.$confirm("确定删除该评论吗？", "提示", {
@@ -189,6 +285,17 @@ export default {
             })
                 .then(() => {
                     this.$emit("deleteComment");
+                })
+                .catch(() => {});
+        },
+        hideComment() {
+            this.$confirm("确定隐藏该评论吗？", "提示", {
+                confirmButtonText: "确定",
+                cancelButtonText: "取消",
+                type: "warning",
+            })
+                .then(() => {
+                    this.$emit("hide", this.commentId);
                 })
                 .catch(() => {});
         },
@@ -208,7 +315,9 @@ export default {
                 fillZero(d.getSeconds())
             );
         },
-
+        likesFormat(count) {
+            return count > 0 ? count : "";
+        },
         attachmentUploadFinish(data) {
             this.disableSubmitBtn = false;
             this.$emit("addNewReply", {
@@ -233,7 +342,9 @@ export default {
             }
         },
         hideForm() {},
-        formatContent,
+        async formatContent(str) {
+            this.renderContent = await formatContent(str);
+        },
         async handleEmotionSelected(emotionVal) {
             const myField = document.querySelector(`#id${this.inputId}`);
             const value = emotionVal.key;
@@ -273,8 +384,28 @@ export default {
     position: relative;
     .u-toolbar {
         font-size: 12px;
+
         .el-button + .el-button {
             margin-left: 20px;
+        }
+
+        &.u-toolbar--primary {
+            display: flex;
+            justify-content: space-between;
+
+            .u-toolbar-right {
+                padding-right: 5px;
+            }
+        }
+
+        .u-filter span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .u-icon-filter {
+            width: 16px;
+            height: 16px;
         }
     }
     .u-date {
@@ -286,6 +417,7 @@ export default {
     }
     .u-cmt {
         padding: 5px 0 10px 0;
+        position: relative;
         .u-text {
             line-height: 1.715;
             img {
@@ -303,12 +435,33 @@ export default {
             }
         }
     }
+    .u-up {
+        width: 12px;
+        height: 12px;
+        position: relative;
+        top: 1px;
+        margin-right: 5px;
+    }
+    .u-like-count {
+        margin-left: 3px;
+        // &:before {
+        //     content: "(";
+        // }
+        // &:after {
+        //     content: ")";
+        // }
+        color: #999;
+    }
 }
 @media screen and (max-width: 767px) {
     .c-comment-cmt {
         .u-toolbar {
             position: static;
             margin-top: 10px;
+
+            &.u-toolbar--primary {
+                display: block !important;
+            }
         }
     }
 }

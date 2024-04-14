@@ -18,6 +18,12 @@
                    type="pop"
                    :max="6">
                 </Emotion>
+                <quickReply @reply="onQuickReply"></quickReply>
+                <div class="c-comment-secret">
+                    <el-checkbox class="u-secret" v-model="is_secret" border size="small">悄悄话
+                        <el-tooltip class="item" effect="dark" content="勾选悄悄话后仅作者和你可见，并且不可再变更状态" placement="top">
+                            <el-icon><InfoFilled></InfoFilled></el-icon> </el-tooltip></el-checkbox>
+                </div>
             </div>
             <Uploader
                 class="u-uploader"
@@ -42,11 +48,13 @@
 <script>
 import Uploader from "./Upload.vue";
 import Emotion from "@jx3box/jx3box-emotion/src/Emotion2.vue";
+import QuickReply from "./QuickReply.vue";
 
 export default {
     components: {
         Uploader,
-        Emotion
+        Emotion,
+        QuickReply
     },
     props: {
         // 用于判定该评论组件是否在底部
@@ -65,7 +73,8 @@ export default {
             newComment: {
                 content: ""
             },
-            inputId: "textarea-top"
+            inputId: "textarea-top",
+            is_secret: false,
         };
     },
     methods: {
@@ -76,6 +85,13 @@ export default {
             } else {
                 this.attachmentUploadFinish([]);
             }
+        },
+        onQuickReply(item) {
+            this.$emit("submit", {
+                content: item,
+                attachmentList: [],
+                is_template: 1,
+            });
         },
         // 文件上传完成后，进行数据提交
         attachmentUploadFinish(data) {
@@ -127,3 +143,17 @@ export default {
     }
 };
 </script>
+
+<style lang="less">
+.c-comment-secret {
+    margin-left: 15px;
+
+    .u-secret {
+        display: flex;
+        align-items: center;
+        .el-checkbox__inner{
+            display:block;
+        }
+    }
+}
+</style>

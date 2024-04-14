@@ -1,13 +1,15 @@
 <template>
     <div class="c-comment-replylist" v-if="data.length">
         <reply-item
-            class="c-comment-reply"
+        class="c-comment-reply"
             v-for="reply in data"
             :key="reply.id"
             :reply="reply"
             :power="power"
             @deleteReply="deleteReply"
             @addReply="addReply"
+            @setLikeComment="setLikeComment"
+            @hide="hideReply"
         />
         <!-- 分页 -->
         <el-row v-if="data.length >= 3 || showPager">
@@ -42,7 +44,7 @@ export default {
             showPager: false,
         };
     },
-    emits: ["goto", "resetReply", "deleteReply", "addNewReply"],
+    emits: ["goto", "resetReply", "deleteReply", "addNewReply", "setLikeComment", "hide"],
     methods: {
         showMore() {
             this.showPager = true;
@@ -57,6 +59,12 @@ export default {
         },
         deleteReply(id) {
             this.$emit("deleteReply", id);
+        },
+        hideReply(id) {
+            this.$emit("hide", id);
+        },
+        setLikeComment(id, isLike) {
+            this.$emit("setLikeComment", id, isLike);
         },
         addReply(data) {
             this.$emit("addNewReply", data);
