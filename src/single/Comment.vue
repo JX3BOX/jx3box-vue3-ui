@@ -214,6 +214,7 @@ export default {
             if (this.isDesc === "DESC") {
                 orderQuery["desc"] = true;
             }
+            orderQuery["orderby_likes"] = this.orderByLikes;
             GET(`${this.baseAPI}/comment/page/${index}`, orderQuery)
                 .then((resp) => {
                     this.commentList = resp.data || [];
