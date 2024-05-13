@@ -34,8 +34,9 @@
                 <el-icon><InfoFilled /></el-icon>
                 <span>反馈</span>
             </a>
-            <AdminButton v-if="adminEnable" class="u-admin" />
-            <Admin v-if="adminEnable" />
+            <!-- <AdminButton v-if="adminEnable" class="u-admin" /> -->
+            <Admin v-if="adminEnable" :marksOptions="adminMarks" :show-extend="showExtend" :app="slug" :subtypeMap="subtypeMap" />
+            <!-- <AdminDrop v-if="adminEnable" /> -->
             <slot name="op-prepend"></slot>
         </div>
     </div>
@@ -47,7 +48,8 @@ import { publishLink, getAppIcon } from "@jx3box/jx3box-common/js/utils";
 import User from "@jx3box/jx3box-common/js/user";
 import Admin from "./bread/Admin";
 import Crumb from "./bread/Crumb";
-import AdminButton from "./bread/AdminButton";
+// import AdminButton from "./bread/AdminButton";
+// import AdminDrop from "./bread/AdminDrop";
 
 import { isApp } from "../assets/js/app.js";
 import Bus from "../utils/bus";
@@ -55,15 +57,20 @@ import Bus from "../utils/bus";
 export default {
     name: "CommonBreadcrumb",
     props: [
-        "name",
+    "name",
         "slug",
         "root",
         "publishEnable",
         "adminEnable",
+        "topicEnable",
         "feedbackEnable",
         "overlayEnable",
         "crumbEnable",
         "withoutLeft",
+        "adminMarks",
+        "icon",
+        "subtypeMap",
+        "showExtend"
     ],
     data: function () {
         return {
@@ -126,7 +133,8 @@ export default {
     components: {
         Admin,
         Crumb,
-        AdminButton,
+        // AdminButton,
+        // AdminDrop
     },
 };
 </script>

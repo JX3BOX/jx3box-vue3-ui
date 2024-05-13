@@ -19,7 +19,7 @@
                 <el-button
                     class="u-admin"
                     v-if="!currentUserHadLike"
-                    type="text"
+                    link
                     size="small"
                     @click="doLike(true)"
                     ><img
@@ -30,7 +30,7 @@
                 >
                 <el-button
                     class="u-admin"
-                    type="text"
+                    link
                     size="small"
                     v-if="currentUserHadLike"
                     @click="doLike(false)"
@@ -63,7 +63,7 @@
                 >
                 <el-button
                     class="u-admin"
-                    type="text"
+                    link
                     size="small"
                     icon="Delete"
                     v-if="canHide"
@@ -120,7 +120,7 @@
                 <el-button
                     class="u-admin u-filter"
                     v-if="canAddWhite"
-                    type="text"
+                    link
                     size="small"
                     @click="setWhiteComment(true)"
                 >
@@ -134,7 +134,7 @@
                 <el-button
                     class="u-admin u-filter"
                     v-if="canRemoveWhite"
-                    type="text"
+                    link
                     size="small"
                     @click="setWhiteComment(false)"
                     ><img

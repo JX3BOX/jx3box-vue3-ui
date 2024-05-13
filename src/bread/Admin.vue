@@ -112,12 +112,17 @@ import { getRewrite } from "@jx3box/jx3box-common/js/utils";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { getSetting, postSetting } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
-import MARK from "@jx3box/jx3box-common/data/mark.json";
+import { cms as marks } from "@jx3box/jx3box-common/data/mark.json";
+import { getTopicBucket } from "../../service/cms";
 // import { onClickOutside } from "@vueuse/core";
 export default {
     name: "BreadAdmin",
     emits: ["update"],
     props: {
+        marksOptions: {
+            type: Object,
+            default: () => {},
+        },
         // 入口是否是后台管理/list
         fromList: {
             type: Boolean,
@@ -135,6 +140,18 @@ export default {
         appDisabled: {
             type: Boolean,
             default: false,
+        },
+        showExtend: {
+            type: Boolean,
+            default: false,
+        },
+        subtypeMap: {
+            type: Object,
+            default: () => {},
+        },
+        app: {
+            type: String,
+            default: "",
         },
     },
     data() {
@@ -164,7 +181,6 @@ export default {
 
             // 角标
             mark: [],
-            mark_options: MARK.cms,
 
             // 高亮
             isHighlight: false,
@@ -181,6 +197,7 @@ export default {
             // 置顶
             isSticky: false,
             sticky: 0,
+            isStar: 0,
 
             // 海报
             uploadurl: JX3BOX.__cms + "api/cms/upload",
@@ -190,6 +207,9 @@ export default {
             // 类型
             post_type: "",
             type_options: [],
+            post_subtype: "",
+            topics: [],
+            tags: [],
 
             // 作者
             post_author: "",
@@ -207,10 +227,18 @@ export default {
                 color: this.isHighlight ? this.color : "",
                 mark: this.mark || [],
                 sticky: this.isSticky ? Date.now() : null,
+                star: this.isStar,
+                topics: this.topics,
+                post_subtype: this.post_subtype,
             };
         },
         isAdmin: function () {
             return User.isAdmin();
+        },
+        mark_options: function () {
+            return this.marksOptions && Object.keys(this.marksOptions)
+                ? Object.assign({}, marks, this.marksOptions)
+                : marks;
         },
     },
     methods: {
@@ -259,7 +287,7 @@ export default {
         // 拉
         pull: function () {
             getSetting(this.pid).then((data) => {
-                let { ID, color, mark, post_status, post_author, sticky, post_banner, post_type, visible } = data;
+                let { ID, color, mark, post_status, post_author, sticky, post_banner, post_type, visible, star, post_subtype, topics } = data;
                 this.pid = ID;
                 this.post_status = post_status;
                 this.visible = visible;
@@ -271,6 +299,10 @@ export default {
                 this.mark = mark || [];
                 this.sticky = sticky || 0;
                 if (this.sticky) this.isSticky = true;
+
+                this.isStar = star || 0;
+                this.topics = topics?.map(item => item.topic) || [];
+                this.post_subtype = post_subtype || "";
 
                 // 设置加载完成标识
                 this.pulled = true;
@@ -298,6 +330,13 @@ export default {
                     this.pushing = false;
                     this.close();
                 });
+        },
+        // 获取topic标签
+        loadTopic() {
+            getTopicBucket({ type: "bbs" }).then((res) => {
+                const data = res.data.data?.map((item) => item.name) || [];
+                this.tags = data;
+            });
         },
     },
     watch: {
@@ -336,12 +375,11 @@ export default {
             if (this.pid && this.hasRight) {
                 this.pull();
             }
-        });
 
-        // 点击外部关闭
-        // onClickOutside(this.$refs.adminDrawer, () => {
-        //     this.close();
-        // });
+            if (this.showExtend && this.app && this.dialog_visible) {
+                this.loadTopic();
+            }
+        });
     },
 };
 </script>

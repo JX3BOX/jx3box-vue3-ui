@@ -5,24 +5,6 @@ function getPostAuthors(post_id) {
     return $cms({ mute: true }).get(`/api/cms/post/${post_id}/authors`);
 }
 
-function uploadFile(data) {
-    return $cms().post(`/api/cms/upload`, data);
-}
-
-// 获取用户列表
-function loadAuthors(params) {
-    return $cms().get(`/api/cms/user/list`, {
-        params: params,
-    });
-}
-
-// 获取表情列表
-function loadEmotions(params) {
-    return $cms().get(`/api/cms/post/emotions`, {
-        params: params,
-    });
-}
-
 function uploadImage(formData) {
     return $cms().post(`/api/cms/upload/avatar`, formData);
 }
@@ -36,26 +18,22 @@ function getDecorationJson() {
     let url = JX3BOX.__imgPath + "decoration/index.json";
     return axios.get(url);
 }
-function getHonorJson() {
-    let url = JX3BOX.__imgPath + "decoration/honor.json";
-    return axios.get(url);
-}
 // 通用上传
 function upload(formData) {
     return $cms().post(`/api/cms/upload`, formData);
 }
 
-function getUserHonor(uid) {
-    return $cms({ mute: true })
-        .get(`/api/cms/user/honor/${uid}/using`)
+// 检测当前用户是否为团队成员
+function checkTeamMember() {
+    return $cms().get(`/api/cms/config/teammates/check`);
 }
 
-function getSliders(source_type, source_ids, client='std') {
+function getSliders(source_type, source_ids, client="std") {
     let _params = {
         type: "slider",
         source_type,
         per: 10,
-        client
+        client,
     };
 
     if (source_ids) {
@@ -71,4 +49,29 @@ function getCollection(id) {
     return $cms({ mute: true }).get(`/api/cms/post/collection/${id}`);
 }
 
-export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, getHonorJson, getSliders, loadAuthors, loadEmotions, uploadFile, getCollection, getUserHonor };
+// 获取自定义主题
+function getTopicBucket(params) {
+    return $cms().get(`/api/cms/topic/bucket`, { params });
+}
+
+// 获取config
+function getConfig(params) {
+    return $cms().get(`/api/cms/config`, { params }).then((res) => {
+        return res.data.data;
+    });
+}
+
+// 获取用户meta
+function getUserMeta(params) {
+    return $cms().get(`/api/cms/user/my/meta`, { params }).then((res) => {
+        return res.data.data;
+    });
+}
+
+// 设置用户meta
+function setUserMeta(key,data) {
+    return $cms().post(`/api/cms/user/my/meta?key=${key}`, data);
+}
+
+export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember,
+    getSliders, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta };

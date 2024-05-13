@@ -15,7 +15,7 @@
             </template>
             <template #op-prepend>
 
-                <AdminDirectMessage :user-id="8" :sourceId="19382" sourceType="macro"></AdminDirectMessage>
+                <!-- <AdminDirectMessage :user-id="8" :sourceId="19382" sourceType="macro"></AdminDirectMessage> -->
             </template>
         </breadcrumb>
         <LeftSidebar :open="true" :uid="7">
@@ -91,7 +91,7 @@ import PostTopic from "./single/PostTopic.vue";
 import axios from "axios";
 import post_topics from "@jx3box/jx3box-common/data/post_topics.json";
 import { get_item } from "../service/item";
-import AdminDirectMessage from "./bread/AdminDirectMessage.vue";
+// import AdminDirectMessage from "./bread/AdminDirectMessage.vue";
 // import Admin from "@/bread/Admin.vue";
 export default {
     name: "App",
@@ -103,7 +103,7 @@ export default {
         // PostHeader,
         PostTopic,
         UploadAlum,
-        AdminDirectMessage,
+        // AdminDirectMessage,
         singlebox,
         // Admin,
     },

@@ -17,7 +17,7 @@ export default {
     props: {
         size: {
             type: String,
-            default: "medium",
+            default: "default",
         },
         sourceId: {
             type: Number,
