@@ -26,7 +26,7 @@
                 class="u-admin"
                 v-if="!currentUserHadLike"
                 link
-                size="mini"
+                size="small"
                 @click="doLike(true)"
                 ><img
                     class="u-up"
@@ -39,7 +39,7 @@
             <el-button
                 class="u-admin"
                 link
-                size="mini"
+                size="small"
                 v-if="currentUserHadLike"
                 @click="doLike(false)"
                 ><img
@@ -73,7 +73,7 @@
             <el-button
                 class="u-admin"
                 link
-                size="mini"
+                size="small"
                 icon="Delete"
                 v-if="canHide"
                 @click="hideComment"

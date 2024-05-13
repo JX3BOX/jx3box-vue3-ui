@@ -78,5 +78,23 @@ function getUserHonor(uid) {
         .get(`/api/cms/user/honor/${uid}/using`)
 }
 
+// 获取用户列表
+function loadAuthors(params) {
+    return $cms().get(`/api/cms/user/list`, {
+        params: params,
+    });
+}
+
+// 获取表情列表
+function loadEmotions(params) {
+    return $cms().get(`/api/cms/post/emotions`, {
+        params: params,
+    });
+}
+
+function uploadFile(data) {
+    return $cms().post(`/api/cms/upload`, data);
+}
+
 export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember,
-    getSliders, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta, getUserHonor };
+    getSliders, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta, getUserHonor, loadAuthors, loadEmotions, uploadFile };
