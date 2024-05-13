@@ -112,8 +112,10 @@ import { getRewrite } from "@jx3box/jx3box-common/js/utils";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { getSetting, postSetting } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
-import { cms as marks } from "@jx3box/jx3box-common/data/mark.json";
+import CMS_MARKS from "@jx3box/jx3box-common/data/mark.json";
 import { getTopicBucket } from "../../service/cms";
+
+const { cms: marks } = CMS_MARKS;
 // import { onClickOutside } from "@vueuse/core";
 export default {
     name: "BreadAdmin",
