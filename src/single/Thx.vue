@@ -13,7 +13,7 @@
                 :points="admin_points"
                 :authors="authors"
                 @updateRecord="updateRecord"
-                :client="client"
+                :client="finalClient"
             />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
@@ -27,12 +27,12 @@
                 :authors="authors"
                 v-if="userBoxcoinEnable && boxcoin_enable && allowGift"
                 @updateRecord="updateRecord"
-                :client="client"
+                :client="finalClient"
             />
             <Share :postId="postId" :postType="postType" :client="client" />
         </div>
         <div class="w-thx-records">
-            <boxcoin-records :postId="postId" :postType="postType" :postClient="client" :cacheRecord="cacheRecord"
+            <boxcoin-records :postId="postId" :postType="postType" :postClient="finalClient" :cacheRecord="cacheRecord"
                 :mode="mode" @update:boxcoin="updateBoxcoin" />
         </div>
         <div class="w-thx-copyright">
@@ -135,6 +135,12 @@ export default {
         post_keys: function () {
             return [this.postId, this.postType];
         },
+        finalClient: function() {
+            if (this.client == 'wujie') {
+                return "std"
+            }
+            return this.client
+        }
     },
     watch: {
         post_keys: {
@@ -158,9 +164,9 @@ export default {
                     this.user_points = res.data.data.limit.user_points || [10, 1000];
                     // 根据多端展示剩余币
                     // 作品是n端，接受n端币+all币
-                    if (this.client == "origin") {
+                    if (this.finalClient == "origin") {
                         this.user_left = res.data.data.asUserBoxCoinRemainOrigin + res.data.data.asUserBoxCoinRemainAll;
-                    } else if (this.client == "std") {
+                    } else if (this.finalClient == "std") {
                         this.user_left = res.data.data.asUserBoxCoinRemainStd + res.data.data.asUserBoxCoinRemainAll;
                     } else {
                         this.user_left =

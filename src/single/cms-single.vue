@@ -80,7 +80,7 @@ import Thx from "./Thx.vue";
 // import RightAffix from "./right-affix.vue";
 import Article from "../editor/Article.vue";
 // import ArticleMarkdown from "@jx3box/jx3box-editor/src/ArticleMarkdown.vue";
-import Comment from "./Comment.vue"; 
+import Comment from "./Comment.vue";
 const { __visibleMap } = require("@jx3box/jx3box-common/data/jx3box.json");
 import { getAppType } from "@jx3box/jx3box-common/js/utils";
 export default {
@@ -164,6 +164,9 @@ export default {
         post_client: function () {
             return this.post?.client || "all";
         },
+        community_id: function () {
+            return this.post?.community_id || 0;
+        },
     },
     methods: {
         updateCollection: function (val) {
@@ -204,6 +207,18 @@ export default {
                 }
             },
         },
+        community_id: {
+            immediate: true,
+            handler(val) {
+                if (val && val != 0) {
+                    // 防止死循环
+                    if (location.href.includes(`/community/${val}`)) {
+                        return;
+                    }
+                    location.href = `/community/${val}`;
+                }
+            }
+        }
     },
 };
 </script>
