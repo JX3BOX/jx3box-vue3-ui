@@ -47,6 +47,9 @@ export default {
         },
         topicImage() {
             const img = this.postBanner || this.topicInfo?.img;
+            if (img.indexOf(".gif") > -1) {
+                return img;
+            }
             return getThumbnail(img, [260*2, 78*2])
         },
         client() {
