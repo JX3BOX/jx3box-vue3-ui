@@ -95,13 +95,6 @@ export default {
     position: relative;
     height: 100%;
 
-    .u-coin {
-        .db;
-        .size(15px);
-        * {
-            fill: #fff !important;
-        }
-    }
     .u-asset {
         padding: 0 10px;
         height: 100%;
@@ -110,15 +103,6 @@ export default {
         &:hover {
             .tm(0.7);
         }
-    }
-
-    .u-icon {
-        .size(16px);
-        // font-size: 15px;
-        display: block;
-        // height: 32px;
-        padding: 24px 10px 10px 10px;
-        .pointer;
     }
 
     .u-assets {

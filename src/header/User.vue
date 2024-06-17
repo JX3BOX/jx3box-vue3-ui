@@ -10,6 +10,9 @@
             <!-- vip -->
             <vip />
 
+            <!-- 商城 -->
+            <shop />
+
             <!-- 我的资产 -->
             <asset :asset="asset" />
 
@@ -42,7 +45,8 @@ import publish from "./Publish.vue";
 import vip from "./Vip.vue";
 import asset from "./Asset.vue";
 import manage from "./Manage.vue";
-import userInfo from "./UserInfo.vue";
+import userInfo from "./UserInfo.vue"; 
+import shop from "./Shop.vue";
 export default {
     name: "HeaderUser",
     components: {
@@ -51,7 +55,8 @@ export default {
         vip,
         asset,
         manage,
-        userInfo,
+        userInfo, 
+        shop,
     },
     data: function () {
         return {

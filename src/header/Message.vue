@@ -46,26 +46,12 @@ export default {
         .h(100%);
         .flex;
         align-items: center;
-
         padding: 0 10px;
-        &:hover {
-            opacity: 0.7;
-        }
         cursor: pointer;
     }
     .u-icon-msg {
-        // .mt(10px);
-        width: 17px;
-        height: 17px;
-        display: block;
         .pr;
-        top: 1px;
-        // margin-top: 9px;
-        svg {
-            width: 100%;
-            height: 100%;
-        }
-        .pr;
+        .size(18px);
     }
     .u-pop {
         width: 10px;
@@ -78,6 +64,7 @@ export default {
         position: absolute;
         right: -5px;
         top: -6px;
+        z-index: 1;
     }
 }
 

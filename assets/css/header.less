@@ -81,6 +81,13 @@ body {
     display: flex;
     align-items: center;
     height: 100%;
+    svg {
+        .size(18px);
+        fill: #fff;
+        &:hover {
+            opacity: 0.7;
+        }
+    }
 
     .u-dropdown {
         border-bottom: 0 solid transparent;
@@ -200,12 +207,6 @@ body {
         align-items: center;
     }
 
-    .u-add {
-        fill: #fff;
-        vertical-align: middle;
-        // margin-right: 4px;
-    }
-
     &.on {
         .u-menu {
             display: block;
@@ -213,7 +214,6 @@ body {
     }
 
     &:hover {
-        .u-add,
         .u-dropdown {
             opacity: 0.7;
         }
