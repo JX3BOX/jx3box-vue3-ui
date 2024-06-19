@@ -80,7 +80,6 @@ export default {
 }
 .c-comment-reply {
     padding-top: 5px;
-    border-radius: 8px;
     background-size: cover;
     flex-direction: column;
     &:not(:last-of-type) {
