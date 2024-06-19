@@ -1,7 +1,7 @@
 <template>
     <div class="c-comment-replylist" v-if="data.length">
         <reply-item
-        class="c-comment-reply"
+            class="c-comment-reply"
             v-for="reply in data"
             :key="reply.id"
             :reply="reply"
@@ -79,6 +79,9 @@ export default {
     border-top: 1px dashed #eee;
 }
 .c-comment-reply {
+    padding-top: 5px;
+    border-radius: 8px;
+    background-size: cover;
     flex-direction: column;
     &:not(:last-of-type) {
         border-bottom: 1px dashed #eee;
