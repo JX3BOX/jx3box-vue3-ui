@@ -13,6 +13,10 @@
                     <el-icon v-if="post.post_status == 'dustbin'" color="#c00"><Delete></Delete></el-icon>
                 </i>
                 <span class="u-title-text">{{ title }}</span>
+                <template v-if="titleExtra">
+                    <span class="u-client" :class="'i-client-' + client">{{ showClientLabel(client) }}</span>
+                    <span class="u-client u-zlp" v-if="zlp">{{ zlp }}</span>
+                </template>
             </span>
         </div>
 
@@ -39,6 +43,7 @@
             <div class="u-meta u-sub-block">
                 <em class="u-label">适用客户端</em>
                 <span class="u-value u-client" :class="client">{{ showClientLabel(client) }}</span>
+                <span class="u-value u-client wujie">无界</span>
             </div>
 
             <!-- 发布日期 -->
@@ -261,8 +266,10 @@ export default {
         }
 
         &.wujie{
-            border: 1px solid @wujie;
-            color: @wujie;
+            border: 1px solid #00dcda;
+            color: #3ae0f1;
+            background: #eff;
+            margin-left: 5px;
         }
 
         &.all {

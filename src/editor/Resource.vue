@@ -10,7 +10,7 @@
             <div class="c-resource-content" v-loading="loading">
                 <div class="m-database-search">
                     <el-radio-group class="u-client" v-model="client" @change="search">
-                        <el-radio-button label="std">重制</el-radio-button>
+                        <el-radio-button label="std">剑三</el-radio-button>
                         <el-radio-button label="origin">缘起</el-radio-button>
                     </el-radio-group>
                     <el-input

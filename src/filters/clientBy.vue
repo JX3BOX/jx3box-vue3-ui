@@ -20,7 +20,7 @@
 <script>
 const clients = {
     all: "全端",
-    std: "重制",
+    std: "剑三",
     origin: "缘起",
 };
 export default {
