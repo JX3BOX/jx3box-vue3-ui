@@ -75,7 +75,7 @@ export default {
 
 <style lang="less">
 .c-comment-replylist {
-    padding: 10px 0;
+    padding: 10px 0 10px 68px;
     border-top: 1px dashed #eee;
 }
 .c-comment-reply {

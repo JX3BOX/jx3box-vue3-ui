@@ -5,11 +5,7 @@
             <div class="c-comment-panel">
                 <div class="u-order">
                     <span class="u-label">排序模式：</span>
-                    <el-radio-group
-                        v-model="isDesc"
-                        @change="changeOrder"
-                        size="small"
-                    >
+                    <el-radio-group v-model="isDesc" @change="changeOrder" size="small">
                         <el-radio-button label="DESC">最后靠前</el-radio-button>
                         <el-radio-button label="ASC">最早靠前</el-radio-button>
                     </el-radio-group>
@@ -34,19 +30,15 @@
                 </div>
             </div>
             <template v-if="isNormal">
-                <div
-                    v-for="item in commentList"
-                    :key="item.id"
-                    class="c-comment-list"
-                >
-                    <CommentAvatar
+                <div v-for="item in commentList" :key="item.id" class="c-comment-list">
+                    <!-- <CommentAvatar
                         :user-avatar="showAvatar(item.avatar)"
                         :user-href="profileLink(item.userId)"
                         :username="item.displayName"
                         :avatarFrame="item.user_avatar_frame"
                         :withFrame="true"
                         :avatarSize="48"
-                    />
+                    /> -->
                     <CommentWithReply
                         :base-api="baseAPI"
                         :item="item"
@@ -89,7 +81,7 @@
 
 <script>
 import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
-import CommentAvatar from "../comment/Avatar.vue";
+// import CommentAvatar from "../comment/Avatar.vue";
 import CommentInputForm from "../comment/CommentInputForm.vue";
 import CommentWithReply from "../comment/CommentWithReply.vue";
 import { GET, POST, DELETE, PUT, getOrderMode, setOrderMode } from "../../service/comment";
@@ -97,7 +89,7 @@ export default {
     name: "CommentComp",
     props: ["id", "category", "normal", "order"],
     components: {
-        CommentAvatar,
+        // CommentAvatar,
         CommentWithReply,
         CommentInputForm,
     },
@@ -144,13 +136,10 @@ export default {
                 .catch(() => {});
         },
         changeWhiteList() {
-            PUT(
-                `${this.baseAPI}/meta/white-list/${
-                    this.openWhiteList ? "open" : "close"
-                }`
-            ).then(()=>{
-                return this.reloadPower()
-            })
+            PUT(`${this.baseAPI}/meta/white-list/${this.openWhiteList ? "open" : "close"}`)
+                .then(() => {
+                    return this.reloadPower();
+                })
                 .then(() => {
                     this.commentPower.is_white = this.openWhiteList;
                     this.reloadCommentList(this.pager.index);
@@ -263,14 +252,14 @@ export default {
         showAvatar: function (val) {
             return showAvatar(val, 144);
         },
-        reloadPower(){
+        reloadPower() {
             GET(`${this.baseAPI}/i-am-author`)
-                    .then((power) => {
-                        this.commentPower = power;
-                        this.openWhiteList = power.is_white;
-                    })
-                    .catch(() => {});
-        }
+                .then((power) => {
+                    this.commentPower = power;
+                    this.openWhiteList = power.is_white;
+                })
+                .catch(() => {});
+        },
     },
     created() {
         this.baseAPI = `/api/next2/comment/${this.category}/article/${this.id}`;
@@ -437,7 +426,7 @@ export default {
 }
 @media screen and (max-width: 720px) {
     .c-comment-panel {
-        .u-op{
+        .u-op {
             display: none;
         }
     }
