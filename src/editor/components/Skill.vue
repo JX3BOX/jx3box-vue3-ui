@@ -14,7 +14,8 @@
 
 <script>
 import { getSkill } from "../../../service/database.js";
-import { iconLink } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { iconLink } = utilModule;
 export default {
     name: "SkillComponent",
     props: ["client", "id", "level"],

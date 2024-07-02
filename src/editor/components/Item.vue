@@ -208,7 +208,8 @@ import GameText from "./GameText.vue";
 import attribute_percent from "../../../assets/js/item/attribute_percent.js";
 import bind from "../../../assets/js/item/bind.js";
 import color from "../../../assets/js/item/color.js";
-import { iconLink } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { iconLink } = utilModule;
 
 import second_format from "../../../assets/js/item/second_format.js";
 import dayjs from "dayjs";

@@ -15,7 +15,8 @@
 
 <script>
 import { getBuff } from "../../../service/database.js";
-import { iconLink } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { iconLink } = utilModule;
 import detach_types from "../../../assets/data/detach_type.json";
 export default {
     name: "BuffComponent",

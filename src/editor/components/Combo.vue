@@ -97,7 +97,8 @@
 
 <script>
 import Vue from "vue";
-import { iconLink } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { iconLink } = utilModule;
 import { getSkill } from "../../service/resource";
 import Sortable from "sortablejs";
 import { cloneDeep } from "lodash";

@@ -194,7 +194,8 @@
 
 <script>
 import Uploader from "./Upload.vue";
-import { resolveImagePath } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { resolveImagePath } = utilModule;
 import { formatContent } from "../../utils/emotion";
 import Emotion from "@jx3box/jx3box-emotion/src/Emotion2.vue";
 

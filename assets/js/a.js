@@ -1,6 +1,9 @@
 // 链接标签
 import url from 'url'
-import { resolveImagePath } from "@jx3box/jx3box-common/js/utils";
+
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { resolveImagePath } = utilModule;
+
 function formatLink(str){
     if(!str) return
 

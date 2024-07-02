@@ -40,7 +40,8 @@
 <script>
 import EquipPosition from "../../../service/enum/EquipPosition";
 import ItemSimple from "./ItemSimple.vue";
-import { authorLink } from "@jx3box/jx3box-common/js/utils.js";
+import * as utilModule from "@jx3box/jx3box-common/js/utils.js";
+const { authorLink } = utilModule;
 import QRcode from "@jx3box/jx3box-common-ui/src/interact/QRcode.vue";
 import { showTime } from "@jx3box/jx3box-common/js/moment.js";
 import { get_plan } from "../../../service/item.js";

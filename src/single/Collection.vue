@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import { getLink } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { getLink } = utilModule;
 import { getCollection } from "../../service/cms";
 export default {
     name: "SingleCollection",

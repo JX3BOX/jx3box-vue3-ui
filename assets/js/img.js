@@ -1,5 +1,6 @@
 // 图片地址&懒加载
-import { resolveImagePath } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { resolveImagePath } = utilModule;
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 function lazyLoad(str) {
     if (!str) return;

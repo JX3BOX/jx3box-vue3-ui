@@ -82,7 +82,8 @@ import Article from "../editor/Article.vue";
 // import ArticleMarkdown from "@jx3box/jx3box-editor/src/ArticleMarkdown.vue";
 import Comment from "./Comment.vue";
 const { __visibleMap } = require("@jx3box/jx3box-common/data/jx3box.json");
-import { getAppType } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { getAppType } = utilModule;
 export default {
     name: "cms-single",
     components: {

@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import { getThumbnail } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { getThumbnail } = utilModule;
 import { upload } from "../../service/cms.js";
 export default {
     name: "upload-banner",

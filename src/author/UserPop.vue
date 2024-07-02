@@ -46,7 +46,8 @@
 </template>
 
 <script>
-import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { showAvatar } = utilModule;
 import { getUserInfoByUidOrName } from "../../service/author";
 export default {
     name: "UserPop",

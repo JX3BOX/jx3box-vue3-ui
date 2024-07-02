@@ -163,7 +163,8 @@
 
 <script>
 import { getNpc } from "../../../service/database.js";
-import { iconLink } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { iconLink } = utilModule;
 export default {
     name: "NpcComponent",
     props: ["client", "id"],

@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { showAvatar } = utilModule;
 export default {
     name: "ContributorsComp",
     props: {

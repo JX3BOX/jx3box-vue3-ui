@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { authorLink } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { authorLink } = utilModule;
 import { getEmotion } from "../../../service/author";
 import dayjs from "dayjs";
 import Avatar from "./Avatar.vue";

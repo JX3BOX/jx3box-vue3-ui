@@ -108,7 +108,8 @@
 
 <script>
 import Bus from "../../utils/bus";
-import { getRewrite } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { getRewrite } = utilModule;
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { getSetting, postSetting } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";

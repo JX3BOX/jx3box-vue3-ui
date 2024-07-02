@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import { getMedalLink } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { getMedalLink } = utilModule;
 import { getUserMedals } from "../../service/author";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 const { __imgPath, __Root } = JX3BOX;

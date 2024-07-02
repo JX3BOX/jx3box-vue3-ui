@@ -102,7 +102,8 @@
 
 <script>
 import User from "@jx3box/jx3box-common/js/user";
-import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import * as utilModule from "@jx3box/jx3box-common/js/utils";
+const { showAvatar } = utilModule;
 import { showDate } from "@jx3box/jx3box-common/js/moment";
 import { getMyInfo } from "../../service/author";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
