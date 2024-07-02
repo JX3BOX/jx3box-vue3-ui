@@ -9,7 +9,7 @@
                 :withFrame="true"
                 :avatarSize="48"
             />
-            <div>
+            <div class="u-flex-1">
                 <div class="c-comment-cmt__author">
                     <el-link class="u-name" type="primary" target="_blank" :href="userHref">{{
                         username || "人字榜800线无名小侠"
@@ -252,5 +252,8 @@ export default {
     display: flex;
     padding-top: 5px;
     background-size: cover;
+    .u-flex-1 {
+        flex: 1;
+    }
 }
 </style>

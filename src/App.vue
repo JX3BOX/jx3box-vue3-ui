@@ -14,7 +14,6 @@
                 <img svg-inline src="../assets/img/jx3.svg" />
             </template>
             <template #op-prepend>
-
                 <!-- <AdminDirectMessage :user-id="8" :sourceId="19382" sourceType="macro"></AdminDirectMessage> -->
             </template>
         </breadcrumb>
@@ -67,7 +66,7 @@
                 :postId="57260"
                 :allowGift="true"
             />
-            <Comment category="post" id="58345"></Comment>
+            <Comment category="post" id="80449"></Comment>
             <RightSidebar :show-toggle="true">
                 <PostTopic type="bps" :id="48857"></PostTopic>
                 <div id="directory"></div>
