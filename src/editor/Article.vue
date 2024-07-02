@@ -71,7 +71,7 @@ import renderJx3Element from "../../assets/js/jx3_element";
 import Item from "./components/Item.vue";
 import Buff from "./components/Buff.vue";
 import Skill from "./components/Skill.vue";
-import Npc from "./components/Npc.vue".vue;
+import Npc from "./components/Npc.vue";
 import Author from "./components/Author.vue";
 import PostAuthor from "./components/PostAuthor.vue";
 
