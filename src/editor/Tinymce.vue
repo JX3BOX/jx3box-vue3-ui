@@ -30,9 +30,9 @@
 
 <script>
 import Editor from "@tinymce/tinymce-vue";
-import Upload from "./Upload";
-import Resource from "./Resource";
-import BoxResource from "./BoxResource";
+import Upload from "./Upload.vue";
+import Resource from "./Resource.vue";
+import BoxResource from "./BoxResource.vue";
 const { __cms, __imgPath } = require("@jx3box/jx3box-common/data/jx3box.json");
 import Emotion from "@jx3box/jx3box-emotion/src/Emotion2.vue"
 import hljs_languages from "../../assets/js/item/hljs_languages.js"

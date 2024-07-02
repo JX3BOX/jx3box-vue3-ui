@@ -68,11 +68,11 @@ import renderCombo from "../../assets/js/combo";
 import renderJx3Element from "../../assets/js/jx3_element";
 
 // 剑三
-import Item from "./components/Item";
-import Buff from "./components/Buff";
-import Skill from "./components/Skill";
-import Npc from "./components/Npc";
-import Author from "./components/Author";
+import Item from "./components/Item.vue";
+import Buff from "./components/Buff.vue";
+import Skill from "./components/Skill.vue";
+import Npc from "./components/Npc.vue".vue;
+import Author from "./components/Author.vue";
 import PostAuthor from "./components/PostAuthor.vue";
 
 export default {

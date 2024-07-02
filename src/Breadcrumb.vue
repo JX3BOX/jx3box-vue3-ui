@@ -46,11 +46,8 @@
 import { throttle } from "lodash";
 import { publishLink, getAppIcon } from "@jx3box/jx3box-common/js/utils";
 import User from "@jx3box/jx3box-common/js/user";
-import Admin from "./bread/Admin";
-import Crumb from "./bread/Crumb";
-// import AdminButton from "./bread/AdminButton";
-// import AdminDrop from "./bread/AdminDrop";
-
+import Admin from "./bread/Admin.vue";
+import Crumb from "./bread/Crumb.vue";
 import { isApp } from "../assets/js/app.js";
 import Bus from "../utils/bus";
 
