@@ -83,11 +83,13 @@
 </template>
 
 <script>
-const { __clients } = require("@jx3box/jx3box-common/data/jx3box.json");
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { showDate, showTime } from "@jx3box/jx3box-common/js/moment";
 import { editLink, authorLink } from "@jx3box/jx3box-common/js/utils.js";
 import User from "@jx3box/jx3box-common/js/user.js";
 import $ from "jquery";
+const { __clients } = JX3BOX;
+
 export default {
     name: "PostHeader",
     props: ["post", "stat"],
@@ -140,24 +142,29 @@ export default {
     watch: {
         post: {
             deep: true,
-            handler: function() {
+            handler: function () {
                 this.countWords();
             },
-        }
+        },
     },
     methods: {
         showClientLabel: function (val) {
             return __clients[val];
         },
-        countWords: function (){
+        countWords: function () {
             this.$nextTick(() => {
                 // 需要去除空格 \n \g
                 // eslint-disable-next-line no-useless-escape
-                const text = $('.c-article').text()?.replace(/[\s|\n|\r|\t|\g|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\，|\。|\？|\：|\；|\‘|\’|\”|\“|\、|\·|\！|\（|\）|\》|\《|\『|\』]/g, '');
+                const text = $(".c-article")
+                    .text()
+                    ?.replace(
+                        /[\s|\n|\r|\t|\g|\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\，|\。|\？|\：|\；|\‘|\’|\”|\“|\、|\·|\！|\（|\）|\》|\《|\『|\』]/g,
+                        ""
+                    );
 
                 this.wordCount = text?.length || 0;
-            })
-        }
+            });
+        },
     },
     mounted: function () {},
 };
@@ -245,7 +252,7 @@ export default {
     @origin: #0eb7ce;
     @std: #f0b400;
     @all: #a26ef7;
-    @wujie : #fc79bf;
+    @wujie: #fc79bf;
 
     .u-client {
         // .fl;
@@ -265,7 +272,7 @@ export default {
             color: @origin;
         }
 
-        &.wujie{
+        &.wujie {
             border: 1px solid #00dcda;
             color: #3ae0f1;
             background: #eff;
@@ -312,7 +319,8 @@ export default {
         font-style: normal;
     }
 
-    .u-views,.u-word-count {
+    .u-views,
+    .u-word-count {
         .flex;
         align-items: center;
         gap: 2px;

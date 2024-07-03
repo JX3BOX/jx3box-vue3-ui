@@ -155,9 +155,10 @@
 import { loadStat } from "../../service/database";
 import { loadAuthors, loadEmotions } from "../../service/cms";
 import { getUserInfo } from "../../service/author";
-const { __Root, __OriginRoot, __imgPath } = require("@jx3box/jx3box-common/data/jx3box.json");
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { getLink, showAvatar, resolveImagePath } from "@jx3box/jx3box-common/js/utils";
 import User from "@jx3box/jx3box-common/js/user";
+const { __Root, __OriginRoot, __imgPath } = JX3BOX;
 
 // import ComboVue from "./components/Combo.vue";
 export default {

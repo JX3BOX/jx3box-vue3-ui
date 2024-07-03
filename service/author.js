@@ -34,12 +34,12 @@ async function getDouyu(ids) {
     return res.data.data;
 }
 
-async function getUserMedals(uid) { 
-    return  $cms({ mute: true })
-    .get("/api/cms/user/medal/" + uid)
-    .then((res) => {
-        return res.data.data;
-    });
+async function getUserMedals(uid) {
+    return $cms({ mute: true })
+        .get("/api/cms/user/medal/" + uid)
+        .then((res) => {
+            return res.data.data;
+        });
 }
 
 function getFrames() {

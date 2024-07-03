@@ -43,7 +43,6 @@ import "element-plus/dist/index.css";
 
 // XSS
 import execFilterXSS from "../../assets/js/script";
-// const execFilterXSS = require("xss");
 const xss_options = {
     allowCommentTag: true,
 };

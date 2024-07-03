@@ -145,24 +145,24 @@
                                 v-for="(o, i) in item"
                                 :key="i"
                             >
-                            <template #reference>
-                                <li
-                                    class="u-item"
-                                    :class="{ on: o.isSelected }"
-                                    @click="selectItem(o, i)"
-                                    ref="item"
-                                >
-                                    <span class="u-id">ID:{{ o.id }}</span>
-                                    <img class="u-pic" :title="'IconID:' + o.IconID" :src="iconURL(o.IconID)" />
-                                    <span class="u-name">{{ o.Name }}</span>
-                                    <span class="u-content">
-                                        <game-text :text="o.Desc"></game-text>
-                                    </span>
-                                    <span class="u-remark">
-                                        {{ o.Requirement }}
-                                    </span>
-                                </li>
-                            </template>
+                                <template #reference>
+                                    <li
+                                        class="u-item"
+                                        :class="{ on: o.isSelected }"
+                                        @click="selectItem(o, i)"
+                                        ref="item"
+                                    >
+                                        <span class="u-id">ID:{{ o.id }}</span>
+                                        <img class="u-pic" :title="'IconID:' + o.IconID" :src="iconURL(o.IconID)" />
+                                        <span class="u-name">{{ o.Name }}</span>
+                                        <span class="u-content">
+                                            <game-text :text="o.Desc"></game-text>
+                                        </span>
+                                        <span class="u-remark">
+                                            {{ o.Requirement }}
+                                        </span>
+                                    </li>
+                                </template>
 
                                 <jx3-item :item_id="o.id" :client="client"></jx3-item>
                             </el-popover>
@@ -282,12 +282,15 @@
 <script>
 import { loadResource, loadStat, getIcons } from "../../service/database";
 import { loadEmotions } from "../../service/cms";
-const { __iconPath, __Root, __OriginRoot } = require("@jx3box/jx3box-common/data/jx3box.json");
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import detach_types from "../../assets/data/detach_type.json";
 import { iconLink, getLink, showAvatar } from "@jx3box/jx3box-common/js/utils";
 import GameText from "./components/GameText.vue";
 import User from "@jx3box/jx3box-common/js/user";
 import Item from "./components/Item.vue";
+
+const { __iconPath, __Root, __OriginRoot } = JX3BOX;
+
 export default {
     name: "ResourceDialog",
     props: {

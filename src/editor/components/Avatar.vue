@@ -9,7 +9,8 @@
 </template>
 
 <script>
-const { __imgPath } = require("@jx3box/jx3box-common/data/jx3box.json");
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
+const { __imgPath } = JX3BOX;
 import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 export default {
     name: "AvatarComponent",

@@ -1,7 +1,7 @@
 import {
     Reporter
 } from "@jx3box/reporter"
-const { __Domain } = require("@jx3box/jx3box-common/data/jx3box.json") 
+import { __Domain } from "@jx3box/jx3box-common/data/jx3box.json";
 
 /**
      * 16进制转int

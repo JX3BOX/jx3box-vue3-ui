@@ -45,7 +45,8 @@ const { authorLink } = utilModule;
 import QRcode from "@jx3box/jx3box-common-ui/src/interact/QRcode.vue";
 import { showTime } from "@jx3box/jx3box-common/js/moment.js";
 import { get_plan } from "../../../service/item.js";
-const { __Root } = require("@jx3box/jx3box-common/data/jx3box.json");
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
+const { __Root } = JX3BOX;
 export default {
     name: "EquipComponent",
     props: ["data", "id"],

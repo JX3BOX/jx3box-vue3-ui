@@ -60,10 +60,12 @@
 import { authorLink, getLink, getThumbnail } from "@jx3box/jx3box-common/js/utils";
 import { getUserInfo, getUserMedals, getUserPublicTeams } from "../../../service/author";
 import { getDecoration, getDecorationJson } from "../../../service/cms";
-const { __imgPath, __userLevelColor } = require("@jx3box/jx3box-common/data/jx3box.json");
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import User from "@jx3box/jx3box-common/js/user";
 import Avatar from "./Avatar.vue";
 import medal from "./Medal.vue";
+const { __imgPath, __userLevelColor } = JX3BOX;
+
 const ATCARD_KEY = "decoration_atcard";
 const DECORATION_JSON = "decoration_json";
 const DECORATION_KEY = "decoration_me";

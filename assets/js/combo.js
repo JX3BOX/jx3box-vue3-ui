@@ -1,6 +1,5 @@
 import $ from "jquery";
-import * as utilModule from "@jx3box/jx3box-common/js/utils";
-const { iconLink } = utilModule;
+import { iconLink } from "@jx3box/jx3box-common/js/utils";
 
 function renderCombo(selector = ".e-skill-combo .w-skill-combo-item") {
     try {

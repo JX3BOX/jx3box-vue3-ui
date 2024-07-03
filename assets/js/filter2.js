@@ -1,5 +1,5 @@
 //对数据库查询的desc字段进行数据加工
-const { JX3BOX } = require('@jx3box/jx3box-common');
+import {JX3BOX} from '@jx3box/jx3box-common';
 let $ = jQuery
 
 //技能过滤器
@@ -33,7 +33,7 @@ async function filterBySub(desc){
     let reg = new RegExp(/\<SUB (\d+?) (\d)\>/g)
     let subreg = new RegExp(/\<SUB (\d+?) (\d)\>/)
     let hasMatched = reg.test(desc)
-    
+
     if(hasMatched){
         let arr = desc.match(reg)
         for(let i=0;i<arr.length;i++){
@@ -135,7 +135,7 @@ async function itemFilter(desc){
     desc = desc.replace(/<\/text>/g,'')
     desc = desc.replace(/font=\d+/g,'')
     desc = desc.replace(/"/g,'')
-    
+
     //处理buff描述
     desc = await filterByBuffDesc(desc)
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-const { __node, __helperUrl } = require("@jx3box/jx3box-common/data/jx3box.json");
+import { __node, __helperUrl } from "@jx3box/jx3box-common/data/jx3box.json";
 import { $node } from "@jx3box/jx3box-common/js/https_v2";
 
 function loadResource(type, query, params) {

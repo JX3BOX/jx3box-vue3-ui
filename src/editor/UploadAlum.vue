@@ -22,8 +22,9 @@
 
 <script>
 import draggable from "vuedraggable";
-const { getThumbnail } = require("@jx3box/jx3box-common/js/utils.js");
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import Upload from "./Upload.vue";
+const { getThumbnail } = JX3BOX;
 
 export default {
     name: "UploadAlum",
@@ -79,7 +80,7 @@ export default {
         },
         deleteHandle: function (row) {
             this.imgList=   this.imgList.filter(item=>item !== row);
-        }, 
+        },
         showThumbnail(val) {
             return getThumbnail(val, 146);
         },

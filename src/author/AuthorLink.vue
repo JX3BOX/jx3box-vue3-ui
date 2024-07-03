@@ -35,6 +35,7 @@
 <script>
 import * as utilModule from "@jx3box/jx3box-common/js/utils";
 const { tvLink } = utilModule;
+
 export default {
     name: "AuthorLink",
     props: ["data"],
@@ -61,8 +62,11 @@ export default {
             return "https://github.com/" + val;
         },
         getIcon: function (val) {
+            console.log(process.env);
             // return __imgPath + "image/author/" + val + ".svg";
-            return require("../../assets/img/author/" + val + ".svg");
+            const img = require("../../assets/img/author/" + val + ".svg");
+            console.log(img)
+            return img;
         },
     },
     created: function () {},
