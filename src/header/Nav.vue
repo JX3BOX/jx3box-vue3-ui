@@ -126,21 +126,22 @@
 </template>
 
 <script>
+import { cloneDeep } from "lodash";
 import default_nav from "../../assets/data/nav.json";
 import { getMenu } from "../../service/header";
 import { trimSlash } from "../../utils";
 
 const activeNav = {
-    index: ['index'],
-    macro: ['macro', 'pz'],
-    tool: ['app', 'jx3dat', 'dbm'],
-    bps: ['bps', 'jcl', 'battle'],
-    fb: ['fb','baizhan','team', 'jdt', 'rank'],
-    cj: ['cj', 'item', 'knowledge', 'quest'],
-    pvx: ['face', 'adventure', 'pvg'],
-    bbs: ['bbs','topic','event'],
-    pvp: ['pvp']
-}
+    index: ["index"],
+    macro: ["macro", "pz"],
+    tool: ["app", "jx3dat", "dbm"],
+    bps: ["bps", "jcl", "battle"],
+    fb: ["fb", "baizhan", "team", "jdt", "rank"],
+    cj: ["cj", "item", "knowledge", "quest"],
+    pvx: ["face", "adventure", "pvg"],
+    bbs: ["bbs", "topic", "event"],
+    pvp: ["pvp"],
+};
 export default {
     name: "HeaderNav",
     props: [],
@@ -153,6 +154,7 @@ export default {
     },
     computed: {
         finalNav: function ({ nav }) {
+            nav = cloneDeep(nav);
             // 父节点
             const finalNav = nav.filter((d) => !d.parentKey && d.status);
             // 子节点
@@ -183,8 +185,8 @@ export default {
     methods: {
         isFocus: function (type) {
             // return location.pathname.includes(type);
-            let active = '';
-            const pathname = location.pathname?.split('/')?.filter(Boolean)?.[0] || '';
+            let active = "";
+            const pathname = location.pathname?.split("/")?.filter(Boolean)?.[0] || "";
             for (const key in activeNav) {
                 if (activeNav[key].includes(pathname)) {
                     active = key;
