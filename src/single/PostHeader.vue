@@ -16,6 +16,7 @@
                 <template v-if="titleExtra">
                     <span class="u-client" :class="'i-client-' + client">{{ showClientLabel(client) }}</span>
                     <span class="u-client u-zlp" v-if="zlp">{{ zlp }}</span>
+                    <span class="u-client i-client-wujie" v-if="is_wujie">无界</span>
                 </template>
             </span>
         </div>
@@ -43,7 +44,7 @@
             <div class="u-meta u-sub-block">
                 <em class="u-label">适用客户端</em>
                 <span class="u-value u-client" :class="client">{{ showClientLabel(client) }}</span>
-                <span class="u-value u-client wujie">无界</span>
+                <span class="u-value u-client wujie" v-if="is_wujie">无界</span>
             </div>
 
             <!-- 发布日期 -->
@@ -138,6 +139,9 @@ export default {
         client: function () {
             return this.post?.client || "std";
         },
+        is_wujie: function () {
+            return this.post?.is_wujie
+        },
     },
     watch: {
         post: {
@@ -171,6 +175,25 @@ export default {
 </script>
 
 <style lang="less">
+.i-client-all {
+    border: 1px solid #a26ef7;
+    color: #a26ef7;
+}
+.i-client-std {
+    border: 1px solid #f0b400;
+    color: #f0b400;
+}
+.i-client-origin {
+    border: 1px solid #0eb7ce;
+    color: #0eb7ce;
+}
+.i-client-wujie {
+    border: 1px solid #00dcda;
+    color: #3ae0f1;
+    background: #eff;
+    margin-left: 5px;
+}
+
 .m-single-header {
     padding-top: 20px;
     padding-bottom: 20px;
