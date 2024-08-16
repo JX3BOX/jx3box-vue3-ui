@@ -176,6 +176,8 @@ export default {
     .u-count {
         color: #888;
         .ml(10px);
+        .pr;
+        top: 4px;
     }
     .u-charge {
         .underline(@color-link);
