@@ -29,7 +29,7 @@
             <template #reference>
                 <!-- <el-tooltip class="item" effect="dark" content="分享" placement="top"> -->
                     <div v-if="simple">
-                        <img class="u-icon u-simple-icon" svg-inline src="../../assets/img/widget/share.svg" />
+                        <img class="u-icon u-simple-icon" svg-inline :src="iconPath" />
                         <!-- <i class="el-icon-position"></i> -->
                         <span class="u-text">分享</span>
                     </div>
@@ -37,7 +37,7 @@
                         v-else
                         class="u-icon"
                         svg-inline
-                        src="../../assets/img/widget/share2.svg"
+                        :src="iconPath"
                     />
                 <!-- </el-tooltip> -->
             </template>
@@ -111,6 +111,9 @@ export default {
                 tieba: this.shareToTieba,
                 qq: this.shareToQQ,
             }
+        },
+        iconPath() {
+            return JX3BOX.__cdn + "design/vector/icon/share.svg"
         },
     },
     methods: {

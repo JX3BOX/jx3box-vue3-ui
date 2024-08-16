@@ -2,7 +2,7 @@
     <div class="w-boxcoin-admin" v-if="allowBoxcoin">
         <el-tooltip effect="dark" content="品鉴" placement="top-start">
             <div class="w-boxcoin-block">
-                <img @click="openBoxcoinPop" class="u-icon" svg-inline src="../../assets/img/widget/like3.svg" />
+                <img @click="openBoxcoinPop" class="u-icon" svg-inline :src="iconPath" />
             </div>
         </el-tooltip>
         <el-dialog
@@ -71,6 +71,7 @@ import { grantBoxcoin } from "../../service/thx.js";
 import { getBreadcrumb } from "../../service/breadcrumb.js";
 import User from "@jx3box/jx3box-common/js/user";
 import Contributors from "./Contributors.vue";
+import JX3BOX  from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "BoxcoinAdmin",
     props: ["postType", "postId", "userId", "own", "total", "points", "max", "min", "authors", "client"],
@@ -117,6 +118,9 @@ export default {
         },
         fitPoints: function () {
             return this.points.filter((item) => item <= this.left);
+        },
+        iconPath() {
+            return JX3BOX.__cdn + "design/vector/icon/taste.svg"
         },
     },
     watch: {

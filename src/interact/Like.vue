@@ -2,7 +2,7 @@
     <div class="w-like2" :class="{ disabled: !status }" @click="addLike" v-if="ready">
         <el-tooltip effect="dark" content="点赞" placement="top-start">
             <div>
-                <img class="u-icon" svg-inline src="../../assets/img/widget/like2.svg" />
+                <img class="u-icon" svg-inline :src="iconPath" />
                 <span class="u-count" v-if="count">{{ count }}</span>
             </div>
         </el-tooltip>
@@ -11,6 +11,7 @@
 
 <script>
 import { postStat, getStat } from "@jx3box/jx3box-common/js/stat";
+import JX3BOX  from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "LikeComp",
     props: ["postType", "postId"],
@@ -23,6 +24,9 @@ export default {
     computed: {
         ready() {
             return this.postType && this.postId;
+        },
+        iconPath() {
+            return JX3BOX.__cdn + "design/vector/icon/like.svg"
         },
     },
     methods: {
