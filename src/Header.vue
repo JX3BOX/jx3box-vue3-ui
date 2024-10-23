@@ -36,6 +36,7 @@ import search from "./header/Search.vue";
 import nav from "./header/Nav.vue";
 import user from "./header/User.vue";
 import Box from "../src/Box.vue";
+import { isMiniProgram, miniprogramHack } from "@jx3box/jx3box-common/js/utils";
 
 export default {
     name: "CommonHeader",
@@ -56,6 +57,13 @@ export default {
         checkIsWebView: function () {
             if (window.navigator.userAgent.includes(KW)) {
                 document.documentElement.classList.add("env-app");
+            }
+
+            if (isMiniProgram()) {
+                document.documentElement.classList.add("wechat-miniprogram");
+
+                // 微信小程序hack
+                miniprogramHack();
             }
         },
 
