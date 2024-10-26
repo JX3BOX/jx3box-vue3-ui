@@ -2,7 +2,7 @@ import {
     Reporter
 } from "@jx3box/reporter"
 import { __Domain } from "@jx3box/jx3box-common/data/jx3box.json";
-// import { $next } from "@jx3box/jx3box-common/js/https_v2";
+import { $next } from "@jx3box/jx3box-common/js/https_v2";
 
 /**
      * 16进制转int
@@ -98,8 +98,8 @@ const stat = {
  * @param {*} data.title 例如：文章标题，帖子标题
  * @returns
  */
-// export function postHistory(data) {
-//     return $next({mute: true}).post("/api/next2/userdata/visit-history/item", data);
-// }
+export function postHistory(data) {
+    return $next({mute: true}).post("/api/next2/userdata/visit-history/item", data);
+}
 
 export default stat;
