@@ -30,6 +30,7 @@
                 :client="finalClient"
             />
             <Share :postId="postId" :postType="postType" :client="client" />
+            <watch-later :category="postType" :title="postTitle"></watch-later>
         </div>
         <div class="w-thx-records">
             <boxcoin-records :postId="postId" :postType="postType" :postClient="finalClient" :cacheRecord="cacheRecord"
@@ -50,6 +51,7 @@ import BoxcoinAdmin from "../interact/BoxcoinAdmin.vue";
 import BoxcoinUser from "../interact/BoxcoinUser.vue";
 import BoxcoinRecords from "../interact/BoxcoinRecords.vue";
 import Share from "../interact/Share.vue";
+import WatchLater from "../interact/WatchLater.vue";
 
 import User from "@jx3box/jx3box-common/js/user";
 import { getBoxcoinStatus, getPostBoxcoinConfig } from "../../service/thx";
@@ -63,6 +65,7 @@ export default {
         BoxcoinUser,
         BoxcoinRecords,
         Share,
+        WatchLater,
     },
     props: {
         type: {

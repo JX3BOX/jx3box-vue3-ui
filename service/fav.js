@@ -14,4 +14,14 @@ function addFav(post_type, post_id, post_title) {
 function delFav(id) {
     return $n.delete(`api/article/favorites/my/${id}`);
 }
-export { hasFav, addFav, delFav };
+
+// 稍后再看
+function addWatchLater(data) {
+    return $n.post(`api/next2/userdata/favorite/item`, data)
+}
+
+function delWatchLater(params) {
+    return $n.delete(`api/next2/userdata/favorite/item`, { params })
+}
+
+export { hasFav, addFav, delFav, addWatchLater, delWatchLater };
