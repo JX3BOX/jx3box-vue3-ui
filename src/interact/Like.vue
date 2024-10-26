@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { postStat, getStat } from "@jx3box/jx3box-common/js/stat";
+import { postStat, getStat } from "@jx3box/jx3box-common/js/stat_v2";
 import JX3BOX  from "@jx3box/jx3box-common/data/jx3box.json";
 export default {
     name: "LikeComp",
