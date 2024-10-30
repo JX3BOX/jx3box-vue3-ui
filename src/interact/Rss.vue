@@ -1,7 +1,7 @@
 <template>
-    <div class="w-rss" @click="onRssClick">
+    <div class="w-rss">
         <el-tooltip effect="dark" :content="tooltipContent" placement="top-start">
-            <div>
+            <div @click="onRssClick">
                 <img v-if="subscribed" class="u-icon" svg-inline :src="rmSrc" />
                 <img v-else class="u-icon" svg-inline :src="addSrc" />
                 <span class="u-count" v-if="!hiddenNum && total > 0">{{ total }}</span>
@@ -62,7 +62,7 @@ export default {
             return jx3box.__cdn + "design/vector/icon/unrss.svg";
         },
         category({ type }) {
-            if (type.includes("community")) return "community";
+            if (type.includes("community") || type.includes("bbs")) return "community";
             if (jx3box.__postType[type]) return "posts";
             if (jx3box.__wikiType[type]) return "wiki";
             return "";
@@ -111,6 +111,7 @@ export default {
     },
     methods: {
         onRssClick() {
+            console.log("onRssClick");
             if (!this.isLogin) {
                 User.toLogin();
                 return;

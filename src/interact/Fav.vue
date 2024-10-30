@@ -1,7 +1,7 @@
 <template>
     <div class="w-fav2" :class="{ disabled: favorite }" @click="doFav">
         <el-tooltip effect="dark" :content="favContent" placement="top-start">
-            <div>
+            <div class="w-fav2_content">
                 <img v-if="favorite" class="u-icon" svg-inline src="../../assets/img/widget/unstar.svg" />
                 <img v-else class="u-icon" svg-inline src="../../assets/img/widget/star.svg" />
                 <span class="u-count" v-if="!hiddenNum && total">{{ total }}</span>
@@ -85,8 +85,11 @@ export default {
     .u-count {
         color: #888;
         .ml(10px);
-        .pr;
-        top: 4px;
+    }
+
+    .w-fav2_content {
+        .flex;
+        align-items: center;
     }
 }
 </style>

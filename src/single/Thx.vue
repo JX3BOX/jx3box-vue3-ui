@@ -17,6 +17,7 @@
             />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
+            <Rss v-if="showRss" :type="postType" :id="postId" :title="postTitle"></Rss>
             <boxcoin-user
                 :postId="postId"
                 :postType="postType"
@@ -52,6 +53,7 @@ import BoxcoinUser from "../interact/BoxcoinUser.vue";
 import BoxcoinRecords from "../interact/BoxcoinRecords.vue";
 import Share from "../interact/Share.vue";
 import WatchLater from "../interact/WatchLater.vue";
+import Rss from "../interact/Rss.vue";
 
 import User from "@jx3box/jx3box-common/js/user";
 import { getBoxcoinStatus, getPostBoxcoinConfig } from "../../service/thx";
@@ -66,6 +68,7 @@ export default {
         BoxcoinRecords,
         Share,
         WatchLater,
+        Rss,
     },
     props: {
         type: {
@@ -109,6 +112,10 @@ export default {
             default: false,
         },
         userBoxcoinEnable: {
+            type: Boolean,
+            default: false,
+        },
+        showRss: {
             type: Boolean,
             default: false,
         },

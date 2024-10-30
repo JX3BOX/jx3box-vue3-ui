@@ -65,6 +65,7 @@
                 :userBoxcoinEnable="true"
                 :postId="57260"
                 :allowGift="true"
+                :showRss="true"
             />
             <Comment category="post" id="80449"></Comment>
             <RightSidebar :show-toggle="true">
