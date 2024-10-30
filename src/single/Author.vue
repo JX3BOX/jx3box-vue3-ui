@@ -3,9 +3,11 @@
         <AuthorInfo :uid="uid" @ready="installModules" />
         <template v-if="data">
             <div class="u-interact">
-                <AuthorFollow style="margin-right: 8px;" :uid="uid" />
+                <!-- <AuthorFollow style="margin-right: 8px;" :uid="uid" /> -->
+                <AuthorRss style="margin-right: 8px" :uid="uid" :data="data" />
                 <!-- <AuthorGift :uid="uid" /> -->
-                <el-button icon="Message" class="u-btn" @click="onMessage">私信</el-button>
+                <el-button class="u-btn" @click="onMessage"><img class="u-msg-icon" svg-inline :src="src" />
+                    私信</el-button>
             </div>
             <!-- <AuthorMsg :uid="uid" /> -->
             <AuthorLink class="u-block u-links" :uid="uid" :data="data" />
@@ -21,19 +23,22 @@
 <script>
 import AuthorInfo from "../author/AuthorInfo.vue";
 import AuthorLink from "../author/AuthorLink.vue";
-import AuthorFollow from "../author/AuthorFollow.vue";
+// import AuthorFollow from "../author/AuthorFollow.vue";
 // import AuthorMsg from "./author/AuthorMsg.vue";
 // import AuthorGift from "../author/AuthorGift.vue";
 // import AuthorFans from "../author/AuthorFans.vue";
 import AuthorMedals from "../author/AuthorMedals.vue";
 import AuthorTeams from "../author/AuthorTeams.vue";
 import AuthorPosts from "../author/AuthorPosts.vue";
+import AuthorRss from "../author/AuthorRss.vue";
+const jx3box = require("@jx3box/jx3box-common/data/jx3box.json");
 export default {
     name: "AuthorComp",
     props: ["uid"],
     data: function () {
         return {
             data: "",
+            src: jx3box.__cdn + "design/vector/icon/message.svg",
         };
     },
     methods: {
@@ -47,13 +52,14 @@ export default {
     components: {
         AuthorInfo,
         AuthorLink,
-        AuthorFollow,
+        // AuthorFollow,
         // AuthorMsg,
         // AuthorGift,
         AuthorMedals,
         AuthorTeams,
         AuthorPosts,
         // AuthorFans,
+        AuthorRss,
     },
 };
 </script>
