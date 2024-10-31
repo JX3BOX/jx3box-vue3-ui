@@ -156,7 +156,7 @@ export default {
     .u-count {
         color: #888;
         .ml(10px);
-        top: 4px;
+        top: 2px;
         .pr;
     }
 }
