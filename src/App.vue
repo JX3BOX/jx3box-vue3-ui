@@ -43,6 +43,7 @@
             <ItemSimple :item="item4" :only-icon="true" iconSize="56px" />
             <ItemSimple :item="item5" jx3-client-type="1" only-icon="true" iconSize="56px" />
             <ItemSimple :item="item6" jx3-client-type="2" only-icon="true" iconSize="56px" /> -->
+            <versionBy value=""></versionBy>
             <el-divider></el-divider>
             <UploadAlum />
             <!-- <PostHeader :post="post"></PostHeader> -->
@@ -93,6 +94,7 @@ import post_topics from "@jx3box/jx3box-common/data/post_topics.json";
 import { get_item } from "../service/item";
 // import AdminDirectMessage from "./bread/AdminDirectMessage.vue";
 // import Admin from "@/bread/Admin.vue";
+import versionBy from "./filters/versionBy.vue";
 export default {
     name: "App",
     components: {
@@ -105,6 +107,7 @@ export default {
         UploadAlum,
         // AdminDirectMessage,
         singlebox,
+        versionBy,
         // Admin,
     },
     data() {
