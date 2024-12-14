@@ -3,7 +3,7 @@
         <el-button
             class="u-btn"
             :class="{ 'u-fans-box': isSelf }"
-            size="mini"
+            size="small"
             plain
             @click="subscribe"
             :loading="loading"
