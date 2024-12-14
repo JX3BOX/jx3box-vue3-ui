@@ -15,7 +15,7 @@ function getDecoration(params) {
     });
 }
 function getDecorationJson() {
-    let url = JX3BOX.__imgPath + "decoration/index.json";
+    let url = JX3BOX.__cdn + "design/decoration/index.json";
     return axios.get(url);
 }
 // 通用上传
