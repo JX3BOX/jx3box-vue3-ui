@@ -37,6 +37,7 @@ import nav from "./header/Nav.vue";
 import user from "./header/User.vue";
 import Box from "../src/Box.vue";
 import { isMiniProgram, miniprogramHack } from "@jx3box/jx3box-common/js/utils";
+import miniprogram from "@jx3box/jx3box-common/data/miniprogram.json";
 
 export default {
     name: "CommonHeader",
@@ -60,10 +61,24 @@ export default {
             }
 
             if (isMiniProgram()) {
-                document.documentElement.classList.add("wechat-miniprogram");
+                const urlParams = new URLSearchParams(window.location.search);
+                const appid = urlParams.get("appid");
+                const item = miniprogram?.find((item) => item.appid === appid);
 
-                // 微信小程序hack
-                miniprogramHack();
+                document.documentElement.classList.add("v-miniprogram");
+
+                if (appid && item) {
+                    document.documentElement.classList.add("env-miniprogram" + item.id);
+
+                    window.JX3BOX_ENV = item.id?.toUpperCase() + "_MINIPROGRAM";
+                } else {
+                    document.documentElement.classList.add("wechat-miniprogram");
+
+                    window.JX3BOX_ENV = "MINIPROGRAM";
+
+                    // 微信小程序hack
+                    miniprogramHack();
+                }
             }
         },
 

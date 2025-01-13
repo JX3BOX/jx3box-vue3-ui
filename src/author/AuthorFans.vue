@@ -8,27 +8,26 @@
             <el-tooltip
                 class="item"
                 effect="dark"
-                :content="'累计打赏' + item.money.toString() + '金箔'"
+                :content="'累计打赏' + item.summary.toString() + '盒币'"
                 placement="top"
                 v-for="item in list"
                 :key="item.pay_user_id"
             >
-                <a class="u-fan" :href="authorLink(item.pay_user_id)"
-                    ><el-avatar class="u-avatar" shape="circle" :size="20" :src="showAvatar(item.pay_user.avatar)"
-                        ><el-icon><Avatar/></el-icon></el-avatar
+                <a class="u-fan" :href="authorLink(item.user_id)"
+                    ><el-avatar class="u-avatar" shape="circle" :size="20" :src="showAvatar(item.user_info.avatar)"
+                        ><i class="el-icon-s-custom"></i></el-avatar
                 ></a>
             </el-tooltip>
-            <el-avatar class="u-avatar u-more" shape="circle" :size="20" v-if="total > MAX_LENGTH">
-                <span class="f-avatar-num" v-if="total > 99">···</span>
-                <span class="f-avatar-num" v-else>+{{ total - MAX_LENGTH }}</span>
-            </el-avatar>
         </div>
-        <div class="f-bottom">本赛季共 {{ total }} 人为TA赠礼</div>
+        <div class="f-bottom">
+            粉丝数: <span class="u-count">{{ fans_count }}</span
+            ><template v-if="boxcoin_count">，累计收到盒币打赏: <span class="u-count">{{ boxcoin_count }}</span></template>
+        </div>
     </div>
 </template>
 
 <script>
-import { getFansList } from "../../service/author";
+import { getFansList, getSummary } from "../../service/author";
 import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 export default {
     name: "AuthorFans",
@@ -42,14 +41,22 @@ export default {
         return {
             list: [],
             total: 0,
-            MAX_LENGTH : 8,
+            MAX_LENGTH: 8,
+
+            fans_count: 0,
+            boxcoin_count: 0,
         };
     },
     methods: {
         getData() {
-            getFansList(this.uid).then((res) => {
-                this.list = res.data.data.list?.slice(0,this.MAX_LENGTH) || [];
-                this.total = res.data.data.totalUser || 0;
+            if (!~~this.uid) return;
+            getSummary(this.uid).then((res) => {
+                this.fans_count = res.data.data?.fans_count || 0;
+                this.boxcoin_count = res.data.data?.boxcoin_count || 0;
+            });
+
+            getFansList(this.uid, this.fansLimit).then((res) => {
+                this.list = res.data.data.list || [];
             });
         },
         showAvatar,

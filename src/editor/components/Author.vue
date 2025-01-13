@@ -276,7 +276,6 @@ export default {
 @import "../../../assets/css/module/author.less";
 .w-author {
     .w-author-wrapper {
-        // background-image: url(https://img.jx3box.com/decoration/images/1_CAT/atcard.png);
         background-repeat: no-repeat;
         background-position: top right;
         background-size: 100% auto;
