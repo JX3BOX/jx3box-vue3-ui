@@ -48,7 +48,7 @@ export default {
         },
         topicImage() {
             const img = this.postBanner || this.topicInfo?.img;
-            if (img && img.indexOf(".gif") > -1) {
+            if (img && (img.indexOf(".gif") > -1 || img.indexOf(".webp") > -1)) {
                 return img;
             }
             return getThumbnail(img, [260*2, 78*2])
