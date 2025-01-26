@@ -31,7 +31,7 @@
                 :client="finalClient"
             />
             <Share :postId="postId" :postType="postType" :client="client" />
-            <watch-later :category="postType" :title="postTitle"></watch-later>
+            <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner"></watch-later>
         </div>
         <div class="w-thx-records">
             <boxcoin-records :postId="postId" :postType="postType" :postClient="finalClient" :cacheRecord="cacheRecord"
@@ -118,6 +118,14 @@ export default {
         showRss: {
             type: Boolean,
             default: false,
+        },
+        authorId: {
+            type: Number,
+            default: 0,
+        },
+        banner: {
+            type: String,
+            default: "",
         },
     },
     data: function () {
