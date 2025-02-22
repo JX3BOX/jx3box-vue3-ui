@@ -1152,10 +1152,10 @@
     "uuid" "^9.0.0"
     "vue" "^2.6.12"
 
-"@jx3box/jx3box-common@^8.3.4", "@jx3box/jx3box-common@^8.5.2":
-  "integrity" "sha512-RZRbSYS+CeE0NuxbDreYVE/lpGXApAteXXTPSxAu3uUfoO06xZFwEVGcEvUD1pvzJmW8q/yMwpsmEnWSHiRlxg=="
-  "resolved" "https://registry.npmjs.org/@jx3box/jx3box-common/-/jx3box-common-8.5.2.tgz"
-  "version" "8.5.2"
+"@jx3box/jx3box-common@^8.3.4", "@jx3box/jx3box-common@^8.6.5":
+  "integrity" "sha512-etkx0h+ZAWzMFU8aTG9CzL/ONZyZqwkEq6RjQIf311V9rBGj+rGbo7vr3B/7Ggud8UAhO/hKPqE8O+N3hIf9jg=="
+  "resolved" "https://registry.npmjs.org/@jx3box/jx3box-common/-/jx3box-common-8.6.5.tgz"
+  "version" "8.6.5"
   dependencies:
     "@jx3box/reporter" "^0.0.5"
     "axios" "^1.6.8"
@@ -1168,9 +1168,9 @@
     "vue" "^2.6.12"
 
 "@jx3box/jx3box-data@^3.3.0", "@jx3box/jx3box-data@^3.6.6", "@jx3box/jx3box-data@^3.7.0":
-  "integrity" "sha512-/SxD/D2chKuSEfflBTSKDxLnAYFNGITL91DZF5xlAjAvmRCqJAryCxCrlcHOhCE56lW7zJjDMo4r6qiuMDpbVg=="
-  "resolved" "https://registry.npmjs.org/@jx3box/jx3box-data/-/jx3box-data-3.7.0.tgz"
-  "version" "3.7.0"
+  "integrity" "sha512-ZGPwRgma7R5xDT4+AlgaSU9w2Ikc4yoz5x6PjamgIydhhN5XEACZGIBNzhCNFa0X6IjWfUqMyp6IVGSvEMQznQ=="
+  "resolved" "https://registry.npmjs.org/@jx3box/jx3box-data/-/jx3box-data-3.7.7.tgz"
+  "version" "3.7.7"
 
 "@jx3box/jx3box-emotion@^1.2.8":
   "integrity" "sha512-vKQf49S4ejnK6tQInmsuD1NN3RxZOC9LMFyrOq3ld+jqyuY3/9Xu19D1bdDEZhy4m/XW+p4uEMg0oXE6es5VXg=="
