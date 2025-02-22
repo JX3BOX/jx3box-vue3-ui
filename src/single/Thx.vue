@@ -31,7 +31,7 @@
                 :client="finalClient"
             />
             <Share :postId="postId" :postType="postType" :client="client" />
-            <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner"></watch-later>
+            <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner" :content-id="postId"></watch-later>
         </div>
         <div class="w-thx-records">
             <boxcoin-records :postId="postId" :postType="postType" :postClient="finalClient" :cacheRecord="cacheRecord"

@@ -17,11 +17,11 @@ function delFav(id) {
 
 // 稍后再看
 function addWatchLater(data) {
-    return $n.post(`api/next2/userdata/favorite/item`, data)
+    return $n.post(`api/next2/userdata/watch-later/item`, data)
 }
 
 function delWatchLater(params) {
-    return $n.delete(`api/next2/userdata/favorite/item`, { params })
+    return $n.delete(`api/next2/userdata/watch-later/item`, { params })
 }
 
 export { hasFav, addFav, delFav, addWatchLater, delWatchLater };
