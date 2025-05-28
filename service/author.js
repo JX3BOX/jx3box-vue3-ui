@@ -34,9 +34,9 @@ async function getDouyu(ids) {
     return res.data.data;
 }
 
-async function getUserMedals(uid) {
-    return $cms({ mute: true })
-        .get("/api/cms/user/medal/" + uid)
+async function getUserMedals(uid, params) {
+    return $next({ mute: true })
+        .get("/api/next2/user/" + uid + "/medals", {params})
         .then((res) => {
             return res.data.data;
         });

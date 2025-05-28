@@ -89,6 +89,7 @@ export default {
                 pageTotal: 1,
                 total: 0,
             },
+            decoration: null,
         };
     },
     computed: {
