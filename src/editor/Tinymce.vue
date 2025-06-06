@@ -34,8 +34,8 @@ import Upload from "./Upload.vue";
 import Resource from "./Resource.vue";
 import BoxResource from "./BoxResource.vue";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
-import Emotion from "@jx3box/jx3box-emotion/src/Emotion2.vue"
-import hljs_languages from "../../assets/js/item/hljs_languages.js"
+import Emotion from "@jx3box/jx3box-emotion/src/Emotion2.vue";
+import hljs_languages from "../../assets/js/item/hljs_languages.js";
 const { __cms, __imgPath } = JX3BOX;
 const API_Root = process.env.NODE_ENV === "production" ? __cms : "/";
 const API = API_Root + "api/cms/upload/tinymce";
@@ -177,10 +177,13 @@ export default {
         insertResource: function (data) {
             tinyMCE.editors["tinymce"].insertContent(data);
         },
-        emotionSelected: function(emotion) {
-            const src = `${__imgPath}emotion/output/${emotion.filename}`
-            const IMAGE = `<img class="t-emotion" src="${src}" alt="${src}" />`
-            tinyMCE.editors["tinymce"].insertContent(IMAGE)
+        emotionSelected: function (emotion) {
+            let src = emotion.filename;
+            if (!emotion.filename.startsWith("http")) {
+                src = `${__imgPath}emotion/output/${emotion.filename}`;
+            }
+            const IMAGE = `<img class="t-emotion" src="${src}" alt="${src}" />`;
+            tinyMCE.editors["tinymce"].insertContent(IMAGE);
         },
     },
     mounted: function () {},
