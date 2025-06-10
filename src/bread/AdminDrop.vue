@@ -15,7 +15,7 @@
                     <el-dropdown-item icon="UploadFilled" command="designTask" v-if="hasPermission('push_banner')">
                         <span>推送</span>
                     </el-dropdown-item>
-                    <el-dropdown-item icon="Refresh" command="pictureTask">
+                    <el-dropdown-item v-if="showRobotPic" icon="Refresh" command="pictureTask">
                         <span>刷图</span>
                     </el-dropdown-item>
                 </el-dropdown-menu>
@@ -49,6 +49,10 @@ export default {
         userId: {
             type: Number,
             default: 0,
+        },
+        showRobotPic: {
+            type: Boolean,
+            default: false,
         },
     },
     data() {
