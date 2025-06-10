@@ -31,7 +31,7 @@ import Bus from "../../utils/bus";
 import User from "@jx3box/jx3box-common/js/user";
 import DesignTask from "./DesignTask.vue";
 import { sendMessage } from "../../service/admin";
-import { refreshQQBotImage } from "@/service/cms";
+import { refreshQQBotImage } from "../../service/cms";
 export default {
     name: "AdminDrop",
     components: {
