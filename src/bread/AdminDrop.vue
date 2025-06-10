@@ -1,8 +1,8 @@
 <template>
     <div class="c-admin-drop">
         <el-dropdown trigger="click" @command="handleCommand">
-            <el-button type="primary" class="c-admin-button c-admin-drop__button" :size="buttonSize" icon="Setting"
-                > 管理 <el-icon style="margin-left: 5px;"><ArrowDown></ArrowDown></el-icon>
+            <el-button type="primary" class="c-admin-button c-admin-drop__button" :size="buttonSize" icon="Setting">
+                管理 <el-icon style="margin-left: 5px"><ArrowDown></ArrowDown></el-icon>
             </el-button>
             <template #dropdown>
                 <el-dropdown-menu>
@@ -14,6 +14,9 @@
                     </el-dropdown-item>
                     <el-dropdown-item icon="UploadFilled" command="designTask" v-if="hasPermission('push_banner')">
                         <span>推送</span>
+                    </el-dropdown-item>
+                    <el-dropdown-item icon="Refresh" command="pictureTask">
+                        <span>刷图</span>
                     </el-dropdown-item>
                 </el-dropdown-menu>
             </template>
@@ -28,10 +31,11 @@ import Bus from "../../utils/bus";
 import User from "@jx3box/jx3box-common/js/user";
 import DesignTask from "./DesignTask.vue";
 import { sendMessage } from "../../service/admin";
+import { refreshQQBotImage } from "@/service/cms";
 export default {
     name: "AdminDrop",
     components: {
-        DesignTask
+        DesignTask,
     },
     props: {
         buttonSize: {
@@ -50,17 +54,17 @@ export default {
     data() {
         return {
             showDesignTask: false,
-        }
+        };
     },
     computed: {
         isEditor() {
             return User.isEditor();
         },
         sourceId() {
-            return this.post?.ID
+            return this.post?.ID;
         },
         sourceType() {
-            return this.post?.post_type
+            return this.post?.post_type;
         },
     },
     methods: {
@@ -88,25 +92,49 @@ export default {
                             user_id: this.userId,
                             content: "运营通知：" + instance.inputValue,
                             type: "system",
-                            subtype: "admin_message"
+                            subtype: "admin_message",
                         };
                         sendMessage(data).then(() => {
                             this.$message.success("私信成功");
                             done();
-                        })
+                        });
                     } else {
                         done();
                     }
-                }
-            }).catch(() => {})
+                },
+            }).catch(() => {});
         },
         designTask() {
             this.showDesignTask = true;
         },
+        pictureTask() {
+            const pathname = location.pathname;
+            // 适用于pvp/1234 horse/1_234 等
+            const pattern = /\/([^/]+)\/([\d_]+)/;
+            const match = pathname.match(pattern);
+            let task_type = "";
+            let task_target_id = "";
+            if (match) {
+                task_type = match[1];
+                task_target_id = match[2];
+            }
+            if (task_type && task_target_id) {
+                refreshQQBotImage({
+                    task_type,
+                    task_target_id,
+                }).then((res) => {
+                    if (!res.data.code) {
+                        this.$message.success("QQ机器人图片生成提交成功");
+                    }
+                });
+            } else {
+                this.$message.error("参数不正确");
+            }
+        },
         hasPermission(permission) {
             return User.hasPermission(permission);
-        }
-    }
+        },
+    },
 };
 </script>
 

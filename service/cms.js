@@ -28,7 +28,7 @@ function checkTeamMember() {
     return $cms().get(`/api/cms/config/teammates/check`);
 }
 
-function getSliders(source_type, source_ids, client="std") {
+function getSliders(source_type, source_ids, client = "std") {
     let _params = {
         type: "slider",
         source_type,
@@ -56,26 +56,29 @@ function getTopicBucket(params) {
 
 // 获取config
 function getConfig(params) {
-    return $cms().get(`/api/cms/config`, { params }).then((res) => {
-        return res.data.data;
-    });
+    return $cms()
+        .get(`/api/cms/config`, { params })
+        .then((res) => {
+            return res.data.data;
+        });
 }
 
 // 获取用户meta
 function getUserMeta(params) {
-    return $cms().get(`/api/cms/user/my/meta`, { params }).then((res) => {
-        return res.data.data;
-    });
+    return $cms()
+        .get(`/api/cms/user/my/meta`, { params })
+        .then((res) => {
+            return res.data.data;
+        });
 }
 
 // 设置用户meta
-function setUserMeta(key,data) {
+function setUserMeta(key, data) {
     return $cms().post(`/api/cms/user/my/meta?key=${key}`, data);
 }
 
 function getUserHonor(uid) {
-    return $cms({ mute: true })
-        .get(`/api/cms/user/honor/${uid}/using`)
+    return $cms({ mute: true }).get(`/api/cms/user/honor/${uid}/using`);
 }
 
 // 获取用户列表
@@ -96,5 +99,27 @@ function uploadFile(data) {
     return $cms().post(`/api/cms/upload`, data);
 }
 
-export { getPostAuthors, uploadImage, upload, getDecoration, getDecorationJson, checkTeamMember,
-    getSliders, getCollection, getTopicBucket, getConfig, getUserMeta, setUserMeta, getUserHonor, loadAuthors, loadEmotions, uploadFile };
+// 创建qqbot图片任务 刷图
+function refreshQQBotImage(data) {
+    return $cms().post(`/api/cms/qqbot/picture_task`, data);
+}
+
+export {
+    getPostAuthors,
+    uploadImage,
+    upload,
+    getDecoration,
+    getDecorationJson,
+    checkTeamMember,
+    getSliders,
+    getCollection,
+    getTopicBucket,
+    getConfig,
+    getUserMeta,
+    setUserMeta,
+    getUserHonor,
+    loadAuthors,
+    loadEmotions,
+    uploadFile,
+    refreshQQBotImage,
+};
