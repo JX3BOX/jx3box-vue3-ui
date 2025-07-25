@@ -13,7 +13,7 @@
 
 <script>
 import ArticleRender from "../src/editor/Article.vue";
-import demohtml from "./content_1";
+import demohtml from "./content_2";
 
 export default {
     name: "APage",
