@@ -28,4 +28,11 @@ function getGames() {
     return axios.get(JX3BOX.__dataPath + "data/product/games.json");
 }
 
-export { getMsg, getNav, getPanel, getBox, getMenu, getGames };
+// 获取全局配置
+function getGlobalConfig() {
+    return axios.get(`${JX3BOX.__ossRoot}config/global.json`).then((res) => {
+        return res.data;
+    });
+}
+
+export { getMsg, getNav, getPanel, getBox, getMenu, getGames, getGlobalConfig };
