@@ -1,7 +1,7 @@
 <template>
     <div class="m-single-box">
         <!-- 头部 -->
-        <PostHeader :post="post" :stat="stat">
+        <PostHeader :post="post" :stat="stat" :anonymous="anonymous">
             <slot name="single-header"></slot>
         </PostHeader>
 
@@ -171,6 +171,9 @@ export default {
         community_id: function () {
             return this.post?.community_id || 0;
         },
+        anonymous: function () {
+            return this.post?.anonymous ==1;
+        }
     },
     methods: {
         updateCollection: function (val) {

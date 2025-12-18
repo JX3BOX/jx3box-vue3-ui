@@ -1,6 +1,6 @@
 <template>
     <div class="c-author">
-        <AuthorInfo :uid="uid" @ready="installModules" />
+        <AuthorInfo :uid="uid" :anonymous="anonymous" @ready="installModules" />
         <template v-if="data">
             <div class="u-interact">
                 <!-- <AuthorFollow style="margin-right: 8px;" :uid="uid" /> -->
@@ -34,7 +34,7 @@ import AuthorRss from "../author/AuthorRss.vue";
 const jx3box = require("@jx3box/jx3box-common/data/jx3box.json");
 export default {
     name: "AuthorComp",
-    props: ["uid"],
+    props: ["uid", "anonymous"],
     data: function () {
         return {
             data: "",
@@ -43,6 +43,9 @@ export default {
     },
     methods: {
         installModules: function (data) {
+            if (this.anonymous == 1) {
+                return;
+            }
             this.data = data;
         },
         onMessage: function () {

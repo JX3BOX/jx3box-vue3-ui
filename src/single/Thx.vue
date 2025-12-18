@@ -4,7 +4,7 @@
             <boxcoin-admin
                 :postId="postId"
                 :postType="postType"
-                v-if="hasRight && adminBoxcoinEnable && boxcoin_enable"
+                v-if="hasRight && adminBoxcoinEnable && boxcoin_enable && hasPermission"
                 :userId="userId"
                 :max="admin_max"
                 :min="admin_min"
@@ -14,6 +14,9 @@
                 :authors="authors"
                 @updateRecord="updateRecord"
                 :client="finalClient"
+                :totalLimit="total_limit"
+                :postTypeUsed="post_type_used"
+                :category="category"
             />
             <Like :postId="postId" :postType="postType"></Like>
             <fav :postId="postId" :postType="postType" :postTitle="postTitle"></fav>
@@ -29,13 +32,14 @@
                 v-if="userBoxcoinEnable && boxcoin_enable && allowGift"
                 @updateRecord="updateRecord"
                 :client="finalClient"
+                :category="category"
             />
             <Share :postId="postId" :postType="postType" :client="client" />
             <watch-later :category="postType" :title="postTitle" :author-id="authorId" :banner="banner" :content-id="contentMetaId"></watch-later>
         </div>
         <div class="w-thx-records">
             <boxcoin-records :postId="postId" :postType="postType" :postClient="finalClient" :cacheRecord="cacheRecord"
-                :mode="mode" @update:boxcoin="updateBoxcoin" />
+                :mode="mode" @update:boxcoin="updateBoxcoin" v-if="showRecord" />
         </div>
         <div class="w-thx-copyright">
             &copy;
@@ -57,6 +61,7 @@ import Rss from "../interact/Rss.vue";
 
 import User from "@jx3box/jx3box-common/js/user";
 import { getBoxcoinStatus, getPostBoxcoinConfig } from "../../service/thx";
+import {getConfig,getUserPermission} from "../../service/cms"
 
 export default {
     name: "ThxComp",
@@ -135,7 +140,7 @@ export default {
     data: function () {
         return {
             boxcoin: 0,
-            hasRight: User.getInfo().group >= 32,
+            hasRight: User.getInfo().group >= 64,
             user: User.getInfo(),
 
             admin_max: 0,
@@ -143,6 +148,8 @@ export default {
             admin_left: 0,
             admin_total: 0,
             admin_points: [100],
+            total_limit: 0,
+            post_type_used: 0,
 
             user_left: 0,
             user_points: [100],
@@ -151,6 +158,9 @@ export default {
             boxcoin_enable: 0,
 
             showDrawer: false,
+
+            admin_boxcoin_visible: 1,
+            hasPermission: false,
         };
     },
     computed: {
@@ -162,6 +172,13 @@ export default {
                 return "std"
             }
             return this.client
+        },
+        showRecord() {
+            // 当admin_boxcoin_visible为0时，作者本人和64及以上权限可见打赏记录
+            if (this.admin_boxcoin_visible === 0) {
+                return this.userId == this.user.uid || this.user.group >= 64;
+            }
+            return true;
         }
     },
     watch: {
@@ -182,6 +199,8 @@ export default {
                     this.admin_points = res.data.data.limit.admin_points || [10, 1000];
                     this.admin_left = res.data.data.asManagerBoxCoinRemain || 0;
                     this.admin_total = res.data.data.asManagerBoxCoinTotal || 0;
+                    this.total_limit = res.data.data.limit.total_limit || 0;
+                    this.post_type_used = res.data.data.asPostTypeBoxcoinHasUsedTotalAtCurrentYear || 0;
 
                     this.user_points = res.data.data.limit.user_points || [10, 1000];
                     // 根据多端展示剩余币
@@ -200,6 +219,17 @@ export default {
             getBoxcoinStatus().then((res) => {
                 this.boxcoin_enable = !!~~res.data?.data?.val;
             });
+
+            getConfig({
+                key: 'admin_boxcoin_visible'
+            }).then((res) => {
+                this.admin_boxcoin_visible = Number(res?.val)
+            });
+
+            User.isLogin() &&  getUserPermission().then(res => {
+                const permissions = res.data.data.permission?.map(item => item.action)
+                this.hasPermission = permissions.includes(`manage_boxcoin_${this.postType}`) || User.isSuperAdmin();
+            })
         },
         // 用户打赏
         updateRecord: function (data) {

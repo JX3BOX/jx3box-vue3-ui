@@ -104,6 +104,11 @@ function refreshQQBotImage(data) {
     return $cms().post(`/api/cms/qqbot/picture_task`, data);
 }
 
+// 获取用户permission
+function getUserPermission() {
+    return $cms().get(`/api/cms/account/permission/i`)
+}
+
 export {
     getPostAuthors,
     uploadImage,
@@ -122,4 +127,5 @@ export {
     loadEmotions,
     uploadFile,
     refreshQQBotImage,
+    getUserPermission,
 };
