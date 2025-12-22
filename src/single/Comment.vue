@@ -1,5 +1,5 @@
 <template>
-    <el-container class="c-comment" v-loading="loading">
+    <el-container class="c-comment" :class="{ 'c-comment-mask': showMask }" v-loading="loading">
         <el-main>
             <CommentInputForm @submit="userSubmitInputForm" />
             <div class="c-comment-panel">
@@ -85,6 +85,8 @@ import { showAvatar, authorLink } from "@jx3box/jx3box-common/js/utils";
 import CommentInputForm from "../comment/CommentInputForm.vue";
 import CommentWithReply from "../comment/CommentWithReply.vue";
 import { GET, POST, DELETE, PUT, getOrderMode, setOrderMode } from "../../service/comment";
+import { getConfig } from "../../service/cms";
+import User from "@jx3box/jx3box-common/js/user";
 export default {
     name: "CommentComp",
     props: ["id", "category", "normal", "order"],
@@ -111,6 +113,8 @@ export default {
             orderByLikes: false,
             openWhiteList: false,
             loading: false,
+
+            showMask: false,
         };
     },
     computed: {
@@ -279,6 +283,16 @@ export default {
             .finally(() => {
                 this.reloadCommentList(1);
             });
+
+        getConfig({
+            key: "comment_strict",
+        }).then((res) => {
+            if (res.val == 1) {
+                if (User.isLogin()) {
+                    this.showMask = User.getInfo().group < 16;
+                }
+            }
+        });
     },
 };
 </script>
@@ -291,6 +305,11 @@ export default {
     }
     .el-icon-circle-close {
         color: #fff !important;
+    }
+}
+.c-comment-mask {
+    .u-mask {
+        display: block;
     }
 }
 .u-uploader {

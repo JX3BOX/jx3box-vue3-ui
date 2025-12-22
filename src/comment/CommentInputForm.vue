@@ -1,5 +1,8 @@
 <template>
     <el-form ref="form" :model="newComment" class="c-comment-box">
+        <div class="u-mask">
+            参与评论，需先进行<a href="/dashboard/auth" class="u-link">账号认证</a>。
+        </div>
         <el-form-item>
             <el-input
                 rows="3"
@@ -154,6 +157,26 @@ export default {
         .el-checkbox__inner{
             display:block;
         }
+    }
+}
+.c-comment-box {
+    .pr;
+
+    .u-mask {
+        .pa;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        z-index: 10;
+        display: none;
+        text-align: center;
+        align-content: center;
+    }
+
+    .u-link {
+        color: @primary;
     }
 }
 </style>
