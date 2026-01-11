@@ -17,6 +17,7 @@
                     option
                 }}</el-radio-button>
             </el-radio-group>
+            <el-button type="primary" size="small" class="u-refresh-btn" @click="onRefreshCache">刷新缓存</el-button>
             <!-- </template> -->
 
             <el-divider content-position="left">可见性变更</el-divider>
@@ -115,6 +116,7 @@ import { getSetting, postSetting } from "../../service/admin";
 import User from "@jx3box/jx3box-common/js/user";
 import CMS_MARKS from "@jx3box/jx3box-common/data/mark.json";
 import { getTopicBucket } from "../../service/cms";
+import emitter from "../../utils/bus";
 
 const { cms: marks } = CMS_MARKS;
 // import { onClickOutside } from "@vueuse/core";
@@ -341,6 +343,12 @@ export default {
                 this.tags = data;
             });
         },
+        onRefreshCache() {
+            emitter.emit("refreshCache", {
+                type: this.post_type,
+                id: this.pid,
+            });
+        }
     },
     watch: {
         "$route.params.id": function () {
