@@ -17,7 +17,7 @@
                     option
                 }}</el-radio-button>
             </el-radio-group>
-            <el-button type="primary" size="small" class="u-refresh-btn" @click="onRefreshCache">刷新缓存</el-button>
+            <el-button type="primary" class="u-refresh-btn" @click="onRefreshCache">刷新缓存</el-button>
             <!-- </template> -->
 
             <el-divider content-position="left">可见性变更</el-divider>
