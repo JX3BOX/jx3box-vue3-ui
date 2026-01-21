@@ -12,7 +12,8 @@
                 "ignores": ["Item"]
             }
         ],
-        "no-useless-escape": "off"
+        "no-useless-escape": "off",
+        "no-unused-vars": "off"
     },
     "globals": {
         "defineOptions": "writable",
