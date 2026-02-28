@@ -36,7 +36,7 @@ import search from "./header/Search.vue";
 import nav from "./header/Nav.vue";
 import user from "./header/User.vue";
 import Box from "../src/Box.vue";
-import { isMiniProgram, miniprogramHack } from "@jx3box/jx3box-common/js/utils";
+import { isMiniProgram, isApp as checkIsApp, miniprogramHack } from "@jx3box/jx3box-common/js/utils";
 import miniprogram from "@jx3box/jx3box-common/data/miniprogram.json";
 import User from "@jx3box/jx3box-common/js/user";
 import { getGlobalConfig } from "../service/header.js";
@@ -66,7 +66,7 @@ export default {
             const urlParams = new URLSearchParams(window.location.search);
             const from = urlParams.get("from");
             from && sessionStorage.setItem("from", from);
-            if (isMiniProgram()) {
+            if (isMiniProgram() || checkIsApp()) {
                 const appid = urlParams.get("appid");
                 const item = miniprogram?.find((item) => item.appid === appid);
                 const from = urlParams.get("_from");
