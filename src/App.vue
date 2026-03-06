@@ -74,7 +74,7 @@
                 </template>
             </SuspendCommon>
 
-            <Footer> </Footer>
+            <CommonFooter> </CommonFooter>
         </Main>
     </div>
 </template>
@@ -95,6 +95,7 @@ import { get_item } from "../service/item";
 // import Admin from "@/bread/Admin.vue";
 import versionBy from "./filters/versionBy.vue";
 import SuspendCommon from "./SuspendCommon.vue";
+import CommonFooter from "./CommonFooter.vue";
 export default {
     name: "App",
     components: {
@@ -109,6 +110,7 @@ export default {
         singlebox,
         versionBy,
         SuspendCommon,
+        CommonFooter,
         // Admin,
     },
     data() {
