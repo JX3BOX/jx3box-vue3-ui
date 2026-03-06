@@ -13,9 +13,7 @@
             <template #logo>
                 <img svg-inline src="../assets/img/jx3.svg" />
             </template>
-            <template #op-prepend>
-                <!-- <AdminDirectMessage :user-id="8" :sourceId="19382" sourceType="macro"></AdminDirectMessage> -->
-            </template>
+            <template #op-prepend> </template>
         </breadcrumb>
         <LeftSidebar :open="true" :uid="7">
             <LeftSideToggle :mobileOnly="true" />
@@ -23,30 +21,9 @@
         </LeftSidebar>
 
         <Main :withoutLeft="false" :withoutRight="false">
-            <!-- <Admin :fromList="true" :show="true" :postId="post_id" @update="update" :appDisabled="true"></Admin> -->
-            <!-- <clientBy @filter="filterMeta" :type="client"></clientBy>
-
-            <markBy @filter="filterMeta"></markBy>
-
-            <zlpBy @filter="filterMeta" type="zlp" :client="client"></zlpBy>
-            <orderBy @filter="filterMeta"></orderBy>
-            <menuBy :data="['test1', 'test2']" @filter="filterMeta"></menuBy>
-            <tagBy :data="['PVE', 'PVX']" :type="tag" @filter="filterMeta"></tagBy>
-            <topicBy v-model="tag2" label="PVE" :topics="post_topics"></topicBy> -->
-            <!--
-            <Item :item_id="'6_27425'"></Item>
-            <ItemSimple :item="item1" />
-
-            <ItemSimple :item="item2" :only-icon="true" :with-name="true" :no-pop="true" iconSize="56px" />
-            <ItemSimple :item="item2" :only-icon="true" iconSize="56px" />
-            <ItemSimple :item="item3" :only-icon="true" iconSize="56px" />
-            <ItemSimple :item="item4" :only-icon="true" iconSize="56px" />
-            <ItemSimple :item="item5" jx3-client-type="1" only-icon="true" iconSize="56px" />
-            <ItemSimple :item="item6" jx3-client-type="2" only-icon="true" iconSize="56px" /> -->
             <versionBy value=""></versionBy>
             <el-divider></el-divider>
             <UploadAlum />
-            <!-- <PostHeader :post="post"></PostHeader> -->
             <singlebox :post="post" />
             <SimpleThxVue
                 postType="bbs"
@@ -74,8 +51,30 @@
                 <div id="directory"></div>
             </RightSidebar>
 
+            <SuspendCommon
+                :drawerOptions="{
+                    author: {
+                        name: '作者名字',
+                        avatar: 'https://cdn.jx3box.com/upload/avatar/2022/3/2/8_9860765.png',
+                        author_id: 8,
+                    },
+                    subscribeType: 'posts',
+                    postType: 'macro',
+                    id: 97147,
+                    title: '薄嘴唇靓仔！！！',
+                }"
+                @search="suspendSearch"
+            >
+                <template #default>
+                    <div style="display: flex; gap: 1rem">
+                        <div>切换</div>
+                        <div>切换</div>
+                        <div>切换</div>
+                    </div>
+                </template>
+            </SuspendCommon>
+
             <Footer> </Footer>
-            <!-- <Bottom></Bottom> -->
         </Main>
     </div>
 </template>
@@ -95,6 +94,7 @@ import { get_item } from "../service/item";
 // import AdminDirectMessage from "./bread/AdminDirectMessage.vue";
 // import Admin from "@/bread/Admin.vue";
 import versionBy from "./filters/versionBy.vue";
+import SuspendCommon from "./SuspendCommon.vue";
 export default {
     name: "App",
     components: {
@@ -108,6 +108,7 @@ export default {
         // AdminDirectMessage,
         singlebox,
         versionBy,
+        SuspendCommon,
         // Admin,
     },
     data() {
@@ -135,6 +136,9 @@ export default {
         },
     },
     methods: {
+        suspendSearch: function (val) {
+            console.log(val, "222");
+        },
         update(data) {
             console.log(data);
         },
