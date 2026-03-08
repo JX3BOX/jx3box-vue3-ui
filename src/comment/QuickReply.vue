@@ -60,5 +60,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/quick-reply.less";
+@import "../../assets/css/comment/quick-reply.less";
 </style>
