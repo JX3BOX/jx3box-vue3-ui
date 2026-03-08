@@ -21,7 +21,10 @@ function escapeRegExp(str) {
 }
 
 function buildEnvProxy() {
-    const enabled = ["1", "true", "yes", "on"].includes(String(process.env.VUE_APP_PROXY_ENABLE || "").toLowerCase());
+    const nodeEnv = String(process.env.NODE_ENV || "").toLowerCase();
+    const rawEnabled = String(process.env.VUE_APP_PROXY_ENABLE || "").toLowerCase();
+    const enabled = ["1", "true", "yes", "on"].includes(rawEnabled);
+    if (nodeEnv && nodeEnv !== "development") return {};
     if (!enabled) return {};
 
     const prefix = process.env.VUE_APP_PROXY_PREFIX || "/__proxy";
@@ -48,6 +51,7 @@ function buildEnvProxy() {
         pay: process.env.VUE_APP_PAY_API || commonDomains.__pay,
         lua: process.env.VUE_APP_LUA_API || commonDomains.__lua,
         node: process.env.VUE_APP_NODE_API || commonDomains.__node,
+        helper: process.env.VUE_APP_HELPER_API || commonDomains.__helperUrl,
     };
 
     return Object.keys(serviceTargets).reduce((acc, key) => Object.assign(acc, mk(key, serviceTargets[key])), {});
@@ -93,7 +97,7 @@ module.exports = {
         // 本地开发开启 `VUE_APP_PROXY_ENABLE=1` 后，会把请求 baseURL 切到 `${VUE_APP_PROXY_PREFIX}/${serviceKey}`
         proxy: buildEnvProxy(),
         allowedHosts: "all",
-        port: process.env.DEV_PORT || 12028,
+        port: process.env.VUE_PORT || 12028,
     },
 
     //❤️ Webpack configuration
