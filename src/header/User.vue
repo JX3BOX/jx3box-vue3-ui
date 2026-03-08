@@ -17,7 +17,10 @@
             <asset :asset="asset" />
 
             <!-- manage -->
-            <manage :isTeammate="isTeammate" v-if="isTeammate" />
+            <manage :isTeammate="isTeammate" />
+
+            <!-- 语言切换 -->
+            <lang />
 
             <!-- user info -->
             <user-info :asset="asset" @logout="logout" @update="update" />
@@ -33,30 +36,48 @@
 </template>
 
 <script>
-import User from "@jx3box/jx3box-common/js/user";
-import { userSignIn } from "../../service/author";
-import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
+import User from "@/config/js/user";
+import { userSignIn } from "@/service/author";
+import { __Links } from "@/config/data/jx3box.json";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 dayjs.extend(isToday);
 
-import message from "./Message.vue";
-import publish from "./Publish.vue";
-import vip from "./Vip.vue";
-import asset from "./Asset.vue";
-import manage from "./Manage.vue";
-import userInfo from "./UserInfo.vue"; 
-import shop from "./Shop.vue";
+import message from "./message.vue";
+import publish from "./publish.vue";
+import vip from "./vip.vue";
+import shop from "./shop.vue";
+import asset from "./asset.vue";
+import manage from "./manage.vue";
+import lang from "./lang.vue";
+import userInfo from "./userInfo.vue";
+
 export default {
-    name: "HeaderUser",
+    props: {
+        asset: {
+            type: Object,
+            default: () => {
+                return {
+                    expire_date: "2022-03-07T00:00:00+08:00",
+                    total_day: 395,
+                    was_vip: 0,
+
+                    pro_expire_date: "2022-03-07T00:00:00+08:00",
+                    pro_total_day: 366,
+                    was_pro: 0,
+                };
+            },
+        },
+    },
     components: {
         message,
         publish,
         vip,
+        shop,
         asset,
         manage,
-        userInfo, 
-        shop,
+        lang,
+        userInfo,
     },
     data: function () {
         return {
@@ -65,20 +86,9 @@ export default {
             user: User.getInfo(),
             isLogin: User.isLogin(),
 
-            // VIP
-            asset: {
-                expire_date: "2022-03-07T00:00:00+08:00",
-                total_day: 395,
-                was_vip: 0,
-
-                pro_expire_date: "2022-03-07T00:00:00+08:00",
-                pro_total_day: 366,
-                was_pro: 0,
-            },
-
             // 链接
-            login_url: JX3BOX.__Links.account.login + "?redirect=" + location.href,
-            register_url: JX3BOX.__Links.account.register + "?redirect=" + location.href,
+            login_url: __Links.account.login + "?redirect=" + location.href,
+            register_url: __Links.account.register + "?redirect=" + location.href,
 
             isTeammate: false,
         };
@@ -111,7 +121,6 @@ export default {
                             })
                             .catch(() => {
                                 localStorage.setItem("user_last_login", JSON.stringify(dayjs()));
-                                console.log(dayjs.tz.guess());
                             })
                             .finally(() => {
                                 clearTimeout(signTimer);
@@ -122,16 +131,9 @@ export default {
                 console.log(e);
             }
         },
-        // 资产
-        loadAsset: function () {
-            User.getAsset().then((data) => {
-                this.asset = data;
-            });
-        },
         // 初始化
         init: function () {
             if (this.isLogin) {
-                this.loadAsset();
                 this.signIn();
             }
         },
@@ -140,7 +142,7 @@ export default {
         logout: function () {
             this.isLogin = false;
         },
-
+        // 更新用户信息
         update: function ({ is_teammate }) {
             this.isTeammate = is_teammate;
         },
@@ -150,3 +152,74 @@ export default {
     },
 };
 </script>
+
+<style lang="less">
+//登录、注册
+.c-header-login {
+    margin: 16px 5px 16px 0;
+
+    transition: 0.4s;
+    *zoom: 1;
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    border: 1px solid @border-hr;
+    border-radius: 3px;
+
+    .u-default,
+    .u-extend {
+        float: left;
+    }
+
+    .u-default {
+        display: block;
+        line-height: @header-logo-size - 2px;
+        padding: 0 8px;
+        color: #fff;
+
+        &:hover {
+            color: hsla(0, 0%, 100%, 0.75);
+        }
+    }
+
+    em {
+        color: #a4acb5;
+        .fl;
+        font-style: normal;
+        .lh(30px);
+    }
+
+    .u-extend {
+        //background-color: hsla(0,0%,100%,.125);
+        background-color: #fafafa;
+        height: @header-logo-size - 2px;
+        padding-left: 5px;
+
+        .c-passport {
+            *zoom: 1;
+            &:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+            padding: (@header-logo-size - 24px - 2px) / 2 0;
+        }
+
+        a {
+            float: left;
+            display: block;
+            margin-right: 5px;
+        }
+
+        img {
+            vertical-align: middle;
+            width: 24px !important;
+            height: auto;
+        }
+
+        display: none;
+    }
+}
+</style>

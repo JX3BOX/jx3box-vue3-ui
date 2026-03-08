@@ -2,19 +2,23 @@
     <div class="c-header-panel" id="c-header-panel">
         <el-tooltip effect="dark" content="创作中心" placement="bottom" popper-class="c-header-tooltip">
             <a class="u-post" :href="url">
-                <img class="u-add" svg-inline src="../../assets/img/header/edit.svg" />
+                <editIcon class="u-add" />
             </a>
         </el-tooltip>
     </div>
 </template>
 
 <script>
-import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
+import { __Links } from "@/config/data/jx3box.json";
+import editIcon from "@/assets/img/components/common/header/edit.svg";
 export default {
-    name: "HeaderPublish",
+    name: "publish",
+    components: {
+        editIcon,
+    },
     data: function () {
         return {
-            url: JX3BOX.__Links.dashboard.publish,
+            url: __Links.dashboard.publish,
         };
     },
 };

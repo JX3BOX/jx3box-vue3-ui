@@ -4,11 +4,8 @@
             <!-- logo -->
             <header-logo />
 
-            <!-- origin -->
-            <clientSwitch :defaultValue="client" />
-
-            <!-- game -->
-            <!-- <gameSwitch /> -->
+            <!-- client -->
+            <header-client :defaultValue="client" />
 
             <!-- search -->
             <header-search :client="client" />
@@ -19,44 +16,62 @@
             <slot></slot>
 
             <!-- user -->
-            <header-user :client="client" />
+            <header-user ref="user" :client="client" :asset="asset" />
         </div>
-        <Box class="c-header-jx3box" :overlayEnable="overlayEnable" :client="client" />
+        <!-- <header-box class="c-header-jx3box" :overlayEnable="overlayEnable" :client="client" /> -->
     </header>
 </template>
 
 <script>
+// 外部模块
 import _ from "lodash";
-import { isApp, KW } from "../assets/js/app.js";
 
-// components
-import logo from "./header/Logo.vue";
-import clientSwitch from "./header/ClientSwitch.vue";
-import search from "./header/Search.vue";
-import nav from "./header/Nav.vue";
-import user from "./header/User.vue";
-import Box from "../src/Box.vue";
-import { isMiniProgram, isApp as checkIsApp, miniprogramHack } from "@jx3box/jx3box-common/js/utils";
-import miniprogram from "@jx3box/jx3box-common/data/miniprogram.json";
-import User from "@jx3box/jx3box-common/js/user";
-import { getGlobalConfig } from "../service/header.js";
+// 子模块
+import logo from "./header/logo.vue";
+import client from "./header/client.vue";
+import search from "./header/search.vue";
+import nav from "./header/nav.vue";
+import user from "./header/user.vue";
+// import box from "./header/box.vue";
+
+// 移动端适配
+const KW = "jx3boxApp";
+import { isMiniProgram, miniprogramHack, isApp as checkIsApp } from "@/config/js/utils";
+import miniprogram from "@/config/data/miniprogram.json";
+
+// 数据
+import { getGlobalConfig } from "@/service/header.js";
+import User from "@/config/js/user.js";
+import { __Root, __OriginRoot } from "@/config/data/jx3box.json";
 
 export default {
-    name: "CommonHeader",
+    name: "Header",
+    components: {
+        "header-logo": logo,
+        "header-client": client,
+        "header-search": search,
+        "header-nav": nav,
+        "header-user": user,
+        // "header-box": box,
+    },
     props: ["overlayEnable"],
     data: function () {
         return {
             isOverlay: false,
-            isApp: isApp(),
+            isApp: checkIsApp(),
+
+            asset: {},
         };
     },
     computed: {
         client: function () {
             return location.hostname.includes("origin") ? "origin" : "std";
         },
+        siteRoot: function () {
+            return location.host.includes("origin") ? __OriginRoot : __Root;
+        },
     },
     methods: {
-        // webView检测
         // webView检测
         checkIsWebView: function () {
             if (window.navigator.userAgent.includes(KW)) {
@@ -92,10 +107,9 @@ export default {
             }
 
             // 如果来自推栏
-            if (sessionStorage.getItem("from") == 'tl') {
+            if (sessionStorage.getItem("from") == "tl") {
                 document.documentElement.classList.add("v-miniprogram");
             }
-
         },
 
         // 检查
@@ -103,6 +117,8 @@ export default {
             this.checkIsWebView();
 
             const token = this.getUrlParam("__token");
+            const env = this.getUrlParam("__env");
+            env && localStorage.setItem("__env", env);
 
             token && localStorage.setItem("__token", token);
 
@@ -170,28 +186,76 @@ export default {
         this.init();
 
         if (this.overlayEnable) {
-            const vm = this;
-            window.addEventListener(
-                "scroll",
-                _.throttle(() => {
-                    vm.isOverlay = window.scrollY > 200 ? true : false;
-                }, 200)
-            );
+            this.__overlayScrollHandler = _.throttle(() => {
+                this.isOverlay = window.scrollY > 200 ? true : false;
+            }, 200);
+            window.addEventListener("scroll", this.__overlayScrollHandler, { passive: true });
+            this.__overlayScrollHandler();
+        }
+    },
+    beforeUnmount: function () {
+        if (this.__overlayScrollHandler) {
+            window.removeEventListener("scroll", this.__overlayScrollHandler);
+            this.__overlayScrollHandler.cancel && this.__overlayScrollHandler.cancel();
+            this.__overlayScrollHandler = null;
         }
     },
     mounted: function () {},
-    components: {
-        "header-logo": logo,
-        "header-search": search,
-        "header-nav": nav,
-        "header-user": user,
-        Box,
-        clientSwitch,
-        // gameSwitch,
-    },
 };
 </script>
 
 <style lang="less">
-@import "../assets/css/header.less";
+.c-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 601;
+
+    width: 100%;
+    height: @header-height;
+
+    background-color: @header-bg;
+    color: #fff;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+    transition: 0.5s ease-in-out;
+}
+.c-header.isOverlay {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+.c-header-inner {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .flex;
+}
+@media print {
+    .c-header {
+        .none;
+    }
+}
+
+@media screen and (max-width: @phone) {
+    .env-app,
+    .v-miniprogram,
+    .wechat-miniprogram {
+        .c-header {
+            .none;
+        }
+        body {
+            padding-top: 0;
+        }
+    }
+
+    .wechat-miniprogram {
+        .c-header {
+            .none;
+        }
+    }
+}
 </style>

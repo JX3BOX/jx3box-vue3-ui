@@ -1,14 +1,15 @@
 <template>
     <div class="c-header-logo" @click="toggleBox($event)" title="点击展开魔盒矩阵">
-        <i class="u-pic" id="c-header-logo"><img svg-inline src="../../assets/img/header/logo.svg" /></i>
+        <i class="u-pic" id="c-header-logo"><Logo /></i>
         <span class="u-txt" :class="{ on: isIndex }" href="/">魔盒</span>
     </div>
 </template>
 
 <script>
-import Bus from "../../utils/bus";
+import Logo from "@/assets/img/components/common/header/logo.svg";
+import { useLayoutStore } from "@/store/layout";
 export default {
-    name: "HeaderLogo",
+    name: "c-header-logo",
     props: [],
     data: function () {
         return {
@@ -20,11 +21,14 @@ export default {
         // 盒子
         toggleBox: function (e) {
             e.stopPropagation();
-            Bus.emit("toggleBox");
+            const layout = useLayoutStore();
+            layout.toggleBoxMatrix();
         },
     },
     mounted: function () {},
-    components: {},
+    components: {
+        Logo,
+    },
 };
 </script>
 
@@ -36,35 +40,35 @@ export default {
     display: inline-flex;
     flex-shrink: 0;
     flex-grow: 0;
+    align-items: center;
     height: @header-height;
+    padding: 0 0 0 10px;
 
-    @padding: 15px;
+    @padding: ((@header-height - @header-logo-size) / 2);
 
     .u-pic {
         .db;
-        width: @logo-size;
-        height: @logo-size;
+        width: @header-logo-size;
+        height: @header-logo-size;
         float: left;
-        padding: @padding 10px;
         svg {
             .size(100%);
             fill: #fff;
         }
         transition: 0.3s ease-in-out;
-        &:hover {
-            transform: rotate(90deg);
-            .mt(-2px);
-        }
     }
     .u-txt {
         .db;
         color: #fff;
-        font-family: Consolas;
         font-size: 20px;
-        line-height: @logo-size;
-        padding: @padding 0;
+        font-weight: 600;
+        line-height: @header-logo-size;
+        margin-left: 10px;
         transition: 0.15s ease-in-out;
-        margin-right: 10px;
+    }
+
+    &:hover .u-pic {
+        transform: scale(1.1);
     }
 }
 @media screen and (max-width: @phone) {

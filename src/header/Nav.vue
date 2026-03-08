@@ -1,6 +1,6 @@
 <template>
     <nav class="c-header-nav" v-if="finalNav">
-        <div class="c-header-nav__pc">
+        <div class="c-header-nav--pc">
             <div class="u-item-box" v-for="item in finalNav" :key="'header-nav-' + item.key">
                 <template v-if="item.status && matchedClient(item.client)">
                     <template v-if="item.children && item.children.length">
@@ -10,140 +10,122 @@
                                 :class="{ on: isFocus(item.link) }"
                                 :href="item.link"
                                 :target="isSelf(item.link)"
-                                v-reporter="{
-                                    data: {
-                                        item: trimSlash(item.link),
-                                    },
-                                    caller: 'index_nav',
-                                }"
-                                >{{ item.label }}<el-icon><ArrowDown /></el-icon
-                            ></a>
+                                >{{ item.label }}</a
+                            >
                             <template #dropdown>
                                 <el-dropdown-menu class="c-header-menu">
-                                    <el-dropdown-item
-                                        v-for="(subitem, subIndex) in item.children"
-                                        :key="'header-nav-drop-' + subitem.key + subIndex"
-                                        class="u-menu-item"
-                                    >
-                                        <a
-                                            :href="subitem.link"
-                                            :target="isSelf(subitem.link)"
+                                    <template v-for="(subitem, subIndex) in item.children">
+                                        <el-dropdown-item
                                             v-if="subitem.status && matchedClient(subitem.client)"
-                                            v-reporter="{
-                                                data: {
-                                                    item: trimSlash(subitem.link),
-                                                },
-                                                caller: 'index_nav',
-                                            }"
-                                            >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span></a
-                                        ></el-dropdown-item
-                                    >
+                                            :key="'header-nav-drop-' + subitem.key + subIndex"
+                                            class="u-menu-item"
+                                        >
+                                            <a :href="subitem.link" :target="isSelf(subitem.link)"
+                                                >{{ subitem.label }}
+                                                <span v-if="subitem.desc">{{ subitem.desc }}</span></a
+                                            >
+                                        </el-dropdown-item>
+                                    </template>
                                 </el-dropdown-menu>
                             </template>
                         </el-dropdown>
                     </template>
                     <template v-else>
-                        <a
-                            class="u-item"
-                            :class="{ on: isFocus(item.link) }"
-                            :href="item.link"
-                            v-reporter="{
-                                data: {
-                                    item: trimSlash(item.link),
-                                },
-                                caller: 'index_nav',
-                            }"
-                            >{{ item.label }}</a
-                        >
+                        <a class="u-item" :class="{ on: isFocus(item.link) }" :href="item.link">{{ item.label }}</a>
                     </template>
                 </template>
             </div>
         </div>
-        <div class="c-header-nav__pad">
-            <el-menu mode="horizontal" class="c-quick-menu" v-model="activeIndex" :ellipsis="false">
+        <!-- <div class="c-header-nav--pad">
+            <el-menu mode="horizontal" class="c-quick-menu" :default-active="activeIndex">
                 <el-sub-menu index="quick-menu" popper-class="c-quick-menu__submenu">
                     <template #title>快捷导航</template>
-                    <el-menu-item v-for="item in finalNav" :key="'header-nav-' + item.key">
-                        <template v-if="matchedClient(item.client)">
-                            <el-sub-menu
-                                :index="item.key"
-                                class="c-header-menu"
-                                v-if="item.children && item.children.length"
-                            >
-                                <template #title>
+                    <template v-for="item in finalNav" :key="'header-nav-' + item.key">
+                        <el-sub-menu
+                            v-if="matchedClient(item.client) && item.children && item.children.length"
+                            :index="item.key"
+                            class="c-header-menu"
+                        >
+                            <template #title>
                                     <a
                                         class="u-menu-item"
                                         :class="{ on: isFocus(item.link) }"
                                         :href="item.link"
                                         :target="isSelf(item.link)"
-                                        v-reporter="{
-                                            data: {
-                                                item: trimSlash(item.link),
-                                            },
-                                            caller: 'index_nav',
-                                        }"
                                         >{{ item.label }}</a
-                                    ></template
-                                >
-                                <template v-for="(subitem, subIndex) in item.children">
-                                    <el-menu-item
-                                        v-if="matchedClient(subitem.client)"
-                                        :key="'header-nav-drop-' + subitem.key + subIndex"
-                                        :index="subitem.key"
-                                        v-reporter="{
-                                            data: {
-                                                item: trimSlash(subitem.link),
-                                            },
-                                            caller: 'index_nav',
-                                        }"
                                     >
-                                        <a class="u-menu-item" :href="subitem.link" :target="isSelf(subitem.link)"
-                                            >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span>
-                                        </a>
-                                    </el-menu-item>
-                                </template>
-                            </el-sub-menu>
-                            <el-menu-item v-else>
+                            </template>
+                            <template v-for="(subitem, subIndex) in item.children">
+                                <el-menu-item
+                                    v-if="subitem.status && matchedClient(subitem.client)"
+                                    :key="'header-nav-drop-' + subitem.key + subIndex"
+                                    :index="subitem.key"
+                                >
+                                        <a
+                                            class="u-menu-item"
+                                            :href="subitem.link"
+                                            :target="isSelf(subitem.link)"
+                                            >{{ subitem.label }} <span v-if="subitem.desc">{{ subitem.desc }}</span></a
+                                        >
+                                </el-menu-item>
+                            </template>
+                        </el-sub-menu>
+                        <el-menu-item v-else-if="matchedClient(item.client)" :index="item.key">
                                 <a
                                     class="u-item"
                                     :class="{ on: isFocus(item.link) }"
                                     :href="item.link"
-                                    v-reporter="{
-                                        data: {
-                                            item: trimSlash(item.link),
-                                        },
-                                        caller: 'index_nav',
-                                    }"
                                     >{{ item.label }}</a
                                 >
-                            </el-menu-item>
-                        </template>
-                    </el-menu-item>
+                        </el-menu-item>
+                    </template>
                 </el-sub-menu>
             </el-menu>
-        </div>
+        </div> -->
     </nav>
 </template>
 
 <script>
-import { cloneDeep } from "lodash";
-import default_nav from "../../assets/data/nav.json";
-import { getMenu } from "../../service/header";
-import { trimSlash } from "../../utils";
-
+const default_nav = [
+    { key: "index", link: "/index/", label: "首页", client: "all", status: true, parentKey: "" },
+    { key: "macro", link: "/macro/", label: "宏库", client: "all", status: true, parentKey: "" },
+    { key: "bps", link: "/bps/", label: "职业", client: "all", status: true, parentKey: "" },
+    { key: "pvp", link: "/pvp/", label: "竞技", client: "all", status: true, parentKey: "" },
+    { key: "fb", link: "/fb/", label: "副本", client: "all", status: true, parentKey: "" },
+    { key: "wiki", link: "/cj/", label: "百科", client: "all", status: true, parentKey: "" },
+    { key: "pvx", link: "/pvx/", label: "休闲", client: "all", status: true, parentKey: "" },
+    { key: "tool", link: "/tool/", label: "工具", client: "all", status: true, parentKey: "" },
+    { key: "bbs", link: "/community/", label: "茶馆", client: "all", status: true, parentKey: "" },
+];
 const activeNav = {
     index: ["index"],
     macro: ["macro", "pz"],
-    tool: ["app", "jx3dat", "dbm"],
+    tool: ["app", "jx3dat", "dbm", "tool"],
     bps: ["bps", "jcl", "battle"],
     fb: ["fb", "baizhan", "team", "jdt", "rank"],
-    cj: ["cj", "item", "knowledge", "quest"],
-    pvx: ["face", "adventure", "pvg"],
-    bbs: ["bbs", "topic", "event"],
+    cj: ["wiki", "item", "knowledge", "quest", "cj"],
+    pvx: [
+        "face",
+        "adventure",
+        "pvg",
+        "pvx",
+        "homeland",
+        "pet",
+        "horse",
+        "furniture",
+        "reputation",
+        "book",
+        "exam",
+        "body",
+    ],
+    community: ["bbs", "topic", "emotion", "joke", "namespace", "collection", "community"],
     pvp: ["pvp"],
 };
+
+import { getMenu } from "@/service/header";
+import { trimSlash } from "./utils";
+
 export default {
-    name: "HeaderNav",
     props: [],
     data: function () {
         return {
@@ -153,27 +135,25 @@ export default {
         };
     },
     computed: {
-        finalNav: function ({ nav }) {
-            nav = cloneDeep(nav);
+        finalNav: function () {
+            const nav = Array.isArray(this.nav) ? this.nav : [];
+
             // 父节点
-            const finalNav = nav.filter((d) => !d.parentKey && d.status);
+            const parents = nav
+                .filter((d) => !d.parentKey && d.status)
+                .map((d) => ({
+                    ...d,
+                    children: [],
+                }));
             // 子节点
             const navChildren = nav.filter((c) => c.parentKey && c.status);
 
             navChildren.forEach((child) => {
-                const parentKey = child.parentKey;
-                // 匹配客户端
-                const parent = finalNav.find((n) => n.key === parentKey);
-
-                if (parent) {
-                    if (!parent.children) {
-                        parent.children = [];
-                    }
-                    parent.children.push(child);
-                }
+                const parent = parents.find((n) => n.key === child.parentKey);
+                if (parent) parent.children.push(child);
             });
 
-            return finalNav;
+            return parents;
         },
         client() {
             return location.href.includes("origin") ? "origin" : "std";
@@ -184,16 +164,20 @@ export default {
     },
     methods: {
         isFocus: function (type) {
-            // return location.pathname.includes(type);
             let active = "";
             const pathname = location.pathname?.split("/")?.filter(Boolean)?.[0] || "";
             for (const key in activeNav) {
-                if (activeNav[key].includes(pathname)) {
+                if (pathname && activeNav[key].includes(pathname)) {
                     active = key;
                     break;
                 }
             }
             return active && type.includes(active);
+        },
+        syncActiveIndex: function () {
+            const nav = Array.isArray(this.nav) ? this.nav : default_nav;
+            const hit = nav.find((d) => !d.parentKey && d.status && this.isFocus(d.link));
+            this.activeIndex = hit ? hit.key : "";
         },
         matchedClient: function (client) {
             return client == "all" ? true : client == this.client;
@@ -203,14 +187,16 @@ export default {
         },
         loadNav() {
             try {
-                const nav = JSON.parse(sessionStorage.getItem("nav"));
+                const nav = (sessionStorage.getItem("nav") && JSON.parse(sessionStorage.getItem("nav"))) || null;
                 if (nav) {
                     this.nav = nav;
+                    this.syncActiveIndex();
                 } else {
                     getMenu("nav").then((res) => {
                         if (res.data) {
                             this.nav = res?.data?.data?.val;
                             sessionStorage.setItem("nav", JSON.stringify(this.nav));
+                            this.syncActiveIndex();
                         }
                     });
                 }
@@ -224,6 +210,7 @@ export default {
         },
     },
     created: function () {
+        this.syncActiveIndex();
         this.loadNav();
     },
     components: {},
@@ -233,48 +220,46 @@ export default {
 <style lang="less">
 //菜单
 .c-header-nav {
-    .fl;
-    font-family: Montserrat, "Helvetica Neue", sans-serif;
-    .clearfix;
-    .u-item-box {
-        .fl;
-    }
+    padding: 0 20px;
     .u-item {
         .pointer;
         display: block;
+
         font-size: 14px;
-        line-height: @logo-size;
-        color: #fff;
-        // font-weight:300;
+        font-weight: 500;
+
+        padding: 0 15px;
+        line-height: @header-height;
+
+        color: rgba(255, 255, 255, 0.68);
         &:hover {
-            background-color: darken(@primary, 10%);
+            color: #fff;
         }
+        transition: all 0.15s ease-in;
+
         &.on {
             // background-color: @primary;
             .pr;
+            color: #fff;
+            font-weight: 700;
             &:after {
                 content: "";
                 .db;
-                border-bottom: 3px solid @primary;
+                border-bottom: 3px solid @v4focus;
                 .pa;
                 .lb(0);
                 .w(100%);
             }
-            &:hover {
-                background-color: @primary;
-            }
-        }
-        padding: 16px 15px;
-        transition: 0.1s ease-in;
-        i {
-            .none;
         }
     }
     .u-menu {
         .fl;
-        .el-icon-arrow-down {
-            .fz(12px);
+        .u-arrow {
+            width: 12px;
+            height: 12px;
             color: #8e8e8e;
+            margin-left: 4px;
+            vertical-align: middle;
         }
     }
 }
@@ -296,7 +281,11 @@ export default {
     .mt(0px) !important;
 }
 
-.c-header-nav__pad {
+.c-header-nav--pc,
+.c-header-nav--pad {
+    .flex(y);
+}
+.c-header-nav--pad {
     .c-quick-menu {
         background: #24292e;
     }
@@ -314,47 +303,49 @@ export default {
 .c-quick-menu__submenu {
     .el-menu {
         min-width: 150px;
-
-        .el-menu {
-            .el-menu-item {
-                padding: 0 20px !important;
-            }
-        }
     }
     .u-menu-item,
     .u-item {
         display: block;
         color: @color;
     }
-    .el-menu-item,
-    .el-sub-menu {
+    .el-menu-item {
         min-width: 150px;
         &:hover {
-            background-color: #e6f0fb !important;
+            background-color: #e6f0fb;
 
             .el-sub-menu__title {
                 background-color: #e6f0fb;
             }
         }
     }
+    // .el-menu--horizontal {
+    //     .el-menu-item {
+    //         text-align: center;
+    //     }
+    // }
 }
-.c-header-nav__pad {
+.c-header-nav--pad {
     .none;
     .c-quick-menu {
         border-bottom: none;
     }
 }
-@media screen and (max-width: @ipad) {
-    .c-header-nav__pc {
-        display: none;
-    }
-    .c-header-nav__pad {
-        display: block;
-    }
-}
-
-@media screen and (max-width: @ipad-y) {
-    .c-header-nav__pad {
+// @media screen and (max-width: @ipad) {
+//     .c-header-nav--pc {
+//         display: none;
+//     }
+//     .c-header-nav--pad {
+//         display: block;
+//     }
+// }
+// @media screen and (max-width: @ipad-y) {
+//     .c-header-nav--pad {
+//         display: none;
+//     }
+// }
+@media screen and (max-width: @mininote) {
+    .c-header-nav {
         display: none;
     }
 }

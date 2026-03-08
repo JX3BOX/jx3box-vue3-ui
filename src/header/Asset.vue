@@ -1,60 +1,51 @@
 <template>
     <div class="c-header-panel c-header-assets">
         <a class="u-asset" href="/dashboard/boxcoin">
-            <img class="u-coin" svg-inline src="../../assets/img/header/coin.svg" />
+            <coinIcon class="u-icon" />
         </a>
 
         <div class="u-assets u-pop-content">
             <div class="u-detail">
                 <span class="u-item">
-                    <a class="u-item-primary" href="/about/incentives" target="_blank">
-                        <span class="u-label"
-                            ><el-icon><User /></el-icon> 等级</span
-                        >
+                    <a class="u-item-primary" href="/about/incentives" :target="target">
+                        <span class="u-label"><i class="el-icon-user"></i> 等级</span>
                         <span class="u-value u-level" :style="levelStyle">Lv.{{ level }}</span>
                     </a>
-                    <!-- <span class="u-item-extend"><a href="/about/incentives" target="_blank">[权益]</a></span> -->
+                    <!-- <span class="u-item-extend"><a href="/about/incentives" :target="target">[权益]</a></span> -->
                 </span>
                 <span class="u-item">
-                    <a class="u-item-primary" href="/dashboard/boxcoin" target="_blank"
-                        ><span class="u-label"
-                            ><el-icon><Coin /></el-icon> 盒币</span
-                        >
+                    <a class="u-item-primary" href="/dashboard/boxcoin" :target="target"
+                        ><span class="u-label"><i class="el-icon-coin"></i> 盒币</span>
                         <span class="u-value">{{ asset.box_coin }}</span></a
                     >
-                    <span class="u-item-extend"><a href="/dashboard/boxcoin" target="_blank">[兑换通宝]</a></span>
+                    <span class="u-item-extend"><a href="/dashboard/boxcoin" :target="target">[兑换通宝]</a></span>
                 </span>
-                <span class="u-item">
-                    <a class="u-item-primary" href="/dashboard/cny" target="_blank"
-                        ><span class="u-label"
-                            ><el-icon><Wallet /></el-icon> 金箔</span
+                <!-- <span class="u-item">
+                    <a class="u-item-primary" href="/dashboard/cny" :target="target"
+                        ><span class="u-label"><i class="el-icon-wallet"></i> 金箔</span
                         ><span class="u-value">{{ asset.cny }}</span></a
                     >
                     <span class="u-item-extend"
-                        ><a href="/vip/cny" target="_blank">[充值]</a>
-                        <a href="/dashboard/cny" target="_blank">[提现]</a></span
+                        ><a href="/vip/cny" :target="target">[充值]</a>
+                        <a href="/dashboard/cny" :target="target">[提现]</a></span
                     >
-                </span>
+                </span> -->
                 <span class="u-item">
-                    <a class="u-item-primary" href="/dashboard/points" target="_blank"
-                        ><span class="u-label"
-                            ><el-icon><Sugar /></el-icon> 银铛</span
-                        >
+                    <a class="u-item-primary" href="/dashboard/points" :target="target"
+                        ><span class="u-label"><i class="el-icon-sugar"></i> 积分</span>
                         <span class="u-value">{{ asset.points }}</span></a
                     >
                     <span class="u-item-extend"
-                        ><a href="/vip/mall" target="_blank">[兑礼]</a
-                        ><a href="/vip/lottery" target="_blank">[抽奖]</a></span
+                        ><a href="/vip/mall" :target="target">[兑礼]</a
+                        ><a href="/vip/lottery" :target="target">[抽奖]</a></span
                     >
                 </span>
                 <span class="u-item">
-                    <a class="u-item-primary" href="/dashboard/card" target="_blank"
-                        ><span class="u-label"
-                            ><el-icon><Postcard /></el-icon> 卡密</span
-                        >
+                    <a class="u-item-primary" href="/dashboard/card" :target="target"
+                        ><span class="u-label"><i class="el-icon-bank-card"></i> 卡密</span>
                         <span class="u-value">{{ asset.ext_info ? asset.ext_info.keycode : 0 }}</span></a
                     >
-                    <span class="u-item-extend"><a href="/dashboard/card" target="_blank">[查看]</a></span>
+                    <span class="u-item-extend"><a href="/dashboard/card" :target="target">[查看]</a></span>
                 </span>
             </div>
         </div>
@@ -62,14 +53,19 @@
 </template>
 
 <script>
-import User from "@jx3box/jx3box-common/js/user";
-import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
+import User from "@/config/js/user";
+import { __userLevelColor } from "@/config/data/jx3box.json";
+import coinIcon from "@/assets/img/components/common/header/coin.svg";
 export default {
-    name: "HeaderAsset",
+    name: "Asset",
+    components: {
+        coinIcon,
+    },
     props: ["asset"],
     data() {
         return {
             // VIP
+            target: "_self",
         };
     },
     computed: {
@@ -78,7 +74,7 @@ export default {
         },
         levelStyle: function () {
             return {
-                background: JX3BOX.__userLevelColor[this.level],
+                background: __userLevelColor[this.level],
                 color: "#fff",
                 padding: "2px 8px",
                 borderRadius: "2px",
@@ -89,12 +85,10 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/mixin.less";
 // 用户资产
 .c-header-assets {
     position: relative;
     height: 100%;
-
     .u-asset {
         padding: 0 10px;
         height: 100%;
@@ -118,7 +112,7 @@ export default {
             padding: 5px 15px;
 
             &:hover {
-                background-color: @color-link;
+                background-color: @v4primary;
                 .u-label {
                     color: #fff;
                 }
@@ -134,16 +128,13 @@ export default {
             }
 
             .u-label {
-                color: #454545;
-                .flex;
-                align-items: center;
-                gap: 5px;
+                color: @v4tip;
             }
 
             .u-value {
                 font-weight: bold;
                 .ml(5px);
-                color: @color-link;
+                color: #111;
                 .fz(13px);
             }
             .u-level {
@@ -154,7 +145,7 @@ export default {
                 a {
                     .ml(5px);
                     &:hover {
-                        color: @pink;
+                        color: @v4primary;
                     }
                 }
             }

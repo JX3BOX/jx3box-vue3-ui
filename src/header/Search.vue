@@ -1,11 +1,11 @@
 <template>
     <div class="c-header-search" id="c-header-search">
         <div class="c-search">
-             <form class="u-form" @submit.prevent="handleSubmit">
+            <form class="u-form" @submit.prevent="handleSubmit">
                 <input class="u-text" type="text" autocomplete="off" name="q" placeholder="搜索.." ref="searchInput" />
                 <input type="hidden" name="client" :value="client" />
                 <i class="u-btn" @click="handleSubmit">
-                    <img svg-inline src="../../assets/img/header/search-key-slash.svg" />
+                    <search-icon />
                 </i>
             </form>
         </div>
@@ -13,9 +13,14 @@
 </template>
 
 <script>
-import { __Root } from "@jx3box/jx3box-common/data/jx3box.json";
+import { __Root } from "@/config/data/jx3box.json";
+import { searchJump } from "./utils";
+import searchIcon from "@/assets/img/components/common/header/search-key-slash.svg";
 export default {
-    name: "HeaderSearch",
+    name: "search",
+    components: {
+        searchIcon,
+    },
     data: function () {
         return {
             isPhone: window.innerWidth < 720 ? true : false,
@@ -30,43 +35,15 @@ export default {
             const searchValue = this.$refs.searchInput.value;
             if (!searchValue) return;
 
-            // 检查输入是否为纯数字
-            if (/^\d+$/.test(searchValue)) {
-                // 如果是纯数字，直接跳转到 /{id}
-                const target = this.isPhone ? "_self" : "_blank";
-                const url = __Root + `post/${searchValue}`;
-                if (target === "_blank") {
-                    window.open(url, "_blank");
-                } else {
-                    window.location.href = url;
-                }
-            } else {
-                // 如果不是纯数字，使用原有搜索功能
-                const form = document.createElement("form");
-                form.method = "GET";
-                form.action = this.url;
-                form.target = this.isPhone ? "_self" : "_blank";
-
-                const searchInput = document.createElement("input");
-                searchInput.type = "hidden";
-                searchInput.name = "q";
-                searchInput.value = searchValue;
-
-                const clientInput = document.createElement("input");
-                clientInput.type = "hidden";
-                clientInput.name = "client";
-                clientInput.value = this.client;
-
-                form.appendChild(searchInput);
-                form.appendChild(clientInput);
-                document.body.appendChild(form);
-                form.submit();
-                document.body.removeChild(form);
-            }
+            searchJump({
+                searchValue: searchValue,
+                isPhone: this.isPhone,
+                url: this.url,
+                client: this.client,
+            });
         },
     },
     created: function () {},
-    components: {},
 };
 </script>
 
@@ -75,7 +52,7 @@ export default {
 .c-header-search {
     width: 220px;
     // padding: 16px 0;
-    margin: 15px 0;
+    margin: ((@header-height - @header-logo-size - 2px)/2) 0;
 
     .u-form {
         position: relative;
@@ -88,10 +65,10 @@ export default {
         // border: 0;
         box-shadow: none;
         color: #fff;
-        height: @logo-size + 2px;
-        line-height: @logo-size + 2px;
+        height: @header-logo-size + 2px;
+        line-height: @header-logo-size + 2px;
         box-sizing: border-box;
-        border-radius: 4px;
+        border-radius: 10px;
         font-size: 14px;
         padding: 0.625em 0.4375em;
         width: 100%;
@@ -102,20 +79,24 @@ export default {
             outline: 0;
         }
         transition: background-color 0.1s ease-in;
+
+        &::placeholder {
+            font-size: 11px;
+            color: #999;
+            padding-left: 5px;
+        }
     }
 
     .u-btn {
         border: 0;
         position: absolute;
-        right: 8px;
-        top: 6px;
+        right: 10px;
+        top: 7px;
         display: block;
         width: 19px;
         height: 20px;
         padding: 0;
     }
-
-    margin-right: 10px;
 }
 @media screen and (max-width: @phone) {
     .c-header-search {

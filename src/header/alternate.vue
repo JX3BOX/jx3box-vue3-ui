@@ -9,12 +9,7 @@
                 @click="onSelectAlternate(item)"
             >
                 <div class="m-avatar">
-                    <img
-                        class="u-active"
-                        v-if="profile.uid == item.uid"
-                        src="../../assets/img/header/check.svg"
-                        alt=""
-                    />
+                    <el-icon class="u-active" v-if="profile.uid == item.uid"><SuccessFilled /></el-icon>
                     <img class="u-avatar" :src="showAvatar(item.avatar)" alt="" />
                 </div>
                 <div class="m-misc">
@@ -26,7 +21,7 @@
                 </div>
 
                 <div class="u-remove" @click.stop="onRemoveAlternate(item)" v-if="profile.uid != item.uid">
-                    <i class="el-icon-close"></i>
+                    <el-icon><Close /></el-icon>
                 </div>
             </div>
             <div class="c-alternate-btn" :class="{ 'is-disabled': overLength }" @click="onAddAlternate">+</div>
@@ -35,14 +30,14 @@
 </template>
 
 <script>
-import Bus from "../../utils/bus";
-import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import Bus from "./bus";
+import { showAvatar } from "@/config/js/utils";
 import dayjs from "dayjs";
-import User from "@jx3box/jx3box-common/js/user";
-import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
-import { refreshAuth } from "../../service/cms"
+import User from "@/config/js/user";
+import { __Links } from "@/config/data/jx3box.json";
+import { refreshAuth } from "@/service/header";
 export default {
-    name: "AlternateComponent",
+    name: "AlternateSwitch",
     data() {
         return {
             visible: false,
@@ -66,7 +61,7 @@ export default {
         },
     },
     mounted() {
-        Bus.on("showAlternate", () => {
+        Bus.$on("showAlternate", () => {
             this.visible = true;
         });
         this.init();
@@ -107,8 +102,10 @@ export default {
                 }
 
                 // 当前激活的排在第一
-                this.alternate.sort((a, _) => {
-                    return a.uid == this.profile.uid ? -1 : 1;
+                this.alternate.sort((a, b) => {
+                    const pa = a.uid == this.profile.uid ? -1 : 1;
+                    const pb = b.uid == this.profile.uid ? -1 : 1;
+                    return pa - pb;
                 });
             } catch (error) {
                 console.error(error);
@@ -193,10 +190,12 @@ export default {
         // padding: 10px;
         border-bottom: #dcdfe6 1px solid;
     }
-    .c-alternate__content {
-        max-height: 600px;
-        overflow-y: auto;
-    }
+}
+
+.c-alternate__content {
+    max-height: 600px;
+    overflow-y: auto;
+
     .c-alternate-item {
         .flex;
         gap: 10px;
@@ -243,7 +242,8 @@ export default {
         top: -6px;
         width: 20px;
         height: 20px;
-        fill: #fff;
+        // fill: #fff;
+        color: #0dbc19;
     }
 
     .m-misc {

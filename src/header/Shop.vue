@@ -4,7 +4,7 @@
             <a class="u-present" href="/vip/mall">
                 <i class="u-icon u-icon-msg">
                     <i class="u-pop" style="display: none" v-show="pop"></i>
-                    <img class="u-icon" svg-inline src="../../assets/img/header/gift.svg" />
+                    <shopIcon class="u-icon" />
                 </i>
             </a>
         </el-tooltip>
@@ -12,10 +12,14 @@
 </template>
 
 <script>
-import { getConfig, getUserMeta, setUserMeta } from "../../service/cms";
-import User from "@jx3box/jx3box-common/js/user";
+import { getConfig, getUserMeta, setUserMeta } from "@/service/header";
+import User from "@/config/js/user";
+import shopIcon from "@/assets/img/components/common/header/gift.svg";
 export default {
-    name: "HeaderShop",
+    name: "shop",
+    components: {
+        shopIcon,
+    },
     data: function () {
         return {
             pop: false,
@@ -34,7 +38,7 @@ export default {
              * meta如果为0，说明用户已经看过，不显示，同时比较config的值，如果config的值大于local，更新local为config的值和meta为1
              * meta如果为1，说明用户未看过，显示
              */
-            let meta = null
+            let meta = null;
             if (User.isLogin()) {
                 meta = await getUserMeta({ key: "mall_pop" });
             }
@@ -45,21 +49,21 @@ export default {
 
                 if (val) {
                     this.pop = true;
-                    localStorage.setItem('mall_pop', config.val);
+                    localStorage.setItem("mall_pop", config.val);
                     setUserMeta("mall_pop", { val: 1 });
                 }
             } else {
                 if (meta == 1) {
                     this.pop = true;
 
-                    localStorage.setItem('mall_pop', config.val);
+                    localStorage.setItem("mall_pop", config.val);
                 } else {
-                    const local = localStorage.getItem('mall_pop');
+                    const local = localStorage.getItem("mall_pop");
 
                     if (~~config.val > ~~local) {
                         this.pop = true;
 
-                        localStorage.setItem('mall_pop', config.val);
+                        localStorage.setItem("mall_pop", config.val);
 
                         // setUserMeta("mall_pop", { val: 1 });
                     }
@@ -67,7 +71,7 @@ export default {
             }
         },
     },
-}
+};
 </script>
 
 <style lang="less">
@@ -82,7 +86,7 @@ export default {
         }
     }
 
-    .u-icon-msg { 
+    .u-icon-msg {
         .pr;
         .size(18px);
     }
@@ -91,7 +95,7 @@ export default {
         width: 10px;
         height: 10px;
         color: #fff;
-        background-image: linear-gradient(#54a3ff, #006eed);
+        background-image: linear-gradient(#fcd14f, #d7a20b);
         background-clip: padding-box;
         border: 2px solid #24292e;
         border-radius: 50%;
@@ -99,6 +103,6 @@ export default {
         right: -5px;
         top: -6px;
         z-index: 1;
-    } 
+    }
 }
 </style>
