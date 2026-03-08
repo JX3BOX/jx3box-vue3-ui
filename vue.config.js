@@ -1,4 +1,52 @@
 const path = require("path");
+
+function normalizeTarget(value) {
+    if (!value) return "";
+    const trimmed = String(value).trim();
+    if (!trimmed) return "";
+    if (/^https?:\/\//i.test(trimmed)) return trimmed;
+    return `https://${trimmed.replace(/^\/+/, "")}`;
+}
+
+function escapeRegExp(str) {
+    return String(str).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function buildEnvProxy() {
+    const enabled = ["1", "true", "yes", "on"].includes(String(process.env.VUE_APP_PROXY_ENABLE || "").toLowerCase());
+    if (!enabled) return {};
+
+    const prefix = process.env.VUE_APP_PROXY_PREFIX || "/__proxy";
+    const mk = (serviceKey, target) => {
+        const normalized = normalizeTarget(target);
+        if (!normalized) return {};
+        const context = `${prefix}/${serviceKey}`;
+        const contextRe = new RegExp(`^${escapeRegExp(context)}`);
+        return {
+            [context]: {
+                target: normalized,
+                changeOrigin: true,
+                secure: false,
+                cookieDomainRewrite: "",
+                pathRewrite: (p) => p.replace(contextRe, ""),
+            },
+        };
+    };
+
+    return Object.assign(
+        {},
+        mk("cms", process.env.VUE_APP_CMS_API),
+        mk("next", process.env.VUE_APP_NEXT_API),
+        mk("team", process.env.VUE_APP_TEAM_API),
+        mk("pay", process.env.VUE_APP_PAY_API),
+        mk("lua", process.env.VUE_APP_LUA_API),
+        mk("node", process.env.VUE_APP_NODE_API),
+    );
+}
+
+
+const envProxy = buildEnvProxy();
+
 module.exports = {
     //❤️ define path for static files ~
     publicPath: process.env.NODE_ENV === "development" ? "/" : process.env.STATIC_PATH,
@@ -35,59 +83,11 @@ module.exports = {
     //⚛️ Proxy ~
     devServer: {
         host: "localhost",
-        proxy: {
-            "/api/vip": {
-                target: "https://pay.jx3box.com",
-                onProxyReq: function (request) {
-                    request.setHeader("origin", "");
-                },
-            },
-            "/api/inspire": {
-                target: "https://pay.jx3box.com",
-                onProxyReq: function (request) {
-                    request.setHeader("origin", "");
-                },
-            },
-            "/api/team": {
-                target: "https://team.api.jx3box.com",
-                onProxyReq: function (request) {
-                    request.setHeader("origin", "");
-                },
-            },
-            "/api/cms": {
-                target: "https://cms.jx3box.com",
-            },
-            "/api/article": {
-                target: "https://next2.jx3box.com",
-            },
-            "/api/messages": {
-                target: "https://helper.jx3box.com",
-            },
-            "/api/post/favorite": {
-                target: "https://helper.jx3box.com",
-            },
-            "/api/wiki": {
-                target: "https://helper.jx3box.com",
-            },
-            "/api/personal": {
-                target: "https://pay.jx3box.com",
-                onProxyReq: function (request) {
-                    request.setHeader("origin", "");
-                },
-            },
-            "/api/cny": {
-                target: "https://pay.jx3box.com",
-                onProxyReq: function (request) {
-                    request.setHeader("origin", "");
-                },
-            },
-            "/api": {
-                target: "https://next2.jx3box.com",
-                onProxyReq: function (request) {
-                    request.setHeader("origin", "");
-                },
-            },
-        },
+        // 统一走 api.js 的 /__proxy/*（开启 VUE_APP_PROXY_ENABLE=1 时）
+        // 若未开启，则回退到旧的 /api/* 代理（兼容历史写法）
+        proxy: Object.keys(envProxy).length ? envProxy : legacyProxy,
+        disableHostCheck: true,
+        port: process.env.DEV_PORT || 12028,
     },
 
     //❤️ Webpack configuration
