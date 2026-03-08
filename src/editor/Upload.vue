@@ -49,7 +49,7 @@
                         <img v-if="file.is_img" class="el-upload-list__item-thumbnail u-imgbox" :src="file.url" alt />
                         <!-- 其他类型 -->
                         <div v-else class="u-filebox">
-                            <img class="u-fileplaceholder" svg-inline src="../../assets/img/file.svg" />
+                            <img class="u-fileplaceholder" svg-inline src="../../assets/img/editor/file.svg" />
                             <span class="u-filename">{{ file.name }}</span>
                         </div>
                         <!-- 勾选角标 -->
@@ -273,5 +273,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/upload.less";
+@import "../../assets/css/editor/upload.less";
 </style>

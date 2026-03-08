@@ -37,8 +37,10 @@ import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import Emotion from "@jx3box/jx3box-emotion/src/Emotion2.vue";
 import hljs_languages from "../../assets/js/item/hljs_languages.js";
 const { __cms, __imgPath } = JX3BOX;
-const API_Root = process.env.NODE_ENV === "production" ? __cms : "/";
-const API = API_Root + "api/cms/upload/tinymce";
+const proxyEnabled = ["1", "true", "yes", "on"].includes(String(process.env.VUE_APP_PROXY_ENABLE || "").toLowerCase());
+const proxyPrefix = process.env.VUE_APP_PROXY_PREFIX || "/__proxy";
+const API_Root = process.env.NODE_ENV === "production" ? __cms : proxyEnabled ? `${proxyPrefix}/cms/` : "/";
+const API = API_Root.replace(/\/+$/, "/") + "api/cms/upload/tinymce";
 
 export default {
     name: "TinyMce",
@@ -198,5 +200,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/tinymce.less";
+@import "../../assets/css/tinymce/_.less";
 </style>

@@ -11,7 +11,7 @@
             :crumbEnable="true"
         >
             <template #logo>
-                <img svg-inline src="../assets/img/jx3.svg" />
+                <img svg-inline src="../assets/img/editor/jx3.svg" />
             </template>
             <template #op-prepend> </template>
         </breadcrumb>

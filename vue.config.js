@@ -1,5 +1,13 @@
 const path = require("path");
 
+let commonDomains = {};
+try {
+    // 与 @jx3box/jx3box-common/js/api.js 的默认域名兜底保持一致
+    commonDomains = require("@jx3box/jx3box-common/data/jx3box.json");
+} catch (e) {
+    commonDomains = {};
+}
+
 function normalizeTarget(value) {
     if (!value) return "";
     const trimmed = String(value).trim();
@@ -33,19 +41,17 @@ function buildEnvProxy() {
         };
     };
 
-    return Object.assign(
-        {},
-        mk("cms", process.env.VUE_APP_CMS_API),
-        mk("next", process.env.VUE_APP_NEXT_API),
-        mk("team", process.env.VUE_APP_TEAM_API),
-        mk("pay", process.env.VUE_APP_PAY_API),
-        mk("lua", process.env.VUE_APP_LUA_API),
-        mk("node", process.env.VUE_APP_NODE_API),
-    );
+    const serviceTargets = {
+        cms: process.env.VUE_APP_CMS_API || commonDomains.__cms,
+        next: process.env.VUE_APP_NEXT_API || commonDomains.__next,
+        team: process.env.VUE_APP_TEAM_API || commonDomains.__team,
+        pay: process.env.VUE_APP_PAY_API || commonDomains.__pay,
+        lua: process.env.VUE_APP_LUA_API || commonDomains.__lua,
+        node: process.env.VUE_APP_NODE_API || commonDomains.__node,
+    };
+
+    return Object.keys(serviceTargets).reduce((acc, key) => Object.assign(acc, mk(key, serviceTargets[key])), {});
 }
-
-
-const envProxy = buildEnvProxy();
 
 module.exports = {
     //❤️ define path for static files ~
@@ -83,10 +89,10 @@ module.exports = {
     //⚛️ Proxy ~
     devServer: {
         host: "localhost",
-        // 统一走 api.js 的 /__proxy/*（开启 VUE_APP_PROXY_ENABLE=1 时）
-        // 若未开启，则回退到旧的 /api/* 代理（兼容历史写法）
-        proxy: Object.keys(envProxy).length ? envProxy : legacyProxy,
-        disableHostCheck: true,
+        // 与 @jx3box/jx3box-common/js/api.js 对齐：
+        // 本地开发开启 `VUE_APP_PROXY_ENABLE=1` 后，会把请求 baseURL 切到 `${VUE_APP_PROXY_PREFIX}/${serviceKey}`
+        proxy: buildEnvProxy(),
+        allowedHosts: "all",
         port: process.env.DEV_PORT || 12028,
     },
 

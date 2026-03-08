@@ -24,7 +24,7 @@
                     @click="doLike(true)"
                     ><img
                         class="u-up"
-                        src="../../assets/img/heart_1.svg"
+                        src="../../assets/img/comment/heart_1.svg"
                         alt=""
                     />点赞<span class="u-like-count">{{ likesFormat(hasLikeCount) }}</span></el-button
                 >
@@ -36,7 +36,7 @@
                     @click="doLike(false)"
                     ><img
                         class="u-up"
-                        src="../../assets/img/heart_2.svg"
+                        src="../../assets/img/comment/heart_2.svg"
                         alt=""
                     />已赞<span class="u-like-count">{{
                         likesFormat(hasLikeCount)
@@ -126,7 +126,7 @@
                 >
                     <img
                         class="u-icon-filter"
-                        src="../../assets/img/view.svg"
+                        src="../../assets/img/editor/view.svg"
                         alt="显示"
                     />
                     显示</el-button
@@ -139,7 +139,7 @@
                     @click="setWhiteComment(false)"
                     ><img
                         class="u-icon-filter"
-                        src="../../assets/img/hide.svg"
+                        src="../../assets/img/comment/hide.svg"
                         alt="隐藏"
                     />隐藏</el-button
                 >

@@ -2,7 +2,7 @@
     <div class="c-resource">
         <!-- 上传触发按钮 -->
         <el-button class="u-switch" type="primary" @click="openDialog" :disabled="!enable">
-            <img class="u-icon u-jx3-icon" svg-inline src="../../assets/img/jx3.svg" />剑三资源
+            <img class="u-icon u-jx3-icon" svg-inline src="../../assets/img/editor/jx3.svg" />剑三资源
         </el-button>
 
         <!-- 弹出界面 -->
@@ -36,7 +36,7 @@
                     <el-tab-pane label="Buff" name="buff">
                         <template #label>
                             <span class="u-tab-label">
-                                <img class="u-icon" svg-inline src="../../assets/img/buff.svg" />
+                                <img class="u-icon" svg-inline src="../../assets/img/editor/buff.svg" />
                                 <b>Buff</b>
                                 <em class="u-count">{{ stat.buff }}</em>
                             </span>
@@ -80,7 +80,7 @@
                     <el-tab-pane label="技能" name="skill">
                         <template #label>
                             <span class="u-tab-label">
-                                <img class="u-icon" svg-inline src="../../assets/img/skill.svg" />
+                                <img class="u-icon" svg-inline src="../../assets/img/editor/skill.svg" />
                                 <b>技能</b>
                                 <em class="u-count">{{ stat.skill }}</em>
                             </span>
@@ -128,7 +128,7 @@
                     <el-tab-pane label="物品" name="item">
                         <template #label>
                             <span class="u-tab-label">
-                                <img class="u-icon" svg-inline src="../../assets/img/item.svg" />
+                                <img class="u-icon" svg-inline src="../../assets/img/editor/item.svg" />
                                 <b>物品</b>
                                 <em class="u-count">{{ stat.item }}</em>
                             </span>
@@ -210,7 +210,7 @@
                     <el-tab-pane label="图标" name="icon">
                         <template #label>
                             <span class="u-tab-label">
-                                <img class="u-icon" svg-inline src="../../assets/img/icons.svg" />
+                                <img class="u-icon" svg-inline src="../../assets/img/editor/icons.svg" />
                                 <b>图标</b>
                                 <em class="u-count">{{ stat.icon }}</em>
                             </span>
@@ -613,7 +613,7 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/resource.less";
+@import "../../assets/css/editor/resource.less";
 
 .m-item-pop {
     padding: 0 !important;

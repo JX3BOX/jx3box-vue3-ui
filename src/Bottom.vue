@@ -19,5 +19,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/bottom.less";
+@import "../assets/css/common/bottom.less";
 </style>

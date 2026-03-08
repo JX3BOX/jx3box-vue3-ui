@@ -56,7 +56,7 @@ import execSplitPages from "../../assets/js/nextpage";
 // 扩展文本
 import renderFoldBlock from "../../assets/js/fold";
 import renderDirectory from "../../assets/js/directory";
-import { renderKatexAll } from "../../assets/js/katex";
+import {renderKatexAll} from "../../assets/js/katex";
 import renderCode from "../../assets/js/code";
 import renderImgPreview from "../../assets/js/renderImgPreview";
 import renderMacro from "../../assets/js/macro";
@@ -226,5 +226,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/article.less";
+@import "../../assets/css/editor/article.less";
 </style>

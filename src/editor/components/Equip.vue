@@ -30,7 +30,7 @@
         </div>
         <div class="u-misc">
             <a class="u-logo" :href="link" target="_blank">
-                <img svg-inline src="../../../assets/img/jx3box.svg" />
+                <img svg-inline src="../../../assets/img/editor/jx3box.svg" />
                 <span>配装ID:{{ plan.id }}</span>
             </a>
         </div>
@@ -116,10 +116,6 @@ export default {
 .c-equip {
     .dbi;
     .size(500px, 750px);
-    // background:url('../assets/img/equip_bg.png') no-repeat 0 0;
-    // background-color:#324f4a;
-    // background-color:#fff;
-    // border:6px solid #f5f7fa;
     background-color: @bg-black;
     border: 6px solid #444;
     .r(6px);

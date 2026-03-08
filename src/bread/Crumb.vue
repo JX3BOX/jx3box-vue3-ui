@@ -23,5 +23,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/crumb.less";
+@import "../../assets/css/bread/crumb.less";
 </style>
