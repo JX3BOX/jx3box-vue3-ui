@@ -54,7 +54,7 @@
 
 <script>
 import User from "@jx3box/jx3box-common/js/user";
-import { __userLevelColor } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 // import coinIcon from "@/assets/img/components/common/header/coin.svg";
 export default {
     name: "Asset",
@@ -74,7 +74,7 @@ export default {
         },
         levelStyle: function () {
             return {
-                background: __userLevelColor[this.level],
+                background: JX3BOX.__userLevelColor[this.level],
                 color: "#fff",
                 padding: "2px 8px",
                 borderRadius: "2px",

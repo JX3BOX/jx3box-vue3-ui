@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { getConfig, getUserMeta, setUserMeta } from "../../service/header";
+import { getConfig, getUserMeta, setUserMeta } from "../../service/cms";
 import User from "@jx3box/jx3box-common/js/user";
 // import shopIcon from "@/assets/img/components/common/header/gift.svg";
 export default {

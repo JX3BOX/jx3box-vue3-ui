@@ -1,8 +1,10 @@
 import {
     Reporter
 } from "@jx3box/reporter"
-import { __Domain } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { $next } from "@jx3box/jx3box-common/js/api";
+
+const { __Domain } = JX3BOX;
 
 /**
      * 16进制转int

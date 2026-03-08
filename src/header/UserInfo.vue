@@ -109,11 +109,13 @@ import User from "@jx3box/jx3box-common/js/user";
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import { getMyInfo } from "../../service/author";
 import { showDate } from "@jx3box/jx3box-common/js/moment";
-import { __Links, __Root, __imgPath, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { copyText } from "./utils";
 import { getMenu } from "../../service/header";
 import Bus from "./bus";
 import alternate from "./alternate.vue";
+
+const { __Links, __Root, __imgPath, __OriginRoot } = JX3BOX;
 export default {
     name: "info",
     props: ["asset"],

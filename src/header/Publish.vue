@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 // import editIcon from "@/assets/img/components/common/header/edit.svg";
 export default {
     name: "publish",
@@ -19,7 +19,7 @@ export default {
     },
     data: function () {
         return {
-            url: __Links.dashboard.publish,
+            url: JX3BOX.__Links.dashboard.publish,
         };
     },
 };

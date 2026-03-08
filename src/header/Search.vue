@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { __Root } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { searchJump } from "./utils";
 // import searchIcon from "@/assets/img/components/common/header/search-key-slash.svg";
 export default {
@@ -25,7 +25,7 @@ export default {
     data: function () {
         return {
             isPhone: window.innerWidth < 720 ? true : false,
-            url: __Root + "search",
+            url: JX3BOX.__Root + "search",
             client: location.href.includes("origin") ? "origin" : "std",
         };
     },

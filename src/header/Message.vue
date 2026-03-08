@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import { getLetter, getMsg } from "../../service/header";
 // import bell from "@/assets/img/components/common/header/bell.svg";
 export default {
@@ -23,7 +23,7 @@ export default {
     },
     data: function () {
         return {
-            url: __Links.dashboard.msg,
+            url: JX3BOX.__Links.dashboard.msg,
             pop: false,
         };
     },

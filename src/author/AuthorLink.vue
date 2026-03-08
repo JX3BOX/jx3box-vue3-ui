@@ -62,10 +62,10 @@ export default {
             return "https://github.com/" + val;
         },
         getIcon: function (val) {
-            console.log(process.env);
+            // console.log(process.env);
             // return __imgPath + "image/author/" + val + ".svg";
             const img = require("../../assets/img/author/" + val + ".svg");
-            console.log(img)
+            // console.log(img)
             return img;
         },
     },

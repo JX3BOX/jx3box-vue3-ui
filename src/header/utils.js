@@ -1,6 +1,8 @@
 import { ElNotification } from "element-plus";
-import { __Root } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import searchMap from "./search_map.json";
+
+const { __Root } = JX3BOX;
 
 // 复制
 export function copyText(text) {

@@ -42,7 +42,7 @@ import miniprogram from "@jx3box/jx3box-common/data/miniprogram.json";
 // 数据
 import { getGlobalConfig } from "../service/header";
 import User from "@jx3box/jx3box-common/js/user.js";
-import { __Root, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 
 export default {
     name: "Header",
@@ -68,7 +68,7 @@ export default {
             return location.hostname.includes("origin") ? "origin" : "std";
         },
         siteRoot: function () {
-            return location.host.includes("origin") ? __OriginRoot : __Root;
+            return location.host.includes("origin") ? JX3BOX.__OriginRoot : JX3BOX.__Root;
         },
     },
     methods: {

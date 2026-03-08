@@ -8,6 +8,7 @@
         "dev": "cross-env DEV_SERVER=true vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
+        "postinstall": "node scripts/patch-jx3box-common.js",
         "update": "npm --registry https://registry.npmjs.org install @jx3box/jx3box-common@latest @jx3box/jx3box-data@latest @jx3box/jx3box-emotion@latest @jx3box/jx3box-macro@latest @jx3box/jx3box-talent@latest",
         "header": "vue-cli-service build --target lib --name newheader src/Header.vue && cp public/index.html dist/newheader.html"
     },

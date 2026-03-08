@@ -56,7 +56,7 @@ import execSplitPages from "../../assets/js/nextpage";
 // 扩展文本
 import renderFoldBlock from "../../assets/js/fold";
 import renderDirectory from "../../assets/js/directory";
-import renderKatex from "../../assets/js/katex";
+import { renderKatexAll } from "../../assets/js/katex";
 import renderCode from "../../assets/js/code";
 import renderImgPreview from "../../assets/js/renderImgPreview";
 import renderMacro from "../../assets/js/macro";
@@ -136,7 +136,7 @@ export default {
             // 代码
             renderCode(`code[class=^'language-']`);
             // Tatex
-            renderKatex();
+            renderKatexAll();
 
             // 画廊（需要在宏、奇穴、物品等之前渲染以排除下方自动生成图片）
             renderImgPreview();

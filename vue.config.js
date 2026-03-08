@@ -3,6 +3,13 @@ module.exports = {
     //❤️ define path for static files ~
     publicPath: process.env.NODE_ENV === "development" ? "/" : process.env.STATIC_PATH,
 
+    // 过滤依赖包里的已知兼容性 warning（不影响运行，但会刷屏）
+    configureWebpack: {
+        stats: {
+            warningsFilter: [/node_modules[\\\\/]+@jx3box[\\\\/]+jx3box-common[\\\\/]+/],
+        },
+    },
+
     pages: {
         index: {
             entry: "src/main.js",

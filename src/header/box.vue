@@ -31,10 +31,12 @@
 import search from "./search.vue";
 import _ from "lodash";
 import Bus from "./bus";
-import { __imgPath, __cdn } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import box from "../assets/data/box.json";
 import { getMenu } from "../service/header.js";
 import { trimSlash } from "../assets/js/utils";
+
+const { __imgPath, __cdn } = JX3BOX;
 export default {
     name: "Box",
     props: ["overlayEnable"],

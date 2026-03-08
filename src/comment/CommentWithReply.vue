@@ -70,7 +70,8 @@ import ReplyList from "./ReplyList.vue";
 import { POST, DELETE, GET } from "../../service/comment";
 import CommentAvatar from "../comment/Avatar.vue";
 import { getDecoration } from "../../service/cms";
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
+const { __imgPath } = JX3BOX;
 const DECORATION_KEY = "decoration_comment_";
 export default {
     props: ["item", "baseApi", "power", "user-href", "username"],

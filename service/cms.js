@@ -77,6 +77,11 @@ function setUserMeta(key, data) {
     return $cms().post(`/api/cms/user/my/meta?key=${key}`, data);
 }
 
+// 刷新凭证
+function refreshAuth() {
+    return $cms().post(`/api/cms/user/account/email/refresh`);
+}
+
 function getUserHonor(uid) {
     return $cms({ mute: true }).get(`/api/cms/user/honor/${uid}/using`);
 }
@@ -122,6 +127,7 @@ export {
     getConfig,
     getUserMeta,
     setUserMeta,
+    refreshAuth,
     getUserHonor,
     loadAuthors,
     loadEmotions,

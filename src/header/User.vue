@@ -38,7 +38,7 @@
 <script>
 import User from "@jx3box/jx3box-common/js/user";
 import { userSignIn } from "../../service/author";
-import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 dayjs.extend(isToday);
@@ -87,8 +87,8 @@ export default {
             isLogin: User.isLogin(),
 
             // 链接
-            login_url: __Links.account.login + "?redirect=" + location.href,
-            register_url: __Links.account.register + "?redirect=" + location.href,
+            login_url: JX3BOX.__Links.account.login + "?redirect=" + location.href,
+            register_url: JX3BOX.__Links.account.register + "?redirect=" + location.href,
 
             isTeammate: false,
         };

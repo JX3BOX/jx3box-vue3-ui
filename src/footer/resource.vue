@@ -49,7 +49,6 @@
                     class="flex h-10 w-10 items-center justify-center rounded-lg text-blue-400"
                     style="background-color: rgba(59, 130, 246, 0.2)"
                 >
-                    <!-- <img class="h-6 w-6" :src="qqbotIcon" alt="QQ机器人" /> -->
                     <img class="h-6 w-6" svg-inline src="../../assets/img/common/qqbot.svg" alt="QQ机器人" />
                 </div>
                 <div>
@@ -72,19 +71,12 @@
 </template>
 
 <script>
-// import qqbotIcon from "@/assets/img/components/common/footer/qqbot.svg?url";
-// import iosIcon from "@/assets/img/components/common/footer/ios.svg?url";
-// import androidIcon from "@/assets/img/components/common/footer/android.svg?url";
-// import harmonyIcon from "@/assets/img/components/common/footer/harmony.svg?url";
-// import miniprogramIcon from "@/assets/img/components/common/footer/miniprogram.svg?url";
-// import miniprogramQrcode from "@/assets/img/icons/miniprogram.jpg";
 export default {
     name: "FooterResource",
     props: [],
     components: {},
     data: function () {
         return {
-            qqbotIcon,
             downloadLinks: [
                 {
                     name: "App Store",

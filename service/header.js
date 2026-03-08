@@ -2,8 +2,12 @@ import axios from "axios";
 import { $cms, $next } from "@jx3box/jx3box-common/js/api";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 
-function getMsg() {
+function getLetter() {
     return $next({ mute: true }).get("/api/letter/unread/count");
+}
+
+function getMsg() {
+    return $next({ mute: true }).get("/api/next2/userdata/messages/unread_total");
 }
 
 function getNav(client = "std") {
@@ -35,4 +39,4 @@ function getGlobalConfig() {
     });
 }
 
-export { getMsg, getNav, getPanel, getBox, getMenu, getGames, getGlobalConfig };
+export { getLetter, getMsg, getNav, getPanel, getBox, getMenu, getGames, getGlobalConfig };

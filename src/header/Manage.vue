@@ -31,9 +31,10 @@
 
 <script>
 import { getMenu } from "../../service/header";
-import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 import User from "@jx3box/jx3box-common/js/user";
 // import manageIcon from "@/assets/img/components/common/header/manage.svg";
+const { __imgPath } = JX3BOX;
 const defaultPanel = [
     {
         label: "管理中心",

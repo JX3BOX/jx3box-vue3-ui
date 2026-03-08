@@ -34,8 +34,8 @@ import Bus from "./bus";
 import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import dayjs from "dayjs";
 import User from "@jx3box/jx3box-common/js/user";
-import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
-import { refreshAuth } from "../../service/header";
+import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
+import { refreshAuth } from "../../service/cms";
 export default {
     name: "AlternateSwitch",
     data() {
@@ -172,7 +172,7 @@ export default {
                 return;
             }
             // 跳转至登录页
-            location.href = __Links.account.login + "?alternate=1";
+            location.href = JX3BOX.__Links.account.login + "?alternate=1";
         },
     },
 };
