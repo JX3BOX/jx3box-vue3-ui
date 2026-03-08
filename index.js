@@ -1,4 +1,4 @@
-import Header from "./src/Header.vue";
+import Header from "./src/CommonHeader.vue";
 import Footer from "./src/Footer.vue";
 import Main from "./src/Main.vue";
 import Breadcrumb from "./src/Breadcrumb.vue";

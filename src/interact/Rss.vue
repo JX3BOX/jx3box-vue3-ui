@@ -22,7 +22,7 @@ import {
     unsubscribeWiki,
     unsubscribeCommunity,
     unsubscribePost,
-} from "@jx3box/jx3box-common/js/rss_v2";
+} from "@jx3box/jx3box-common/js/rss";
 const jx3box = require("@jx3box/jx3box-common/data/jx3box.json");
 
 export default {

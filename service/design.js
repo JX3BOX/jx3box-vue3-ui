@@ -1,4 +1,4 @@
-import { $cms } from "@jx3box/jx3box-common/js/https_v2";
+import { $cms } from "@jx3box/jx3box-common/js/api";
 
 export const createDesignTask = (data) => {
     return $cms().post(`/api/cms/design/task`, data);

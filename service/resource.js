@@ -5,7 +5,7 @@
  * @LastEditTime: 2022-08-20 23:54:41
  * @Description:
  */
-import { $node } from "@jx3box/jx3box-common/js/https_v2";
+import { $node } from "@jx3box/jx3box-common/js/api";
 const $ = $node();
 
 /* import axios from 'axios'

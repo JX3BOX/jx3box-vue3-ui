@@ -1,4 +1,4 @@
-import { $cms } from "@jx3box/jx3box-common/js/https_v2.js";
+import { $cms } from "@jx3box/jx3box-common/js/api";
 
 function getBreadcrumb(name) {
     return $cms().get(`/api/cms/breadcrumb/${name}`);

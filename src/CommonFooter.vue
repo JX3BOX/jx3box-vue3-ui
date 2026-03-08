@@ -43,10 +43,10 @@ export default {
 <style lang="less">
 body::after {
     bottom: 0;
-    background: @footer-bg;
+    background: #111827;
 }
 .c-footer-v4__popover {
-    background: @footer-bg;
+    background: #111827;
     border: 1px solid #374151;
     border-radius: 12px;
     box-shadow: 0 16px 40px rgba(3, 7, 18, 0.45);

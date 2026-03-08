@@ -1,6 +1,6 @@
 import axios from "axios";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
-import { $next, $cms, $team, $pay } from "@jx3box/jx3box-common/js/https_v2.js";
+import { $next, $cms, $team, $pay } from "@jx3box/jx3box-common/js/api";
 
 async function getUserInfo(uid) {
     const res = await $cms({ mute: true }).get(`/api/cms/user/${uid}/info`);

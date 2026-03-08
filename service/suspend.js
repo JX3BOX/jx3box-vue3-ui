@@ -1,4 +1,4 @@
-import { $next } from "@jx3box/jx3box-common/js/https_v2";
+import { $next } from "@jx3box/jx3box-common/js/api";
 //订阅作者
 function subscribeAuthor(authorId, data) {
     return $next().post(`/api/next2/rss/subscribe/author/${authorId}`, data);

@@ -1,4 +1,4 @@
-import { $helper } from "@jx3box/jx3box-common/js/https_v2";
+import { $helper } from "@jx3box/jx3box-common/js/api";
 
 // 获取物品
 function get_item(item_id, client) {

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { getAuthorRss, subscribeAuthor, unsubscribeAuthor } from "@jx3box/jx3box-common/js/rss_v2";
+import { getAuthorRss, subscribeAuthor, unsubscribeAuthor } from "@jx3box/jx3box-common/js/rss";
 import User from "@jx3box/jx3box-common/js/user";
 const jx3box = require("@jx3box/jx3box-common/data/jx3box.json");
 export default {

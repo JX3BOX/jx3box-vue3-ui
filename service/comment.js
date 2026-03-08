@@ -1,7 +1,7 @@
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 
 import { ElNotification as Notification } from "element-plus";
-import { $cms } from "@jx3box/jx3box-common/js/https_v2";
+import { $cms } from "@jx3box/jx3box-common/js/api";
 import User from "@jx3box/jx3box-common/js/user";
 
 const KEY = "cmt_order";

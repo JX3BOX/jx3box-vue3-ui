@@ -1,4 +1,4 @@
-import { $cms } from "@jx3box/jx3box-common/js/https_v2";
+import { $cms } from "@jx3box/jx3box-common/js/api";
 import axios from "axios";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 function getPostAuthors(post_id) {

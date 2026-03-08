@@ -1,5 +1,5 @@
 import axios from "axios";
-import { $cms, $next } from "@jx3box/jx3box-common/js/https_v2.js";
+import { $cms, $next } from "@jx3box/jx3box-common/js/api";
 import JX3BOX from "@jx3box/jx3box-common/data/jx3box.json";
 
 function getMsg() {
