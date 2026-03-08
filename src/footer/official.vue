@@ -31,11 +31,11 @@
 </template>
 
 <script>
-import wechatIcon from "@/assets/img/icons/wechat.svg?url";
-import bilibiliIcon from "@/assets/img/icons/bilibili.svg?url";
-import weiboIcon from "@/assets/img/icons/weibo.svg?url";
-import douyinIcon from "@/assets/img/icons/douyin.svg?url";
-import wechatQrcode from "@/assets/img/icons/mp.jpg";
+// import wechatIcon from "@/assets/img/icons/wechat.svg?url";
+// import bilibiliIcon from "@/assets/img/icons/bilibili.svg?url";
+// import weiboIcon from "@/assets/img/icons/weibo.svg?url";
+// import douyinIcon from "@/assets/img/icons/douyin.svg?url";
+// import wechatQrcode from "@/assets/img/icons/mp.jpg";
 
 export default {
     name: "FooterOfficial",
@@ -48,29 +48,29 @@ export default {
                     name: "公众号",
                     key: "wechat",
                     href: "",
-                    icon: wechatIcon,
-                    qrcode: wechatQrcode,
+                    icon: require('../../assets/img/common/wechat.svg'),
+                    qrcode: require('../../assets/img/common/mp.jpg'),
                     label: "剑三魔盒",
                 },
                 {
                     name: "B站",
                     key: "bilibili",
                     href: "https://space.bilibili.com/2066064028",
-                    icon: bilibiliIcon,
+                    icon: require('../../assets/img/common/bilibili.svg'),
                     label: "剑网3魔盒",
                 },
                 {
                     name: "微博",
                     key: "weibo",
                     href: "https://weibo.com/jx3box",
-                    icon: weiboIcon,
+                    icon: require('../../assets/img/common/weibo.svg'),
                     label: "剑网3魔盒",
                 },
                 {
                     name: "抖音",
                     key: "douyin",
                     href: "https://www.douyin.com/user/MS4wLjABAAAAP3OHPy-BYsW6IMiPZfP1FP3J_zYAAYNVVlk9XyoKhOs",
-                    icon: douyinIcon,
+                    icon: require('../../assets/img/common/douyin.svg'),
                     label: "剑网3魔盒",
                 },
             ],

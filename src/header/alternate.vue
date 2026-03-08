@@ -31,11 +31,11 @@
 
 <script>
 import Bus from "./bus";
-import { showAvatar } from "@/config/js/utils";
+import { showAvatar } from "@jx3box/jx3box-common/js/utils";
 import dayjs from "dayjs";
-import User from "@/config/js/user";
-import { __Links } from "@/config/data/jx3box.json";
-import { refreshAuth } from "@/service/header";
+import User from "@jx3box/jx3box-common/js/user";
+import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
+import { refreshAuth } from "../../service/header";
 export default {
     name: "AlternateSwitch",
     data() {

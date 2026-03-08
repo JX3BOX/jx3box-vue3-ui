@@ -1,7 +1,8 @@
 <template>
     <div class="c-header-panel c-lang-switcher" id="c-header-lang-switcher">
         <span class="u-translator" href="/dashboard/boxcoin">
-            <langIcon class="u-icon" />
+            <!-- <langIcon class="u-icon" /> -->
+            <img class="u-icon" svg-inline src="../../assets/img/common/lang.svg" alt="语言切换">
         </span>
         <ul class="u-menu u-pop-content">
             <li
@@ -17,11 +18,11 @@
 </template>
 
 <script>
-import langIcon from "@/assets/img/components/common/header/lang.svg";
+// import langIcon from "@/assets/img/components/common/header/lang.svg";
 export default {
     name: "langSwitch",
     components: {
-        langIcon,
+        // langIcon,
     },
     data() {
         return {

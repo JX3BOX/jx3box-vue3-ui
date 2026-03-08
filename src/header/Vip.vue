@@ -4,7 +4,8 @@
             <a class="u-post u-vip" href="/vip/premium">
                 <i class="u-icon u-icon-msg">
                     <i class="u-pop" style="display: none" v-show="pop"></i>
-                    <vipIcon class="u-add" />
+                    <!-- <vipIcon class="u-add" /> -->
+                    <img class="u-add" svg-inline src="../../assets/img/common/vip.svg" alt="会员中心">
                 </i>
             </a>
         </el-tooltip>
@@ -12,13 +13,13 @@
 </template>
 
 <script>
-import { getConfig, getUserMeta, setUserMeta } from "@/service/header";
-import User from "@/config/js/user";
-import vipIcon from "@/assets/img/components/common/header/vip.svg";
+import { getConfig, getUserMeta, setUserMeta } from "../../service/header";
+import User from "@jx3box/jx3box-common/js/user";
+// import vipIcon from "@/assets/img/components/common/header/vip.svg";
 export default {
     name: "vip",
     components: {
-        vipIcon,
+        // vipIcon,
     },
     data: function () {
         return {

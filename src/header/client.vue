@@ -41,7 +41,8 @@
                             <path d="M4 5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5Z" />
                             <path d="M4 13a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2Z" />
                         </svg> -->
-                        <Jx3Icon class="w-4 h-4" />
+                        <img class="w-4 h-4" svg-inline src="../../assets/img/common/jx3-www.svg" alt="剑网3/无界">
+                        <!-- <Jx3Icon class="w-4 h-4" /> -->
                     </span>
                     <div>
                         <div class="text-sm font-bold text-gray-200 group-hover/item:text-white">剑网3 / 无界</div>
@@ -67,7 +68,8 @@
                                 clip-rule="evenodd"
                             />
                         </svg> -->
-                        <OriginIcon class="w-4 h-4" />
+                        <img class="w-4 h-4" svg-inline src="../../assets/img/common/jx3-origin.svg" alt="剑网3·缘起">
+                        <!-- <OriginIcon class="w-4 h-4" /> -->
                     </span>
                     <div>
                         <div class="text-sm font-bold text-gray-200 group-hover/item:text-white">剑网3·缘起</div>
@@ -81,13 +83,13 @@
 </template>
 
 <script>
-import Jx3Icon from "@/assets/img/components/common/header/jx3-www.svg";
-import OriginIcon from "@/assets/img/components/common/header/jx3-origin.svg";
+// import Jx3Icon from "@/assets/img/components/common/header/jx3-www.svg";
+// import OriginIcon from "@/assets/img/components/common/header/jx3-origin.svg";
 export default {
     name: "clientSwitch",
     components: {
-        Jx3Icon,
-        OriginIcon,
+        // Jx3Icon,
+        // OriginIcon,
     },
     props: ["defaultValue"],
     data: function () {

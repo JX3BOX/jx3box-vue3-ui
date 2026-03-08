@@ -105,13 +105,13 @@
 </template>
 
 <script>
-import User from "@/config/js/user";
-import { showAvatar } from "@/config/js/utils";
-import { getMyInfo } from "@/service/author";
-import { showDate } from "@/config/js/moment";
-import { __Links, __Root, __imgPath, __OriginRoot } from "@/config/data/jx3box.json";
+import User from "@jx3box/jx3box-common/js/user";
+import { showAvatar } from "@jx3box/jx3box-common/js/utils";
+import { getMyInfo } from "../../service/author";
+import { showDate } from "@jx3box/jx3box-common/js/moment";
+import { __Links, __Root, __imgPath, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 import { copyText } from "./utils";
-import { getMenu } from "@/service/header";
+import { getMenu } from "../../service/header";
 import Bus from "./bus";
 import alternate from "./alternate.vue";
 export default {

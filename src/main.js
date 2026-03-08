@@ -12,7 +12,7 @@ app.use(head);
 import ElementPlus from "element-plus";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 import "element-plus/dist/index.css";
-import "../assets/css/var.less";
+// import "../assets/css/var.less";
 
 import "@jx3box/jx3box-common/css/normalize.css";
 

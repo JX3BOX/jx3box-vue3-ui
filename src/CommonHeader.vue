@@ -36,13 +36,13 @@ import user from "./header/user.vue";
 
 // 移动端适配
 const KW = "jx3boxApp";
-import { isMiniProgram, miniprogramHack, isApp as checkIsApp } from "@/config/js/utils";
-import miniprogram from "@/config/data/miniprogram.json";
+import { isMiniProgram, miniprogramHack, isApp as checkIsApp } from "@jx3box/jx3box-common/js/utils";
+import miniprogram from "@jx3box/jx3box-common/data/miniprogram.json";
 
 // 数据
-import { getGlobalConfig } from "@/service/header.js";
-import User from "@/config/js/user.js";
-import { __Root, __OriginRoot } from "@/config/data/jx3box.json";
+import { getGlobalConfig } from "../service/header";
+import User from "@jx3box/jx3box-common/js/user.js";
+import { __Root, __OriginRoot } from "@jx3box/jx3box-common/data/jx3box.json";
 
 export default {
     name: "Header",

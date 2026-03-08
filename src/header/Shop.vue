@@ -4,7 +4,8 @@
             <a class="u-present" href="/vip/mall">
                 <i class="u-icon u-icon-msg">
                     <i class="u-pop" style="display: none" v-show="pop"></i>
-                    <shopIcon class="u-icon" />
+                    <!-- <shopIcon class="u-icon" /> -->
+                     <img class="u-icon" svg-inline src="../../assets/img/common/gift.svg" alt="积分商城">
                 </i>
             </a>
         </el-tooltip>
@@ -12,13 +13,13 @@
 </template>
 
 <script>
-import { getConfig, getUserMeta, setUserMeta } from "@/service/header";
-import User from "@/config/js/user";
-import shopIcon from "@/assets/img/components/common/header/gift.svg";
+import { getConfig, getUserMeta, setUserMeta } from "../../service/header";
+import User from "@jx3box/jx3box-common/js/user";
+// import shopIcon from "@/assets/img/components/common/header/gift.svg";
 export default {
     name: "shop",
     components: {
-        shopIcon,
+        // shopIcon,
     },
     data: function () {
         return {

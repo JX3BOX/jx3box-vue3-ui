@@ -36,9 +36,9 @@
 </template>
 
 <script>
-import User from "@/config/js/user";
-import { userSignIn } from "@/service/author";
-import { __Links } from "@/config/data/jx3box.json";
+import User from "@jx3box/jx3box-common/js/user";
+import { userSignIn } from "../../service/author";
+import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
 import dayjs from "dayjs";
 import isToday from "dayjs/plugin/isToday";
 dayjs.extend(isToday);

@@ -1,15 +1,20 @@
 <template>
     <div class="c-header-logo" @click="toggleBox($event)" title="点击展开魔盒矩阵">
-        <i class="u-pic" id="c-header-logo"><Logo /></i>
+        <i class="u-pic" id="c-header-logo">
+            <img svg-inline src="../../assets/img/common/logo.svg" alt="JX3BOX" />
+        </i>
         <span class="u-txt" :class="{ on: isIndex }" href="/">魔盒</span>
     </div>
 </template>
 
 <script>
-import Logo from "@/assets/img/components/common/header/logo.svg";
-import { useLayoutStore } from "@/store/layout";
+// import { useLayoutStore } from "@/store/layout";
+
 export default {
     name: "c-header-logo",
+    components: {
+        // Logo,
+    },
     props: [],
     data: function () {
         return {
@@ -18,17 +23,15 @@ export default {
     },
     computed: {},
     methods: {
+        // TODO: 主页和魔盒矩阵的切换
         // 盒子
-        toggleBox: function (e) {
-            e.stopPropagation();
-            const layout = useLayoutStore();
-            layout.toggleBoxMatrix();
-        },
+        // toggleBox: function (e) {
+        //     e.stopPropagation();
+        //     const layout = useLayoutStore();
+        //     layout.toggleBoxMatrix();
+        // },
     },
     mounted: function () {},
-    components: {
-        Logo,
-    },
 };
 </script>
 

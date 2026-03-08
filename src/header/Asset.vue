@@ -1,7 +1,7 @@
 <template>
     <div class="c-header-panel c-header-assets">
         <a class="u-asset" href="/dashboard/boxcoin">
-            <coinIcon class="u-icon" />
+            <img class="u-icon" svg-inline src="../../assets/img/common/coin.svg" alt="资产" />
         </a>
 
         <div class="u-assets u-pop-content">
@@ -53,13 +53,13 @@
 </template>
 
 <script>
-import User from "@/config/js/user";
-import { __userLevelColor } from "@/config/data/jx3box.json";
-import coinIcon from "@/assets/img/components/common/header/coin.svg";
+import User from "@jx3box/jx3box-common/js/user";
+import { __userLevelColor } from "@jx3box/jx3box-common/data/jx3box.json";
+// import coinIcon from "@/assets/img/components/common/header/coin.svg";
 export default {
     name: "Asset",
     components: {
-        coinIcon,
+        // coinIcon,
     },
     props: ["asset"],
     data() {

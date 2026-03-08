@@ -4,7 +4,7 @@
             <div class="grid grid-cols-1 gap-10 pb-10 lg:grid-cols-12 lg:gap-8">
                 <section class="lg:col-span-3">
                     <div class="flex items-center space-x-3">
-                        <img class="h-9 w-9" src="@/assets/img/components/common/footer/logo.svg?url" alt="JX3BOX" />
+                        <img class="h-9 w-9" svg-inline src="../assets/img/common/logo.svg" alt="JX3BOX" />
                         <span class="text-2xl font-bold tracking-tight text-white">JX3BOX</span>
                     </div>
                     <p class="mt-5 text-sm leading-7 text-gray-400" style="max-width: 20rem">

@@ -5,7 +5,8 @@
                 <input class="u-text" type="text" autocomplete="off" name="q" placeholder="搜索.." ref="searchInput" />
                 <input type="hidden" name="client" :value="client" />
                 <i class="u-btn" @click="handleSubmit">
-                    <search-icon />
+                    <!-- <search-icon /> -->
+                    <img svg-inline src="../../assets/img/common/search-key-slash.svg" alt="搜索">
                 </i>
             </form>
         </div>
@@ -13,13 +14,13 @@
 </template>
 
 <script>
-import { __Root } from "@/config/data/jx3box.json";
+import { __Root } from "@jx3box/jx3box-common/data/jx3box.json";
 import { searchJump } from "./utils";
-import searchIcon from "@/assets/img/components/common/header/search-key-slash.svg";
+// import searchIcon from "@/assets/img/components/common/header/search-key-slash.svg";
 export default {
     name: "search",
     components: {
-        searchIcon,
+        // searchIcon,
     },
     data: function () {
         return {

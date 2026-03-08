@@ -2,7 +2,8 @@
     <div class="c-header-panel c-header-manage" id="c-header-manage">
         <span class="u-post u-manage">
             <i class="u-pop" style="display: none" v-show="showPop || !isAuth"></i>
-            <manageIcon class="u-add" />
+            <!-- <manageIcon class="u-add" /> -->
+            <img class="u-add" svg-inline src="../../assets/img/common/manage.svg" alt="扩展中心">
         </span>
         <ul class="u-menu u-pop-content">
             <template v-for="item in userPanel">
@@ -29,10 +30,10 @@
 </template>
 
 <script>
-import { getMenu } from "@/service/header";
-import { __imgPath } from "@/config/data/jx3box.json";
-import User from "@/config/js/user";
-import manageIcon from "@/assets/img/components/common/header/manage.svg";
+import { getMenu } from "../../service/header";
+import { __imgPath } from "@jx3box/jx3box-common/data/jx3box.json";
+import User from "@jx3box/jx3box-common/js/user";
+// import manageIcon from "@/assets/img/components/common/header/manage.svg";
 const defaultPanel = [
     {
         label: "管理中心",
@@ -43,7 +44,7 @@ const defaultPanel = [
 export default {
     name: "Manage",
     components: {
-        manageIcon,
+        // manageIcon,
     },
     data() {
         return {

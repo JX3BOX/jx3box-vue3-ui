@@ -4,7 +4,8 @@
             <a class="u-msg" :href="url">
                 <i class="u-icon u-icon-msg">
                     <i class="u-pop" style="display: none" v-show="pop"></i>
-                    <bell />
+                    <!-- <bell /> -->
+                     <img svg-inline src="../../assets/img/common/bell.svg" alt="消息">
                 </i>
             </a>
         </el-tooltip>
@@ -12,13 +13,13 @@
 </template>
 
 <script>
-import { __Links } from "@/config/data/jx3box.json";
-import { getLetter, getMsg } from "@/service/header";
-import bell from "@/assets/img/components/common/header/bell.svg";
+import { __Links } from "@jx3box/jx3box-common/data/jx3box.json";
+import { getLetter, getMsg } from "../../service/header";
+// import bell from "@/assets/img/components/common/header/bell.svg";
 export default {
     name: "message",
     components: {
-        bell,
+        // bell,
     },
     data: function () {
         return {

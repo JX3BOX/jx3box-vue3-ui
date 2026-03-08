@@ -1,5 +1,5 @@
 import { ElNotification } from "element-plus";
-import { __Root } from "@/config/data/jx3box.json";
+import { __Root } from "@jx3box/jx3box-common/data/jx3box.json";
 import searchMap from "./search_map.json";
 
 // 复制

@@ -49,7 +49,8 @@
                     class="flex h-10 w-10 items-center justify-center rounded-lg text-blue-400"
                     style="background-color: rgba(59, 130, 246, 0.2)"
                 >
-                    <img class="h-6 w-6" :src="qqbotIcon" alt="QQ机器人" />
+                    <!-- <img class="h-6 w-6" :src="qqbotIcon" alt="QQ机器人" /> -->
+                    <img class="h-6 w-6" svg-inline src="../../assets/img/common/qqbot.svg" alt="QQ机器人" />
                 </div>
                 <div>
                     <p class="font-bold uppercase tracking-wider text-gray-500" style="font-size: 10px">
@@ -71,13 +72,12 @@
 </template>
 
 <script>
-import qqbotIcon from "@/assets/img/components/common/footer/qqbot.svg?url";
-import iosIcon from "@/assets/img/components/common/footer/ios.svg?url";
-import androidIcon from "@/assets/img/components/common/footer/android.svg?url";
-import harmonyIcon from "@/assets/img/components/common/footer/harmony.svg?url";
-import miniprogramIcon from "@/assets/img/components/common/footer/miniprogram.svg?url";
-import miniprogramQrcode from "@/assets/img/icons/miniprogram.jpg";
-
+// import qqbotIcon from "@/assets/img/components/common/footer/qqbot.svg?url";
+// import iosIcon from "@/assets/img/components/common/footer/ios.svg?url";
+// import androidIcon from "@/assets/img/components/common/footer/android.svg?url";
+// import harmonyIcon from "@/assets/img/components/common/footer/harmony.svg?url";
+// import miniprogramIcon from "@/assets/img/components/common/footer/miniprogram.svg?url";
+// import miniprogramQrcode from "@/assets/img/icons/miniprogram.jpg";
 export default {
     name: "FooterResource",
     props: [],
@@ -89,27 +89,27 @@ export default {
                 {
                     name: "App Store",
                     href: "",
-                    icon: iosIcon,
-                    // qrcode: require("@/assets/img/mobile/mp.jpg"),
+                    icon: require("../../assets/img/common/ios.svg"),
+                    // qrcode: require("../../assets/img/common/ios.jpg"),
                 },
                 {
                     name: "Android",
                     href: "",
-                    icon: androidIcon,
-                    // qrcode: require("@/assets/img/mobile/mp.jpg"),
+                    icon: require("../../assets/img/common/android.svg"),
+                    // qrcode: require("../../assets/img/common/android.jpg"),
                 },
                 {
                     name: "鸿蒙 NEXT",
                     href: "",
-                    icon: harmonyIcon,
-                    // qrcode: require("@/assets/img/mobile/mp.jpg"),
+                    icon: require("../../assets/img/common/harmony.svg"),
+                    // qrcode: require("../../assets/img/common/harmony.jpg"),
                 },
                 {
                     name: "小程序",
                     label: "JX3BOX小助手",
                     href: "",
-                    icon: miniprogramIcon,
-                    qrcode: miniprogramQrcode,
+                    icon: require("../../assets/img/common/miniprogram.svg"),
+                    qrcode: require("../../assets/img/common/miniprogram.jpg"),
                 },
             ],
         };

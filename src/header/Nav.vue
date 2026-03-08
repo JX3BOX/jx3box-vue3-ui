@@ -122,7 +122,7 @@ const activeNav = {
     pvp: ["pvp"],
 };
 
-import { getMenu } from "@/service/header";
+import { getMenu } from "../../service/header";
 import { trimSlash } from "./utils";
 
 export default {
