@@ -30,7 +30,7 @@
                 @click="doLike(true)"
                 ><img
                     class="u-up"
-                    src="../../assets/img/heart_1.svg"
+                    src="../../assets/img/comment/heart_1.svg"
                     alt=""
                 />点赞<span class="u-like-count">{{
                     likesFormat(hasLikeCount)
@@ -44,7 +44,7 @@
                 @click="doLike(false)"
                 ><img
                     class="u-up"
-                    src="../../assets/img/heart_2.svg"
+                    src="../../assets/img/comment/heart_2.svg"
                     alt=""
                 />已赞<span class="u-like-count">{{
                     likesFormat(hasLikeCount)
