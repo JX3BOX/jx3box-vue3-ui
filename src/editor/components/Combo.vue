@@ -255,5 +255,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../../assets/css/combo.less";
+@import "../../../assets/css/editor/combo.less";
 </style>

@@ -701,5 +701,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets//css//suspendCommon.less";
+@import "../assets/css/common/suspend-common.less";
 </style>

@@ -231,5 +231,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/cms-single.less";
+@import "../../assets/css/single/cms-single.less";
 </style>

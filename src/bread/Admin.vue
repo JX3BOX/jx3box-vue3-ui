@@ -396,5 +396,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/admin.less";
+@import "../../assets/css/bread/admin.less";
 </style>

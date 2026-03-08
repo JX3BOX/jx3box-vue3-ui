@@ -41,5 +41,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/footer.less";
+@import "../assets/css/common/footer.less";
 </style>

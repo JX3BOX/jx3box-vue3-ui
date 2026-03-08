@@ -226,5 +226,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/article.less";
+@import "../../assets/css/editor/article.less";
 </style>

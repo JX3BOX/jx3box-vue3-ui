@@ -112,7 +112,7 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/left-sidebar.less";
+@import "../assets/css/common/left-sidebar.less";
 // 虚拟装扮主题
 .m-theme {
     // background: url(../assets/testbg.png) no-repeat;

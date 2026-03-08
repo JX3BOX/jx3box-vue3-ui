@@ -213,5 +213,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/thx.less";
+@import "../../assets/css/single/thx.less";
 </style>

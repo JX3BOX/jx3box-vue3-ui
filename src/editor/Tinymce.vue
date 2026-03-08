@@ -198,5 +198,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/tinymce.less";
+@import "../../assets/css/eidtor/tinymce.less";
 </style>

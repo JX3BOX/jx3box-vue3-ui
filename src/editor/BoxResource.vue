@@ -431,7 +431,7 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/resource.less";
+@import "../../assets/css/editor/resource.less";
 
 .m-item-pop {
     padding: 0 !important;

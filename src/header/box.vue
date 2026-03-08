@@ -135,7 +135,7 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/box.less";
+@import "../assets/css/header/box.less";
 </style>
 
 <style scoped lang="less">

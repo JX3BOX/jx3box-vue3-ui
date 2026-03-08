@@ -273,5 +273,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/upload.less";
+@import "../../assets/css/editor/upload.less";
 </style>

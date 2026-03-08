@@ -57,5 +57,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../assets/css/right-sidebar.less";
+@import "../assets/css/common/right-sidebar.less";
 </style>

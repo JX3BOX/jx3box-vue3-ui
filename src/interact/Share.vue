@@ -162,5 +162,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/share2.less";
+@import "../../assets/css/interact/share2.less";
 </style>

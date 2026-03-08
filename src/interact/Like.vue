@@ -57,5 +57,5 @@ export default {
 </script>
 
 <style lang="less">
-@import "../../assets/css/like2.less";
+@import "../../assets/css/interact/like2.less";
 </style>
